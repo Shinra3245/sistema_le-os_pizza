@@ -104,6 +104,23 @@ test('rechaza metadatos incompletos, productos inexistentes y cantidades inváli
   }
 });
 
+test('permite alitas o boneless mitad de un sabor y mitad de otro', async () => {
+  const boot=(await call('/api/bootstrap')).body;
+  const wings=boot.catalog.find(product=>product.category==='alitas_boneless');
+  const presentation=wings.choiceGroups.find(group=>group.label==='Presentación').options[0];
+  const flavors=wings.choiceGroups.find(group=>group.label==='Sabor').options;
+  const item=dishItem(wings,{configuration:{type:'dish',choices:{Presentación:presentation,Sabor:'dato manipulado'},flavorMode:'mitades',leftFlavor:flavors[1],rightFlavor:flavors[3],excludedIngredients:[]}});
+  const created=await call('/api/orders',{method:'POST',body:JSON.stringify({type:'mesa',table:'5',guests:2,items:[item]})});
+  assert.equal(created.response.status,201);
+  assert.equal(created.body.items[0].unitPrice,wings.price);
+  assert.match(created.body.items[0].details,new RegExp(`${flavors[1]} / ${flavors[3]}`));
+  assert.equal(created.body.items[0].configuration.flavorMode,'mitades');
+  assert.equal(created.body.items[0].configuration.leftFlavor,flavors[1]);
+  assert.equal(created.body.items[0].configuration.rightFlavor,flavors[3]);
+  const cancelled=await call(`/api/orders/${created.body.id}`,{method:'PATCH',body:JSON.stringify({cancellation:{reason:'Fin de prueba mitad y mitad'}})});
+  assert.equal(cancelled.response.status,200);
+});
+
 test('impide estados libres, doble mesa, pago anticipado y solicitudes sin CSRF', async () => {
   const boot=(await call('/api/bootstrap')).body;
   const item=pizzaItem(boot);

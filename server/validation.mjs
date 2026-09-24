@@ -70,8 +70,11 @@ function canonicalDish(raw, product) {
   if (product.kind !== 'dish') throw new ValidationError('El producto seleccionado no se puede agregar directamente.');
   const configuration = raw.configuration && typeof raw.configuration === 'object' ? raw.configuration : {};
   const requestedChoices = configuration.choices && typeof configuration.choices === 'object' ? configuration.choices : {};
-  const groups = (product.choiceGroups || []).filter(group => !(product.category === 'hamburguesas' && group.label === 'Queso'));
-  const allowedLabels = new Set(groups.map(group => group.label));
+  const allGroups = (product.choiceGroups || []).filter(group => !(product.category === 'hamburguesas' && group.label === 'Queso'));
+  const isWings = productParentCategory(product) === 'alitas_boneless';
+  const flavorGroup = isWings ? allGroups.find(group => group.label === 'Sabor') : null;
+  const groups = flavorGroup ? allGroups.filter(group => group !== flavorGroup) : allGroups;
+  const allowedLabels = new Set(allGroups.map(group => group.label));
   if (Object.keys(requestedChoices).some(label => !allowedLabels.has(label))) throw new ValidationError('Se recibió una opción que no pertenece al platillo.');
   const choices = {};
   for (const group of groups) {
@@ -79,6 +82,17 @@ function canonicalDish(raw, product) {
     const selected = requestedChoices[group.label] || options[0];
     if (!options.includes(selected)) throw new ValidationError(`La opción de ${group.label} no está disponible.`);
     choices[group.label] = selected;
+  }
+  let flavorMode = '';
+  let leftFlavor = '';
+  let rightFlavor = '';
+  if (flavorGroup) {
+    const flavors = Array.isArray(flavorGroup.options) ? flavorGroup.options : [];
+    flavorMode = configuration.flavorMode === 'mitades' ? 'mitades' : 'completa';
+    leftFlavor = cleanText(configuration.leftFlavor || requestedChoices.Sabor || flavors[0], 80);
+    rightFlavor = flavorMode === 'mitades' ? cleanText(configuration.rightFlavor, 80) : leftFlavor;
+    if (!flavors.includes(leftFlavor) || !flavors.includes(rightFlavor)) throw new ValidationError('Selecciona uno o dos sabores válidos para las alitas o boneless.');
+    choices.Sabor = flavorMode === 'mitades' ? `${leftFlavor} / ${rightFlavor}` : leftFlavor;
   }
   let variant = '';
   if (Array.isArray(product.variants) && product.variants.length) {
@@ -95,7 +109,7 @@ function canonicalDish(raw, product) {
     name: displayNameFor(product), productId: product.id, category: product.category,
     parentCategory: productParentCategory(product), subcategory: productSubcategory(product),
     station: stationFor(product), unitPrice, details,
-    configuration: { type:'dish', choices, variant, excludedIngredients }
+    configuration: { type:'dish', choices, variant, excludedIngredients, ...(flavorGroup ? { flavorMode, leftFlavor, rightFlavor } : {}) }
   };
 }
 
