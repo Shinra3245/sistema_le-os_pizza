@@ -1,0 +1,50 @@
+# Dependencias instaladas localmente
+node_modules/
+
+# Compilados y cachés regenerables
+dist/
+.vite/
+coverage/
+.cache/
+.eslintcache
+*.tsbuildinfo
+
+# Datos operativos locales y credenciales de acceso
+# Se conserva la carpeta vacía para que el servidor pueda inicializarla.
+data/*
+!data/.gitkeep
+
+# Variables de entorno y certificados privados
+.env
+.env.*
+!.env.example
+.npmrc
+*.pem
+*.key
+*.p12
+
+# Registros de ejecución
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Herramientas y guías exclusivas de esta computadora
+.skills-shared/
+GUIA_ADMIN_INICIO_LOCAL.md
+src/prueba_duo.js
+
+# Configuración de editores y sistema operativo
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Archivos temporales
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
