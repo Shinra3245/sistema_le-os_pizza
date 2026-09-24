@@ -178,9 +178,14 @@ test('valida catálogo, exportaciones y cierre de caja con ventas digitales', as
   const order=await call('/api/orders',{method:'POST',body:JSON.stringify({type:'mesa',table:'4',guests:2,items:[pizzaItem(boot)]})});
   assert.equal(order.response.status,201);
   await call(`/api/orders/${order.body.id}`,{method:'PATCH',body:JSON.stringify({finishAllTickets:true})});
-  const paid=await call(`/api/orders/${order.body.id}`,{method:'PATCH',body:JSON.stringify({payment:{method:'Tarjeta',tipType:'ninguna',tipValue:0}})});
+  const paid=await call(`/api/orders/${order.body.id}`,{method:'PATCH',body:JSON.stringify({payment:{method:'Tarjeta',tipType:'cantidad',tipValue:10}})});
   assert.equal(paid.response.status,200);
-  assert.equal(paid.body.payment.total,Math.round(paid.body.payment.subtotal*1.04));
+  assert.equal(paid.body.payment.total,paid.body.payment.subtotal+Math.round(paid.body.payment.subtotal*.04)+10);
+  const transferOrder=await call('/api/orders',{method:'POST',body:JSON.stringify({type:'mesa',table:'7',guests:2,items:[pizzaItem(boot)]})});
+  assert.equal(transferOrder.response.status,201);
+  await call(`/api/orders/${transferOrder.body.id}`,{method:'PATCH',body:JSON.stringify({finishAllTickets:true})});
+  const transferred=await call(`/api/orders/${transferOrder.body.id}`,{method:'PATCH',body:JSON.stringify({payment:{method:'Transferencia',tipType:'cantidad',tipValue:12}})});
+  assert.equal(transferred.response.status,200);
   const pdf=await call('/api/export/pdf');
   assert.equal(pdf.response.status,200); assert.match(pdf.response.headers.get('cache-control'),/no-store/); assert.match(pdf.body,/^%PDF/);
   const excel=await call('/api/export/excel');
@@ -197,6 +202,10 @@ test('valida catálogo, exportaciones y cierre de caja con ventas digitales', as
   assert.equal(close.body.report.expectedCash,session.openingCash+cashSales);
   assert.equal(close.body.report.expectedTurnTotal,session.openingCash+totalSales);
   assert.equal(close.body.report.difference,0);
+  assert.equal(close.body.report.tipTotals.Tarjeta,10);
+  assert.equal(close.body.report.tipTotals.Transferencia,12);
+  assert.equal(close.body.report.tips,22);
+  assert.equal(close.body.report.expectedCash,session.openingCash+cashSales,'Las propinas digitales no deben sumarse al efectivo esperado.');
   assert.equal(close.body.report.autoClosedOrders,1);
   assert.equal(close.body.report.openOrders,0);
   const closedBoot=(await call('/api/bootstrap')).body;

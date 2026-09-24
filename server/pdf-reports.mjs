@@ -138,6 +138,7 @@ export function generalReportPdf({ settings, orders = [], rawMaterials = [], gen
 
 export function cashCloseReportPdf({ settings, session, report, orders = [], generatedAt = new Date() }) {
   const data=report || {}; const totalCollected=number(data.totalSales ?? Object.values(data.methodTotals || {}).reduce((sum,value)=>sum+number(value),0)); const expectedTurnTotal=number(data.expectedTurnTotal ?? number(session.openingCash)+totalCollected); const difference=number(data.difference); const balanceLabel=difference===0?'Caja exacta':difference>0?'Sobrante':'Faltante';
+  const tipTotals=data.tipTotals || Object.fromEntries(['Tarjeta','Transferencia'].map(method=>[method,orders.filter(order=>order.paid&&order.payment?.method===method).reduce((sum,order)=>sum+number(order.payment?.tip),0)]));
   const firstCapacity=15,nextCapacity=26,groups=[]; let cursor=0;
   groups.push(orders.slice(cursor,cursor+firstCapacity)); cursor+=firstCapacity;
   while(cursor<orders.length){groups.push(orders.slice(cursor,cursor+nextCapacity));cursor+=nextCapacity;}
@@ -151,16 +152,13 @@ export function cashCloseReportPdf({ settings, session, report, orders = [], gen
       commands.push(metricCard(176,574,124,'VENTAS COBRADAS',money(totalCollected),'gold'));
       commands.push(metricCard(312,574,124,'TOTAL TURNO',money(expectedTurnTotal),'gold'));
       commands.push(metricCard(448,574,124,'EFECTIVO CONTADO',money(data.countedCash),difference<0?'red':'green'));
-      commands.push(rect(40,474,258,82,colors.paper,colors.line,8)); commands.push(text('PAGOS Y MOVIMIENTOS',54,538,7,{font:'F2',color:colors.gold}));
-      commands.push(text('Efectivo',54,520,8,{color:colors.muted}),text(money(data.methodTotals?.Efectivo),282,520,8,{font:'F2',color:colors.forest,align:'right'}));
-      commands.push(text('Tarjeta',54,504,8,{color:colors.muted}),text(money(data.methodTotals?.Tarjeta),282,504,8,{font:'F2',color:colors.forest,align:'right'}));
-      commands.push(text('Transferencia',54,488,8,{color:colors.muted}),text(money(data.methodTotals?.Transferencia),282,488,8,{font:'F2',color:colors.forest,align:'right'}));
-      commands.push(rect(314,474,258,82,difference<0?colors.redSoft:colors.forestSoft,null,8)); commands.push(text('ARQUEO FINAL',328,538,7,{font:'F2',color:difference<0?colors.red:colors.forest}));
-      commands.push(text(balanceLabel,328,510,13,{font:'F3',color:difference<0?colors.red:colors.forest}),text(money(Math.abs(difference)),556,508,15,{font:'F2',color:difference<0?colors.red:colors.forest,align:'right'}));
-      commands.push(text(`Efectivo esperado: ${money(data.expectedCash)}`,328,490,7,{font:'F2',color:colors.muted,maxWidth:225}));
-      commands.push(text(`Comisiones: ${money(data.cardFees)}   |   Propinas: ${money(data.tips)}`,328,478,6.5,{color:colors.muted,maxWidth:225}));
-      commands.push(sectionTitle('OPERACIONES','Pedidos del turno',451)); commands.push(text(`${orders.length} pedidos | ${data.paidOrders||0} cobrados | ${data.cancelledOrders||0} cancelados | ${data.autoClosedOrders||0} cerrados al corte | ${data.openOrders||0} abiertos`,572,448,6.5,{font:'F2',color:colors.muted,align:'right'}));
-      commands.push(tableHeader(columns,422)); commands.push(group.length?orderRows(group,columns,400,21,'cash'):text('No se registraron pedidos durante este turno.',306,380,10,{color:colors.muted,align:'center'}));
+      [[40,'EFECTIVO',data.methodTotals?.Efectivo,'Sin propinas en sistema'],[218,'TARJETA',data.methodTotals?.Tarjeta,`Comision ${money(data.cardFees)} | Propina ${money(tipTotals.Tarjeta)}`],[396,'TRANSFERENCIA',data.methodTotals?.Transferencia,`Propina ${money(tipTotals.Transferencia)}`]].forEach(([x,label,total,detail])=>{
+        commands.push(rect(x,474,166,82,colors.paper,colors.line,8));
+        commands.push(text(label,x+13,538,7,{font:'F2',color:colors.gold}),text(money(total),x+13,508,14,{font:'F2',color:colors.forest,maxWidth:140}),text(detail,x+13,486,6.5,{color:colors.muted,maxWidth:140}));
+      });
+      commands.push(text(`ARQUEO: ${balanceLabel} ${money(Math.abs(difference))}   |   Efectivo esperado ${money(data.expectedCash)}   |   Contado ${money(data.countedCash)}`,40,460,7,{font:'F2',color:difference<0?colors.red:colors.forest,maxWidth:532}));
+      commands.push(sectionTitle('OPERACIONES','Pedidos del turno',420)); commands.push(text(`${orders.length} pedidos | ${data.paidOrders||0} cobrados | ${data.cancelledOrders||0} cancelados | ${data.autoClosedOrders||0} cerrados al corte | ${data.openOrders||0} abiertos`,572,417,6.5,{font:'F2',color:colors.muted,align:'right'}));
+      commands.push(tableHeader(columns,391)); commands.push(group.length?orderRows(group,columns,369,21,'cash'):text('No se registraron pedidos durante este turno.',306,349,10,{color:colors.muted,align:'center'}));
     } else {
       commands.push(sectionTitle('CONTINUACION','Pedidos del turno',665)); commands.push(tableHeader(columns,635)); commands.push(orderRows(group,columns,613,21,'cash'));
     }

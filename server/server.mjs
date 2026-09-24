@@ -320,12 +320,13 @@ function cashReport(session) {
   const cashSales = cents(payments.filter(payment => payment.method === 'Efectivo').reduce((sum, payment) => sum + payment.total, 0));
   const totalSales = cents(Object.values(methodTotals).reduce((sum, amount) => sum + amount, 0));
   const cardFees = cents(payments.reduce((sum, payment) => sum + (Number(payment.cardFee) || 0), 0));
-  const tips = cents(payments.reduce((sum, payment) => sum + (Number(payment.tip) || 0), 0));
+  const tipTotals = Object.fromEntries(['Tarjeta', 'Transferencia'].map(method => [method, cents(payments.filter(payment => payment.method === method).reduce((sum, payment) => sum + (Number(payment.tip) || 0), 0))]));
+  const tips = cents(Object.values(tipTotals).reduce((sum, amount) => sum + amount, 0));
   const salesSubtotal = cents(payments.reduce((sum, payment) => sum + (Number(payment.subtotal) || 0), 0));
   const expectedCash = cents(Number(session.openingCash) + cashSales);
   const expectedTurnTotal = cents(Number(session.openingCash) + totalSales);
   return {
-    salesSubtotal, totalSales, cardFees, tips, methodTotals, cashSales, expectedCash, expectedTurnTotal,
+    salesSubtotal, totalSales, cardFees, tips, tipTotals, methodTotals, cashSales, expectedCash, expectedTurnTotal,
     paidOrders: paidOrders.length, ordersTotal:sessionOrders.length,
     cancelledOrders:sessionOrders.filter(order => order.status === 'cancelado').length,
     autoClosedOrders:sessionOrders.filter(order => order.status === 'cerrado_turno').length,
