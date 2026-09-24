@@ -130,6 +130,7 @@ h2 { margin-bottom: 0; font-size: 17px; font-weight: 700; letter-spacing: -.3px;
 .status-pendiente { background: #f8e9c7; color: #8c6423; }
 .status-preparando { background: #e9f0ec; color: #3f684f; }
 .status-listo, .status-cerrado { background: #e8f3e9; color: #39704a; }
+.status-cerrado-turno { background: #eee9dd; color: #6f6248; }
 .status-en-ruta { background: #e9eef8; color: #47628c; }
 .status-entregado { background: #e6f2e8; color: #3d7149; }
 .status-cancelado { background: #fae9e5; color: #9d4032; }
@@ -140,6 +141,7 @@ h2 { margin-bottom: 0; font-size: 17px; font-weight: 700; letter-spacing: -.3px;
 .order-row-status-en-ruta { --order-bg: #f2f6f2; --order-border: #d9e4da; --order-hover: #ecf3ed; }
 .order-row-status-entregado { --order-bg: #f1f7ef; --order-border: #d4e5d2; --order-hover: #eaf3e8; }
 .order-row-status-cerrado { --order-bg: #f5f6f0; --order-border: #dde2d6; --order-hover: #eff2e9; }
+.order-row-status-cerrado-turno { --order-bg: #f8f5ed; --order-border: #e4dccb; --order-hover: #f3eee3; }
 .order-row-status-cancelado { --order-bg: #fcf4f0; --order-border: #efd9d1; --order-hover: #faeee9; }
 .order-amount { text-align: right; font-size: 12px; font-variant-numeric: tabular-nums; }
 .row-chevron { color: #b2b1aa; font-size: 22px; }

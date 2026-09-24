@@ -34,6 +34,8 @@ const securityHeaders = {
   'Permissions-Policy': 'camera=(), microphone=(), geolocation=(), payment=(), usb=()'
 };
 const kitchenStations = ['Pizzas', 'Platillos', 'Bebidas'];
+const terminalOrderStatuses = new Set(['cerrado', 'cancelado', 'cerrado_turno']);
+const isOpenOrder = order => !terminalOrderStatuses.has(order.status);
 const normalizeStation = value => {
   const station = String(value || '').toLocaleLowerCase('es-MX');
   if (station.includes('pizza')) return 'Pizzas';
@@ -109,6 +111,34 @@ async function loadStore() {
       return { station, status };
     });
     return { ...order, items, tickets };
+  });
+  const activeCashSessionIds = new Set(current.cashSessions.filter(session => session.status === 'abierta').map(session => session.id));
+  const reconciledAt = new Date().toISOString();
+  current.orders = current.orders.map(order => {
+    if (!isOpenOrder(order) || activeCashSessionIds.has(order.cashSessionId)) return order;
+    return {
+      ...order,
+      status:'cerrado_turno',
+      closedAt:order.closedAt || reconciledAt,
+      updatedAt:reconciledAt,
+      closure:order.closure || {
+        type:'reconciliacion_inicio',
+        reason:'Pedido pendiente cerrado automáticamente porque su turno de caja ya no está abierto.',
+        previousStatus:order.status
+      }
+    };
+  });
+  current.cashSessions = current.cashSessions.map(session => {
+    if (session.status !== 'cerrada' || !session.report) return session;
+    const sessionOrders = current.orders.filter(order => order.cashSessionId === session.id);
+    return {
+      ...session,
+      report:{
+        ...session.report,
+        autoClosedOrders:sessionOrders.filter(order => order.status === 'cerrado_turno').length,
+        openOrders:sessionOrders.filter(isOpenOrder).length
+      }
+    };
   });
   if (current.menuVersion !== (source.version || 'initial')) {
     const oldByIdentity = new Map(current.catalog.map(item => [`${item.category}|${String(item.name).toLocaleLowerCase('es-MX')}`, item]));
@@ -282,8 +312,6 @@ function clearSession(request, response) {
 const activeCashSession = () => store.cashSessions.find(item => item.status === 'abierta') || null;
 const cents = amount => Math.round((Number(amount) + Number.EPSILON) * 100) / 100;
 const orderSubtotal = order => (order.items || []).reduce((sum, item) => sum + (Number(item.unitPrice) || 0) * Math.max(1, Number(item.quantity) || 1), 0);
-const isOpenOrder = order => !['cerrado', 'cancelado'].includes(order.status);
-
 function cashReport(session) {
   const sessionOrders = store.orders.filter(order => order.cashSessionId === session.id);
   const paidOrders = store.orders.filter(order => order.paid && order.payment?.cashSessionId === session.id);
@@ -300,7 +328,8 @@ function cashReport(session) {
     salesSubtotal, totalSales, cardFees, tips, methodTotals, cashSales, expectedCash, expectedTurnTotal,
     paidOrders: paidOrders.length, ordersTotal:sessionOrders.length,
     cancelledOrders:sessionOrders.filter(order => order.status === 'cancelado').length,
-    openOrders: sessionOrders.filter(order => !['cerrado', 'cancelado'].includes(order.status)).length
+    autoClosedOrders:sessionOrders.filter(order => order.status === 'cerrado_turno').length,
+    openOrders: sessionOrders.filter(isOpenOrder).length
   };
 }
 
@@ -499,20 +528,33 @@ async function handleApi(request, response, url) {
     if (!requireRole(request, response, 'admin')) return;
     const session = activeCashSession();
     if (!session) return sendJson(response, 409, { error: 'No hay una caja abierta para cortar.' });
-    const openOrders = store.orders.filter(order => order.cashSessionId === session.id && isOpenOrder(order));
-    if (openOrders.length) return sendJson(response, 409, { error: `Finaliza o cancela ${openOrders.length} pedido${openOrders.length === 1 ? '' : 's'} antes de cerrar la caja.` });
     const body = await readBody(request);
     const countedCash = Number(body.countedCash);
     if (!Number.isSafeInteger(countedCash) || countedCash < 0 || countedCash > 1_000_000) return sendJson(response, 400, { error: 'Escribe el efectivo contado en pesos, sin centavos.' });
+    const openOrders = store.orders.filter(order => order.cashSessionId === session.id && isOpenOrder(order));
+    const closedAt = new Date().toISOString();
+    const closedBy = sessionFor(request)?.username || 'pizzas';
+    for (const order of openOrders) {
+      const previousStatus = order.status;
+      order.status = 'cerrado_turno';
+      order.closedAt = closedAt;
+      order.updatedAt = closedAt;
+      order.closure = {
+        type:'corte_caja',
+        reason:'Pedido pendiente cerrado automáticamente al finalizar el turno.',
+        previousStatus,
+        closedBy
+      };
+    }
     const report = cashReport(session);
     session.status = 'cerrada';
-    session.closedAt = new Date().toISOString();
-    session.closedBy = sessionFor(request)?.username || 'pizzas';
+    session.closedAt = closedAt;
+    session.closedBy = closedBy;
     session.countedCash = countedCash;
     session.report = { ...report, countedCash, difference: cents(countedCash - report.expectedCash) };
     const authSession = sessionFor(request); if (authSession) authSession.lastClosedCashSessionId = session.id;
     await saveStore();
-    await auditEvent(request, 'cash.close', 'success', { cashSessionId:session.id, countedCash, difference:session.report.difference });
+    await auditEvent(request, 'cash.close', 'success', { cashSessionId:session.id, countedCash, difference:session.report.difference, autoClosedOrders:openOrders.length });
     sendJson(response, 200, { session, report: session.report });
     return;
   }

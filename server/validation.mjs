@@ -144,7 +144,7 @@ export function validateOrderMetadata(body, settings, orders, { existingOrderId 
     const tableCount = Number(settings.tableCount || 12);
     if (!Number.isSafeInteger(table) || table < 1 || table > tableCount) throw new ValidationError(`Selecciona una mesa entre 1 y ${tableCount}.`);
     if (!Number.isSafeInteger(guests) || guests < 1 || guests > 30) throw new ValidationError('Indica entre 1 y 30 comensales.');
-    if (orders.some(order => order.id !== existingOrderId && order.type === 'mesa' && String(order.table) === String(table) && !['cerrado','cancelado'].includes(order.status))) {
+    if (orders.some(order => order.id !== existingOrderId && order.type === 'mesa' && String(order.table) === String(table) && !['cerrado','cancelado','cerrado_turno'].includes(order.status))) {
       throw new ValidationError(`La mesa ${table} ya tiene un pedido abierto.`, 409);
     }
     metadata.table = String(table);

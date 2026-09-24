@@ -187,6 +187,8 @@ test('valida catálogo, exportaciones y cierre de caja con ventas digitales', as
   assert.equal(excel.response.status,200); assert.match(excel.response.headers.get('cache-control'),/no-store/); assert.match(excel.body,/Workbook/);
   boot=(await call('/api/bootstrap')).body;
   const session=boot.activeCashSession;
+  const pending=await call('/api/orders',{method:'POST',body:JSON.stringify({type:'mesa',table:'6',guests:2,items:[pizzaItem(boot)]})});
+  assert.equal(pending.response.status,201);
   const payments=boot.orders.filter(entry=>entry.paid&&entry.payment?.cashSessionId===session.id).map(entry=>entry.payment);
   const cashSales=payments.filter(payment=>payment.method==='Efectivo').reduce((sum,payment)=>sum+payment.total,0);
   const totalSales=payments.reduce((sum,payment)=>sum+payment.total,0);
@@ -195,6 +197,13 @@ test('valida catálogo, exportaciones y cierre de caja con ventas digitales', as
   assert.equal(close.body.report.expectedCash,session.openingCash+cashSales);
   assert.equal(close.body.report.expectedTurnTotal,session.openingCash+totalSales);
   assert.equal(close.body.report.difference,0);
+  assert.equal(close.body.report.autoClosedOrders,1);
+  assert.equal(close.body.report.openOrders,0);
+  const closedBoot=(await call('/api/bootstrap')).body;
+  const autoClosed=closedBoot.orders.find(entry=>entry.id===pending.body.id);
+  assert.equal(autoClosed.status,'cerrado_turno');
+  assert.notEqual(autoClosed.paid,true, 'El pedido cerrado al corte no debe fingir un pago.');
+  assert.equal(autoClosed.closure.type,'corte_caja');
   const reportPdf=await call(`/api/cash-sessions/${session.id}/report.pdf`);
   assert.equal(reportPdf.response.status,200);
   assert.match(reportPdf.body,/TOTAL TURNO/);

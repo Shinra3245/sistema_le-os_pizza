@@ -70,7 +70,7 @@ function tableHeader(columns,y) {
   columns.forEach(column => commands.push(text(column.label,column.x,y-14,7,{font:'F2',color:colors.white,align:column.align || 'left',maxWidth:column.width})));
   return commands.join('\n');
 }
-const statusInfo = status => ({ cerrado:['Cerrado',colors.forestSoft,colors.forest], cancelado:['Cancelado',colors.redSoft,colors.red], en_ruta:['En reparto',colors.blueSoft,colors.blue], listo:['Listo',colors.goldSoft,colors.gold], preparando:['Preparando',colors.goldSoft,colors.gold], pendiente:['Pendiente',colors.goldSoft,colors.gold], nuevo:['Abierto',colors.goldSoft,colors.gold], abierto:['Abierto',colors.goldSoft,colors.gold] }[status] || [status || 'Abierto',colors.goldSoft,colors.gold]);
+const statusInfo = status => ({ cerrado:['Cerrado',colors.forestSoft,colors.forest], cerrado_turno:['Cerrado corte',colors.forestSoft,colors.forest], cancelado:['Cancelado',colors.redSoft,colors.red], en_ruta:['En reparto',colors.blueSoft,colors.blue], listo:['Listo',colors.goldSoft,colors.gold], preparando:['Preparando',colors.goldSoft,colors.gold], pendiente:['Pendiente',colors.goldSoft,colors.gold], nuevo:['Abierto',colors.goldSoft,colors.gold], abierto:['Abierto',colors.goldSoft,colors.gold] }[status] || [status || 'Abierto',colors.goldSoft,colors.gold]);
 function statusChip(status,x,y,width = 68) { const [label,background,color] = statusInfo(status); return `${rect(x,y-4,width,15,background,null,7)}\n${text(label,x+width/2,y+1,6.5,{font:'F2',color,align:'center',maxWidth:width-8})}`; }
 function serviceLabel(order) { return order.type === 'mesa' ? `Mesa ${order.table || ''}` : order.type === 'domicilio' ? 'Domicilio' : 'Recoger aqui'; }
 function orderTotal(order) { return number(order.payment?.total || (order.items || []).reduce((sum,item) => sum + number(item.unitPrice) * Math.max(1,number(item.quantity)),0)); }
@@ -108,7 +108,7 @@ function buildPdf(pageBodies,settings,generatedAt) {
 }
 
 export function generalReportPdf({ settings, orders = [], rawMaterials = [], generatedAt = new Date() }) {
-  const paid=orders.filter(order=>order.paid); const captured=paid.reduce((sum,order)=>sum+orderTotal(order),0); const open=orders.filter(order=>!['cerrado','cancelado'].includes(order.status)).length; const cancelled=orders.filter(order=>order.status==='cancelado').length;
+  const paid=orders.filter(order=>order.paid); const captured=paid.reduce((sum,order)=>sum+orderTotal(order),0); const open=orders.filter(order=>!['cerrado','cancelado','cerrado_turno'].includes(order.status)).length; const cancelled=orders.filter(order=>order.status==='cancelado').length;
   const firstCapacity=21, nextCapacity=26; const groups=[]; let cursor=0;
   groups.push(orders.slice(cursor,cursor+firstCapacity)); cursor+=firstCapacity;
   while(cursor<orders.length){groups.push(orders.slice(cursor,cursor+nextCapacity));cursor+=nextCapacity;}
@@ -159,7 +159,7 @@ export function cashCloseReportPdf({ settings, session, report, orders = [], gen
       commands.push(text(balanceLabel,328,510,13,{font:'F3',color:difference<0?colors.red:colors.forest}),text(money(Math.abs(difference)),556,508,15,{font:'F2',color:difference<0?colors.red:colors.forest,align:'right'}));
       commands.push(text(`Efectivo esperado: ${money(data.expectedCash)}`,328,490,7,{font:'F2',color:colors.muted,maxWidth:225}));
       commands.push(text(`Comisiones: ${money(data.cardFees)}   |   Propinas: ${money(data.tips)}`,328,478,6.5,{color:colors.muted,maxWidth:225}));
-      commands.push(sectionTitle('OPERACIONES','Pedidos del turno',451)); commands.push(text(`${orders.length} pedidos   |   ${data.paidOrders||0} cobrados   |   ${data.cancelledOrders||0} cancelados   |   ${data.openOrders||0} abiertos`,572,448,7,{font:'F2',color:colors.muted,align:'right'}));
+      commands.push(sectionTitle('OPERACIONES','Pedidos del turno',451)); commands.push(text(`${orders.length} pedidos | ${data.paidOrders||0} cobrados | ${data.cancelledOrders||0} cancelados | ${data.autoClosedOrders||0} cerrados al corte | ${data.openOrders||0} abiertos`,572,448,6.5,{font:'F2',color:colors.muted,align:'right'}));
       commands.push(tableHeader(columns,422)); commands.push(group.length?orderRows(group,columns,400,21,'cash'):text('No se registraron pedidos durante este turno.',306,380,10,{color:colors.muted,align:'center'}));
     } else {
       commands.push(sectionTitle('CONTINUACION','Pedidos del turno',665)); commands.push(tableHeader(columns,635)); commands.push(orderRows(group,columns,613,21,'cash'));
