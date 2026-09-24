@@ -1,0 +1,1888 @@
+{
+  "restaurante": "Pizzas a la Leña",
+  "version": "Menu_Completo-2026-09-21-v3",
+  "fuente": "Menu_Completo (ocho láminas PNG, 21/09/2026)",
+  "categorias": [
+    "pizzas_clasicas",
+    "pizzas_especialidades",
+    "pizzas_gourmet",
+    "snacks",
+    "ensaladas",
+    "extras",
+    "pastas",
+    "alitas_boneless",
+    "hamburguesas",
+    "bebidas"
+  ],
+  "catalog": [
+    {
+      "id": "pizzas_clasicas-1",
+      "name": "Hawaiana",
+      "category": "pizzas_clasicas",
+      "group": "Clásicas",
+      "kind": "pizza",
+      "price": 200,
+      "prices": {
+        "mediana": 200,
+        "grande": 220,
+        "familiar": 250
+      },
+      "description": "Jamón y piña.",
+      "choices": [],
+      "choiceGroups": [],
+      "variants": [],
+      "active": true
+    },
+    {
+      "id": "pizzas_clasicas-2",
+      "name": "Queso",
+      "category": "pizzas_clasicas",
+      "group": "Clásicas",
+      "kind": "pizza",
+      "price": 200,
+      "prices": {
+        "mediana": 200,
+        "grande": 220,
+        "familiar": 250
+      },
+      "description": "Queso y queso cheddar.",
+      "choices": [],
+      "choiceGroups": [],
+      "variants": [],
+      "active": true
+    },
+    {
+      "id": "pizzas_clasicas-3",
+      "name": "Pepperoni",
+      "category": "pizzas_clasicas",
+      "group": "Clásicas",
+      "kind": "pizza",
+      "price": 200,
+      "prices": {
+        "mediana": 200,
+        "grande": 220,
+        "familiar": 250
+      },
+      "description": "Pepperoni.",
+      "choices": [],
+      "choiceGroups": [],
+      "variants": [],
+      "active": true
+    },
+    {
+      "id": "pizzas_clasicas-4",
+      "name": "Champiñones",
+      "category": "pizzas_clasicas",
+      "group": "Clásicas",
+      "kind": "pizza",
+      "price": 200,
+      "prices": {
+        "mediana": 200,
+        "grande": 220,
+        "familiar": 250
+      },
+      "description": "Champiñones.",
+      "choices": [],
+      "choiceGroups": [],
+      "variants": [],
+      "active": true
+    },
+    {
+      "id": "pizzas_especialidades-5",
+      "name": "Doritos",
+      "category": "pizzas_especialidades",
+      "group": "Especialidades",
+      "kind": "pizza",
+      "price": 220,
+      "prices": {
+        "mediana": 220,
+        "grande": 270,
+        "familiar": 300
+      },
+      "description": "Queso cheddar, jalapeño, carne molida y Doritos.",
+      "choices": [],
+      "choiceGroups": [],
+      "variants": [],
+      "active": true
+    },
+    {
+      "id": "pizzas_especialidades-6",
+      "name": "Carnes frías",
+      "category": "pizzas_especialidades",
+      "group": "Especialidades",
+      "kind": "pizza",
+      "price": 220,
+      "prices": {
+        "mediana": 220,
+        "grande": 270,
+        "familiar": 300
+      },
+      "description": "Jamón, salchicha, salami, pepperoni y cebolla.",
+      "choices": [],
+      "choiceGroups": [],
+      "variants": [],
+      "active": true
+    },
+    {
+      "id": "pizzas_especialidades-7",
+      "name": "Margarita",
+      "category": "pizzas_especialidades",
+      "group": "Especialidades",
+      "kind": "pizza",
+      "price": 220,
+      "prices": {
+        "mediana": 220,
+        "grande": 270,
+        "familiar": 300
+      },
+      "description": "Jitomate, albahaca, aceituna negra y queso mozzarella.",
+      "choices": [],
+      "choiceGroups": [],
+      "variants": [],
+      "active": true
+    },
+    {
+      "id": "pizzas_especialidades-8",
+      "name": "Charra",
+      "category": "pizzas_especialidades",
+      "group": "Especialidades",
+      "kind": "pizza",
+      "price": 220,
+      "prices": {
+        "mediana": 220,
+        "grande": 270,
+        "familiar": 300
+      },
+      "description": "Jamón, chorizo, frijoles, jalapeño y cebolla.",
+      "choices": [],
+      "choiceGroups": [],
+      "variants": [],
+      "active": true
+    },
+    {
+      "id": "pizzas_especialidades-9",
+      "name": "Carnívora",
+      "category": "pizzas_especialidades",
+      "group": "Especialidades",
+      "kind": "pizza",
+      "price": 220,
+      "prices": {
+        "mediana": 220,
+        "grande": 270,
+        "familiar": 300
+      },
+      "description": "Jamón, carne, pepperoni, salami, salchicha y chorizo.",
+      "choices": [],
+      "choiceGroups": [],
+      "variants": [],
+      "active": true
+    },
+    {
+      "id": "pizzas_especialidades-10",
+      "name": "3 carnes",
+      "category": "pizzas_especialidades",
+      "group": "Especialidades",
+      "kind": "pizza",
+      "price": 220,
+      "prices": {
+        "mediana": 220,
+        "grande": 270,
+        "familiar": 300
+      },
+      "description": "Pepperoni, jamón y tocino.",
+      "choices": [],
+      "choiceGroups": [],
+      "variants": [],
+      "active": true
+    },
+    {
+      "id": "pizzas_especialidades-11",
+      "name": "Chetos Flamin’ Hot",
+      "category": "pizzas_especialidades",
+      "group": "Especialidades",
+      "kind": "pizza",
+      "price": 220,
+      "prices": {
+        "mediana": 220,
+        "grande": 270,
+        "familiar": 300
+      },
+      "description": "Queso cheddar, pepperoni, tocino y Cheetos Flamin’ Hot.",
+      "choices": [],
+      "choiceGroups": [],
+      "variants": [],
+      "active": true
+    },
+    {
+      "id": "pizzas_especialidades-12",
+      "name": "BBQ",
+      "category": "pizzas_especialidades",
+      "group": "Especialidades",
+      "kind": "pizza",
+      "price": 220,
+      "prices": {
+        "mediana": 220,
+        "grande": 270,
+        "familiar": 300
+      },
+      "description": "Fajitas de pollo, salsa BBQ, cebolla y tocino.",
+      "choices": [],
+      "choiceGroups": [],
+      "variants": [],
+      "active": true
+    },
+    {
+      "id": "pizzas_especialidades-13",
+      "name": "Mediterránea",
+      "category": "pizzas_especialidades",
+      "group": "Especialidades",
+      "kind": "pizza",
+      "price": 220,
+      "prices": {
+        "mediana": 220,
+        "grande": 270,
+        "familiar": 300
+      },
+      "description": "Atún, aceituna negra, elote, pimiento y cebolla.",
+      "choices": [],
+      "choiceGroups": [],
+      "variants": [],
+      "active": true
+    },
+    {
+      "id": "pizzas_especialidades-14",
+      "name": "Mexicana",
+      "category": "pizzas_especialidades",
+      "group": "Especialidades",
+      "kind": "pizza",
+      "price": 220,
+      "prices": {
+        "mediana": 220,
+        "grande": 270,
+        "familiar": 300
+      },
+      "description": "Chorizo, jamón, jalapeños y cebolla.",
+      "choices": [],
+      "choiceGroups": [],
+      "variants": [],
+      "active": true
+    },
+    {
+      "id": "pizzas_especialidades-15",
+      "name": "Italiana",
+      "category": "pizzas_especialidades",
+      "group": "Especialidades",
+      "kind": "pizza",
+      "price": 220,
+      "prices": {
+        "mediana": 220,
+        "grande": 270,
+        "familiar": 300
+      },
+      "description": "Res, jamón, aceituna negra, pimiento y cebolla.",
+      "choices": [],
+      "choiceGroups": [],
+      "variants": [],
+      "active": true
+    },
+    {
+      "id": "pizzas_especialidades-16",
+      "name": "Especial",
+      "category": "pizzas_especialidades",
+      "group": "Especialidades",
+      "kind": "pizza",
+      "price": 220,
+      "prices": {
+        "mediana": 220,
+        "grande": 270,
+        "familiar": 300
+      },
+      "description": "Jamón, carne molida, champiñones, pepperoni, tocino, pimiento y cebolla.",
+      "choices": [],
+      "choiceGroups": [],
+      "variants": [],
+      "active": true
+    },
+    {
+      "id": "pizzas_especialidades-17",
+      "name": "Campirana",
+      "category": "pizzas_especialidades",
+      "group": "Especialidades",
+      "kind": "pizza",
+      "price": 220,
+      "prices": {
+        "mediana": 220,
+        "grande": 270,
+        "familiar": 300
+      },
+      "description": "Champiñón, carne molida, tocino y cebolla.",
+      "choices": [],
+      "choiceGroups": [],
+      "variants": [],
+      "active": true
+    },
+    {
+      "id": "pizzas_especialidades-18",
+      "name": "Vegetariana",
+      "category": "pizzas_especialidades",
+      "group": "Especialidades",
+      "kind": "pizza",
+      "price": 220,
+      "prices": {
+        "mediana": 220,
+        "grande": 270,
+        "familiar": 300
+      },
+      "description": "Champiñón, pimiento, cebolla y elote.",
+      "choices": [],
+      "choiceGroups": [],
+      "variants": [],
+      "active": true
+    },
+    {
+      "id": "pizzas_especialidades-19",
+      "name": "Azteca",
+      "category": "pizzas_especialidades",
+      "group": "Especialidades",
+      "kind": "pizza",
+      "price": 220,
+      "prices": {
+        "mediana": 220,
+        "grande": 270,
+        "familiar": 300
+      },
+      "description": "Jamón, pepperoni, salchicha, pimiento, champiñón y aceituna negra.",
+      "choices": [],
+      "choiceGroups": [],
+      "variants": [],
+      "active": true
+    },
+    {
+      "id": "pizzas_especialidades-20",
+      "name": "Luxury",
+      "category": "pizzas_especialidades",
+      "group": "Especialidades",
+      "kind": "pizza",
+      "price": 220,
+      "prices": {
+        "mediana": 220,
+        "grande": 270,
+        "familiar": 300
+      },
+      "description": "Pepperoni, pimiento, aceituna negra, cebolla y carne molida.",
+      "choices": [],
+      "choiceGroups": [],
+      "variants": [],
+      "active": true
+    },
+    {
+      "id": "pizzas_gourmet-21",
+      "name": "Monterrey",
+      "category": "pizzas_gourmet",
+      "group": "Gourmet",
+      "kind": "pizza",
+      "price": 250,
+      "prices": {
+        "mediana": 250,
+        "grande": 290,
+        "familiar": 330
+      },
+      "description": "Carne asada, cebolla, jalapeño y queso mozzarella.",
+      "choices": [],
+      "choiceGroups": [],
+      "variants": [],
+      "active": true
+    },
+    {
+      "id": "pizzas_gourmet-22",
+      "name": "Cubana",
+      "category": "pizzas_gourmet",
+      "group": "Gourmet",
+      "kind": "pizza",
+      "price": 250,
+      "prices": {
+        "mediana": 250,
+        "grande": 290,
+        "familiar": 330
+      },
+      "description": "Jamón, piña, tocino y queso mozzarella.",
+      "choices": [],
+      "choiceGroups": [],
+      "variants": [],
+      "active": true
+    },
+    {
+      "id": "pizzas_gourmet-23",
+      "name": "Arrachera",
+      "category": "pizzas_gourmet",
+      "group": "Gourmet",
+      "kind": "pizza",
+      "price": 250,
+      "prices": {
+        "mediana": 250,
+        "grande": 290,
+        "familiar": 330
+      },
+      "description": "Arrachera, cebolla, pimiento y queso mozzarella.",
+      "choices": [],
+      "choiceGroups": [],
+      "variants": [],
+      "active": true
+    },
+    {
+      "id": "pizzas_gourmet-24",
+      "name": "Boneless",
+      "category": "pizzas_gourmet",
+      "group": "Gourmet",
+      "kind": "pizza",
+      "price": 250,
+      "prices": {
+        "mediana": 250,
+        "grande": 290,
+        "familiar": 330
+      },
+      "description": "Boneless, cebolla, aderezo ranch y queso mozzarella.",
+      "choices": [],
+      "choiceGroups": [],
+      "variants": [],
+      "active": true
+    },
+    {
+      "id": "pizzas_gourmet-25",
+      "name": "Pastor",
+      "category": "pizzas_gourmet",
+      "group": "Gourmet",
+      "kind": "pizza",
+      "price": 250,
+      "prices": {
+        "mediana": 250,
+        "grande": 290,
+        "familiar": 330
+      },
+      "description": "Carne al pastor, piña, cebolla y queso mozzarella.",
+      "choices": [],
+      "choiceGroups": [],
+      "variants": [],
+      "active": true
+    },
+    {
+      "id": "pizzas_gourmet-26",
+      "name": "Camarón",
+      "category": "pizzas_gourmet",
+      "group": "Gourmet",
+      "kind": "pizza",
+      "price": 250,
+      "prices": {
+        "mediana": 250,
+        "grande": 290,
+        "familiar": 330
+      },
+      "description": "Camarón, pimiento, cebolla y queso mozzarella.",
+      "choices": [],
+      "choiceGroups": [],
+      "variants": [],
+      "active": true
+    },
+    {
+      "id": "pizzas_gourmet-orilla",
+      "name": "Orilla de queso (complemento)",
+      "category": "pizzas_gourmet",
+      "group": "Gourmet",
+      "kind": "supplement",
+      "price": 35,
+      "prices": {
+        "mediana": 35,
+        "grande": 50,
+        "familiar": 60
+      },
+      "description": "Orilla de queso para pizza. Mediana $35, grande $50 y familiar $60.",
+      "choices": [],
+      "variants": [],
+      "active": true,
+      "choiceGroups": []
+    },
+    {
+      "id": "snacks-28",
+      "name": "Papas a la francesa",
+      "category": "snacks",
+      "group": "snacks",
+      "kind": "dish",
+      "price": 60,
+      "prices": {
+        "base": 60
+      },
+      "description": "Papas a la francesa 300 g · Naturales.",
+      "choices": [],
+      "choiceGroups": [],
+      "variants": [],
+      "active": true
+    },
+    {
+      "id": "snacks-29",
+      "name": "Papas a la francesa pimienta limon",
+      "category": "snacks",
+      "group": "snacks",
+      "kind": "dish",
+      "price": 65,
+      "prices": {
+        "base": 65
+      },
+      "description": "Papas a la francesa 300 g · Pimienta limón.",
+      "choices": [],
+      "choiceGroups": [],
+      "variants": [],
+      "active": true
+    },
+    {
+      "id": "snacks-30",
+      "name": "Papas a la francesa queso gratinado",
+      "category": "snacks",
+      "group": "snacks",
+      "kind": "dish",
+      "price": 80,
+      "prices": {
+        "base": 80
+      },
+      "description": "Papas a la francesa 300 g · Queso gratinado.",
+      "choices": [],
+      "choiceGroups": [],
+      "variants": [],
+      "active": true
+    },
+    {
+      "id": "snacks-31",
+      "name": "Papas Gajo",
+      "category": "snacks",
+      "group": "snacks",
+      "kind": "dish",
+      "price": 70,
+      "prices": {
+        "base": 70
+      },
+      "description": "Papas gajo 300 g · Naturales.",
+      "choices": [],
+      "choiceGroups": [],
+      "variants": [],
+      "active": true
+    },
+    {
+      "id": "snacks-32",
+      "name": "Papas Gajo queso chedar",
+      "category": "snacks",
+      "group": "snacks",
+      "kind": "dish",
+      "price": 85,
+      "prices": {
+        "base": 85
+      },
+      "description": "Papas gajo 300 g · Queso cheddar.",
+      "choices": [],
+      "choiceGroups": [],
+      "variants": [],
+      "active": true
+    },
+    {
+      "id": "snacks-33",
+      "name": "Papas Gajo queso gratinado",
+      "category": "snacks",
+      "group": "snacks",
+      "kind": "dish",
+      "price": 85,
+      "prices": {
+        "base": 85
+      },
+      "description": "Papas gajo 300 g · Queso gratinado.",
+      "choices": [],
+      "choiceGroups": [],
+      "variants": [],
+      "active": true
+    },
+    {
+      "id": "snacks-34",
+      "name": "Nuggets de pollo 5 pz",
+      "category": "snacks",
+      "group": "snacks",
+      "kind": "dish",
+      "price": 50,
+      "prices": {
+        "base": 50
+      },
+      "description": "5 piezas.",
+      "choices": [],
+      "choiceGroups": [],
+      "variants": [],
+      "active": true
+    },
+    {
+      "id": "snacks-35",
+      "name": "Aros de cebolla 6 pz",
+      "category": "snacks",
+      "group": "snacks",
+      "kind": "dish",
+      "price": 50,
+      "prices": {
+        "base": 50
+      },
+      "description": "6 piezas.",
+      "choices": [],
+      "choiceGroups": [],
+      "variants": [],
+      "active": true
+    },
+    {
+      "id": "snacks-36",
+      "name": "Deditos de queso 5 pz",
+      "category": "snacks",
+      "group": "snacks",
+      "kind": "dish",
+      "price": 80,
+      "prices": {
+        "base": 80
+      },
+      "description": "5 piezas.",
+      "choices": [],
+      "choiceGroups": [],
+      "variants": [],
+      "active": true
+    },
+    {
+      "id": "ensaladas-37",
+      "name": "Ensalada Cesar",
+      "category": "ensaladas",
+      "group": "ensaladas",
+      "kind": "dish",
+      "price": 100,
+      "prices": {
+        "base": 100
+      },
+      "description": "Lechuga, pollo, queso parmesano y crotones.",
+      "choices": [],
+      "choiceGroups": [],
+      "variants": [],
+      "active": true
+    },
+    {
+      "id": "ensaladas-38",
+      "name": "Ensalada de la casa",
+      "category": "ensaladas",
+      "group": "ensaladas",
+      "kind": "dish",
+      "price": 125,
+      "prices": {
+        "base": 125
+      },
+      "description": "Lechuga, tomate cherry, uvas, zanahoria, nuez, parmesano, almendra y arándano.",
+      "choices": [],
+      "choiceGroups": [],
+      "variants": [],
+      "active": true
+    },
+    {
+      "id": "ensaladas-39",
+      "name": "Ensalada mixta",
+      "category": "ensaladas",
+      "group": "ensaladas",
+      "kind": "dish",
+      "price": 125,
+      "prices": {
+        "base": 125
+      },
+      "description": "Lechuga, tomate cherry, pepino, cebolla morada, crotones, elote y queso.",
+      "choices": [],
+      "choiceGroups": [],
+      "variants": [],
+      "active": true
+    },
+    {
+      "id": "ensaladas-40",
+      "name": "Ensalada Italiana",
+      "category": "ensaladas",
+      "group": "ensaladas",
+      "kind": "dish",
+      "price": 125,
+      "prices": {
+        "base": 125
+      },
+      "description": "Lechuga, tomate cherry, pepino, cebolla morada, aceituna negra y queso mozzarella.",
+      "choices": [],
+      "choiceGroups": [],
+      "variants": [],
+      "active": true
+    },
+    {
+      "id": "extras-41",
+      "name": "Burritos 2 pz",
+      "category": "extras",
+      "group": "extras",
+      "kind": "dish",
+      "price": 90,
+      "prices": {
+        "base": 90
+      },
+      "description": "2 piezas. Incluye media orden de papas a la francesa naturales (150 g).",
+      "choices": [
+        "Carne molida",
+        "Hawaiano",
+        "Chorizo",
+        "Jamón y piña",
+        "Pastor"
+      ],
+      "choiceGroups": [
+        {
+          "label": "Relleno",
+          "options": [
+            "Carne molida",
+            "Hawaiano",
+            "Chorizo",
+            "Jamón y piña",
+            "Pastor"
+          ]
+        }
+      ],
+      "variants": [],
+      "active": true
+    },
+    {
+      "id": "extras-42",
+      "name": "Palitos de queso 2 pz",
+      "category": "extras",
+      "group": "extras",
+      "kind": "dish",
+      "price": 115,
+      "prices": {
+        "base": 115
+      },
+      "description": "2 piezas.",
+      "choices": [
+        "Jamón",
+        "Piña",
+        "Chorizo",
+        "Champiñón"
+      ],
+      "choiceGroups": [
+        {
+          "label": "Relleno",
+          "options": [
+            "Jamón",
+            "Piña",
+            "Chorizo",
+            "Champiñón"
+          ]
+        }
+      ],
+      "variants": [],
+      "active": true
+    },
+    {
+      "id": "extras-43",
+      "name": "Queso fundido",
+      "category": "extras",
+      "group": "extras",
+      "kind": "dish",
+      "price": 85,
+      "prices": {
+        "base": 85
+      },
+      "description": "Elige chorizo, champiñón o carne molida.",
+      "choices": [
+        "Chorizo",
+        "Champiñón",
+        "Carne molida"
+      ],
+      "choiceGroups": [
+        {
+          "label": "Preparación",
+          "options": [
+            "Chorizo",
+            "Champiñón",
+            "Carne molida"
+          ]
+        }
+      ],
+      "variants": [],
+      "active": true
+    },
+    {
+      "id": "pastas-44",
+      "name": "Boloñesa",
+      "category": "pastas",
+      "group": "pastas",
+      "kind": "dish",
+      "price": 120,
+      "prices": {
+        "base": 120
+      },
+      "description": "Puré de tomate y carne molida.",
+      "choices": [],
+      "choiceGroups": [],
+      "variants": [],
+      "active": true
+    },
+    {
+      "id": "pastas-45",
+      "name": "Carbonara",
+      "category": "pastas",
+      "group": "pastas",
+      "kind": "dish",
+      "price": 120,
+      "prices": {
+        "base": 120
+      },
+      "description": "Crema bechamel y tocino.",
+      "choices": [],
+      "choiceGroups": [],
+      "variants": [],
+      "active": true
+    },
+    {
+      "id": "pastas-46",
+      "name": "Alfredo",
+      "category": "pastas",
+      "group": "pastas",
+      "kind": "dish",
+      "price": 100,
+      "prices": {
+        "natural": 100,
+        "chipotle": 105
+      },
+      "description": "Salsa Alfredo. Elige proteína y salsa natural o chipotle.",
+      "choices": [],
+      "choiceGroups": [],
+      "variants": [
+        {
+          "label": "Natural",
+          "price": 100
+        },
+        {
+          "label": "Chipotle",
+          "price": 105
+        }
+      ],
+      "active": true
+    },
+    {
+      "id": "pastas-47",
+      "name": "Alfredo Camarón",
+      "category": "pastas",
+      "group": "pastas",
+      "kind": "dish",
+      "price": 130,
+      "prices": {
+        "natural": 130,
+        "chipotle": 135
+      },
+      "description": "Salsa Alfredo con camarón. Elige natural o chipotle.",
+      "choices": [],
+      "choiceGroups": [],
+      "variants": [
+        {
+          "label": "Natural",
+          "price": 130
+        },
+        {
+          "label": "Chipotle",
+          "price": 135
+        }
+      ],
+      "active": true
+    },
+    {
+      "id": "pastas-48",
+      "name": "Alfredo Champiñón",
+      "category": "pastas",
+      "group": "pastas",
+      "kind": "dish",
+      "price": 110,
+      "prices": {
+        "natural": 110,
+        "chipotle": 115
+      },
+      "description": "Salsa Alfredo con champiñón. Elige natural o chipotle.",
+      "choices": [],
+      "choiceGroups": [],
+      "variants": [
+        {
+          "label": "Natural",
+          "price": 110
+        },
+        {
+          "label": "Chipotle",
+          "price": 115
+        }
+      ],
+      "active": true
+    },
+    {
+      "id": "pastas-49",
+      "name": "Alfredo Pollo",
+      "category": "pastas",
+      "group": "pastas",
+      "kind": "dish",
+      "price": 125,
+      "prices": {
+        "natural": 125,
+        "chipotle": 130
+      },
+      "description": "Salsa Alfredo con pollo. Elige natural o chipotle.",
+      "choices": [],
+      "choiceGroups": [],
+      "variants": [
+        {
+          "label": "Natural",
+          "price": 125
+        },
+        {
+          "label": "Chipotle",
+          "price": 130
+        }
+      ],
+      "active": true
+    },
+    {
+      "id": "pastas-50",
+      "name": "Alfredo Arrachera",
+      "category": "pastas",
+      "group": "pastas",
+      "kind": "dish",
+      "price": 130,
+      "prices": {
+        "natural": 130,
+        "chipotle": 135
+      },
+      "description": "Salsa Alfredo con arrachera. Elige natural o chipotle.",
+      "choices": [],
+      "choiceGroups": [],
+      "variants": [
+        {
+          "label": "Natural",
+          "price": 130
+        },
+        {
+          "label": "Chipotle",
+          "price": 135
+        }
+      ],
+      "active": true
+    },
+    {
+      "id": "pastas-51",
+      "name": "Italiana",
+      "category": "pastas",
+      "group": "pastas",
+      "kind": "dish",
+      "price": 135,
+      "prices": {
+        "natural": 135
+      },
+      "description": "Camarón y queso mozzarella.",
+      "choices": [],
+      "choiceGroups": [],
+      "variants": [
+        {
+          "label": "Natural",
+          "price": 135
+        }
+      ],
+      "active": true
+    },
+    {
+      "id": "alitas_boneless-52",
+      "name": "Alitas / boneless",
+      "category": "alitas_boneless",
+      "group": "alitas_boneless",
+      "kind": "dish",
+      "price": 130,
+      "prices": {
+        "base": 130
+      },
+      "description": "Elige alitas (8 piezas) o boneless (200 g) y un sabor.",
+      "choices": [
+        "Natural",
+        "Pimienta limón",
+        "BBQ",
+        "Mostaza miel",
+        "Parmesano",
+        "BBQ picoso",
+        "Habanero",
+        "Mango habanero",
+        "Piña habanero",
+        "Tamarindo habanero"
+      ],
+      "choiceGroups": [
+        {
+          "label": "Presentación",
+          "options": [
+            "Alitas · 8 piezas",
+            "Boneless · 200 g"
+          ]
+        },
+        {
+          "label": "Sabor",
+          "options": [
+            "Natural",
+            "Pimienta limón",
+            "BBQ",
+            "Mostaza miel",
+            "Parmesano",
+            "BBQ picoso",
+            "Habanero",
+            "Mango habanero",
+            "Piña habanero",
+            "Tamarindo habanero"
+          ]
+        }
+      ],
+      "variants": [],
+      "active": true
+    },
+    {
+      "id": "hamburguesas-53",
+      "name": "Sencilla",
+      "category": "hamburguesas",
+      "group": "hamburguesas",
+      "kind": "dish",
+      "price": 90,
+      "prices": {
+        "base": 90
+      },
+      "description": "Carne de res. Lleva queso, lechuga, jitomate, cebolla morada e incluye media orden de papas naturales (150 g).",
+      "choices": [
+        "Con queso",
+        "Sin queso"
+      ],
+      "choiceGroups": [
+        {
+          "label": "Queso",
+          "options": [
+            "Con queso",
+            "Sin queso"
+          ]
+        }
+      ],
+      "variants": [],
+      "active": true,
+      "ingredientOptions": [
+        "Queso",
+        "Lechuga",
+        "Jitomate",
+        "Cebolla morada"
+      ]
+    },
+    {
+      "id": "hamburguesas-54",
+      "name": "Doble",
+      "category": "hamburguesas",
+      "group": "hamburguesas",
+      "kind": "dish",
+      "price": 130,
+      "prices": {
+        "base": 130
+      },
+      "description": "Doble carne de res. Lleva queso, lechuga, jitomate, cebolla morada e incluye media orden de papas naturales (150 g).",
+      "choices": [
+        "Con queso",
+        "Sin queso"
+      ],
+      "choiceGroups": [
+        {
+          "label": "Queso",
+          "options": [
+            "Con queso",
+            "Sin queso"
+          ]
+        }
+      ],
+      "variants": [],
+      "active": true,
+      "ingredientOptions": [
+        "Queso",
+        "Lechuga",
+        "Jitomate",
+        "Cebolla morada"
+      ]
+    },
+    {
+      "id": "hamburguesas-55",
+      "name": "Pollo",
+      "category": "hamburguesas",
+      "group": "hamburguesas",
+      "kind": "dish",
+      "price": 90,
+      "prices": {
+        "base": 90
+      },
+      "description": "Carne de pollo. Lleva queso, lechuga, jitomate, cebolla morada e incluye media orden de papas naturales (150 g).",
+      "choices": [
+        "Con queso",
+        "Sin queso"
+      ],
+      "choiceGroups": [
+        {
+          "label": "Queso",
+          "options": [
+            "Con queso",
+            "Sin queso"
+          ]
+        }
+      ],
+      "variants": [],
+      "active": true,
+      "ingredientOptions": [
+        "Queso",
+        "Lechuga",
+        "Jitomate",
+        "Cebolla morada"
+      ]
+    },
+    {
+      "id": "hamburguesas-56",
+      "name": "Arrachera",
+      "category": "hamburguesas",
+      "group": "hamburguesas",
+      "kind": "dish",
+      "price": 110,
+      "prices": {
+        "base": 110
+      },
+      "description": "Carne de arrachera. Lleva queso, lechuga, jitomate, cebolla morada e incluye media orden de papas naturales (150 g).",
+      "choices": [
+        "Con queso",
+        "Sin queso"
+      ],
+      "choiceGroups": [
+        {
+          "label": "Queso",
+          "options": [
+            "Con queso",
+            "Sin queso"
+          ]
+        }
+      ],
+      "variants": [],
+      "active": true,
+      "ingredientOptions": [
+        "Queso",
+        "Lechuga",
+        "Jitomate",
+        "Cebolla morada"
+      ]
+    },
+    {
+      "id": "hamburguesas-57",
+      "name": "Arrachera doble",
+      "category": "hamburguesas",
+      "group": "hamburguesas",
+      "kind": "dish",
+      "price": 140,
+      "prices": {
+        "base": 140
+      },
+      "description": "Doble carne de arrachera. Lleva queso, lechuga, jitomate, cebolla morada e incluye media orden de papas naturales (150 g).",
+      "choices": [
+        "Con queso",
+        "Sin queso"
+      ],
+      "choiceGroups": [
+        {
+          "label": "Queso",
+          "options": [
+            "Con queso",
+            "Sin queso"
+          ]
+        }
+      ],
+      "variants": [],
+      "active": true,
+      "ingredientOptions": [
+        "Queso",
+        "Lechuga",
+        "Jitomate",
+        "Cebolla morada"
+      ]
+    },
+    {
+      "id": "hamburguesas-58",
+      "name": "Pastor",
+      "category": "hamburguesas",
+      "group": "hamburguesas",
+      "kind": "dish",
+      "price": 120,
+      "prices": {
+        "base": 120
+      },
+      "description": "Carne al pastor y piña. Lleva queso, lechuga, jitomate, cebolla morada e incluye media orden de papas naturales (150 g).",
+      "choices": [
+        "Con queso",
+        "Sin queso"
+      ],
+      "choiceGroups": [
+        {
+          "label": "Queso",
+          "options": [
+            "Con queso",
+            "Sin queso"
+          ]
+        }
+      ],
+      "variants": [],
+      "active": true,
+      "ingredientOptions": [
+        "Queso",
+        "Lechuga",
+        "Jitomate",
+        "Cebolla morada",
+        "Piña"
+      ]
+    },
+    {
+      "id": "hamburguesas-59",
+      "name": "Hawaiana",
+      "category": "hamburguesas",
+      "group": "hamburguesas",
+      "kind": "dish",
+      "price": 110,
+      "prices": {
+        "base": 110
+      },
+      "description": "Jamón y piña. Lleva queso, lechuga, jitomate, cebolla morada e incluye media orden de papas naturales (150 g).",
+      "choices": [
+        "Con queso",
+        "Sin queso"
+      ],
+      "choiceGroups": [
+        {
+          "label": "Queso",
+          "options": [
+            "Con queso",
+            "Sin queso"
+          ]
+        }
+      ],
+      "variants": [],
+      "active": true,
+      "ingredientOptions": [
+        "Queso",
+        "Lechuga",
+        "Jitomate",
+        "Cebolla morada",
+        "Jamón",
+        "Piña"
+      ]
+    },
+    {
+      "id": "hamburguesas-60",
+      "name": "3 Quesos",
+      "category": "hamburguesas",
+      "group": "hamburguesas",
+      "kind": "dish",
+      "price": 110,
+      "prices": {
+        "base": 110
+      },
+      "description": "Queso cheddar y combinación de quesos. Lleva queso, lechuga, jitomate, cebolla morada e incluye media orden de papas naturales (150 g).",
+      "choices": [
+        "Con queso",
+        "Sin queso"
+      ],
+      "choiceGroups": [
+        {
+          "label": "Queso",
+          "options": [
+            "Con queso",
+            "Sin queso"
+          ]
+        }
+      ],
+      "variants": [],
+      "active": true,
+      "ingredientOptions": [
+        "Queso",
+        "Lechuga",
+        "Jitomate",
+        "Cebolla morada",
+        "Queso cheddar",
+        "Mezcla de quesos"
+      ]
+    },
+    {
+      "id": "hamburguesas-61",
+      "name": "Especial",
+      "category": "hamburguesas",
+      "group": "hamburguesas",
+      "kind": "dish",
+      "price": 120,
+      "prices": {
+        "base": 120
+      },
+      "description": "Jamón y tocino. Lleva queso, lechuga, jitomate, cebolla morada e incluye media orden de papas naturales (150 g).",
+      "choices": [
+        "Con queso",
+        "Sin queso"
+      ],
+      "choiceGroups": [
+        {
+          "label": "Queso",
+          "options": [
+            "Con queso",
+            "Sin queso"
+          ]
+        }
+      ],
+      "variants": [],
+      "active": true,
+      "ingredientOptions": [
+        "Queso",
+        "Lechuga",
+        "Jitomate",
+        "Cebolla morada",
+        "Jamón",
+        "Tocino"
+      ]
+    },
+    {
+      "id": "hamburguesas-62",
+      "name": "De la casa",
+      "category": "hamburguesas",
+      "group": "hamburguesas",
+      "kind": "dish",
+      "price": 110,
+      "prices": {
+        "base": 110
+      },
+      "description": "Tocino y champiñones. Lleva queso, lechuga, jitomate, cebolla morada e incluye media orden de papas naturales (150 g).",
+      "choices": [
+        "Con queso",
+        "Sin queso"
+      ],
+      "choiceGroups": [
+        {
+          "label": "Queso",
+          "options": [
+            "Con queso",
+            "Sin queso"
+          ]
+        }
+      ],
+      "variants": [],
+      "active": true,
+      "ingredientOptions": [
+        "Queso",
+        "Lechuga",
+        "Jitomate",
+        "Cebolla morada",
+        "Tocino",
+        "Champiñones"
+      ]
+    },
+    {
+      "id": "hamburguesas-63",
+      "name": "BBQ",
+      "category": "hamburguesas",
+      "group": "hamburguesas",
+      "kind": "dish",
+      "price": 110,
+      "prices": {
+        "base": 110
+      },
+      "description": "Carne de res con salsa BBQ. Lleva queso, lechuga, jitomate, cebolla morada e incluye media orden de papas naturales (150 g).",
+      "choices": [
+        "Con queso",
+        "Sin queso"
+      ],
+      "choiceGroups": [
+        {
+          "label": "Queso",
+          "options": [
+            "Con queso",
+            "Sin queso"
+          ]
+        }
+      ],
+      "variants": [],
+      "active": true,
+      "ingredientOptions": [
+        "Queso",
+        "Lechuga",
+        "Jitomate",
+        "Cebolla morada",
+        "Salsa BBQ"
+      ]
+    },
+    {
+      "id": "hamburguesas-64",
+      "name": "Grill",
+      "category": "hamburguesas",
+      "group": "hamburguesas",
+      "kind": "dish",
+      "price": 135,
+      "prices": {
+        "base": 135
+      },
+      "description": "Arrachera, guacamole y aros de cebolla. Lleva queso, lechuga, jitomate, cebolla morada e incluye media orden de papas naturales (150 g).",
+      "choices": [
+        "Con queso",
+        "Sin queso"
+      ],
+      "choiceGroups": [
+        {
+          "label": "Queso",
+          "options": [
+            "Con queso",
+            "Sin queso"
+          ]
+        }
+      ],
+      "variants": [],
+      "active": true,
+      "ingredientOptions": [
+        "Queso",
+        "Lechuga",
+        "Jitomate",
+        "Cebolla morada",
+        "Arrachera",
+        "Guacamole",
+        "Aros de cebolla"
+      ]
+    },
+    {
+      "id": "bebidas-65",
+      "name": "Frappe",
+      "category": "bebidas",
+      "group": "bebidas",
+      "kind": "dish",
+      "price": 70,
+      "prices": {
+        "base": 70
+      },
+      "description": "Frappe preparado al momento.",
+      "choices": [
+        "Frutos rojos",
+        "Piña fresa",
+        "Moka",
+        "Capuchino",
+        "Mazapán",
+        "Matcha",
+        "Oreo",
+        "Gansito"
+      ],
+      "choiceGroups": [
+        {
+          "label": "Sabor",
+          "options": [
+            "Frutos rojos",
+            "Piña fresa",
+            "Moka",
+            "Capuchino",
+            "Mazapán",
+            "Matcha",
+            "Oreo",
+            "Gansito"
+          ]
+        }
+      ],
+      "variants": [],
+      "active": true
+    },
+    {
+      "id": "bebidas-66",
+      "name": "Malteada",
+      "category": "bebidas",
+      "group": "bebidas",
+      "kind": "dish",
+      "price": 70,
+      "prices": {
+        "base": 70
+      },
+      "description": "Malteada preparada al momento.",
+      "choices": [
+        "Fresa",
+        "Chocolate",
+        "Vainilla"
+      ],
+      "choiceGroups": [
+        {
+          "label": "Sabor",
+          "options": [
+            "Fresa",
+            "Chocolate",
+            "Vainilla"
+          ]
+        }
+      ],
+      "variants": [],
+      "active": true
+    },
+    {
+      "id": "bebidas-67",
+      "name": "Refrescos 600 ml",
+      "category": "bebidas",
+      "group": "bebidas",
+      "kind": "dish",
+      "price": 40,
+      "prices": {
+        "base": 40
+      },
+      "description": "Sprite, Fanta, Mundet, Fresa, Coca-Cola, agua mineral o Peñafiel de sabor.",
+      "choices": [
+        "Sprite",
+        "Fanta",
+        "Mundet",
+        "Fresa",
+        "Coca-Cola",
+        "Agua mineral",
+        "Peñafiel de sabor"
+      ],
+      "choiceGroups": [
+        {
+          "label": "Bebida",
+          "options": [
+            "Sprite",
+            "Fanta",
+            "Mundet",
+            "Fresa",
+            "Coca-Cola",
+            "Agua mineral",
+            "Peñafiel de sabor"
+          ]
+        }
+      ],
+      "variants": [],
+      "active": true
+    },
+    {
+      "id": "bebidas-68",
+      "name": "Café o Té",
+      "category": "bebidas",
+      "group": "bebidas",
+      "kind": "dish",
+      "price": 35,
+      "prices": {
+        "base": 35
+      },
+      "description": "Elige café o té.",
+      "choices": [
+        "Café",
+        "Té"
+      ],
+      "choiceGroups": [
+        {
+          "label": "Bebida",
+          "options": [
+            "Café",
+            "Té"
+          ]
+        }
+      ],
+      "variants": [],
+      "active": true
+    },
+    {
+      "id": "bebidas-69",
+      "name": "Limonada o Naranjada 1/2",
+      "category": "bebidas",
+      "group": "bebidas",
+      "kind": "dish",
+      "price": 60,
+      "prices": {
+        "base": 60
+      },
+      "description": "Natural o mineral · 1/2 litro.",
+      "choices": [
+        "Limonada",
+        "Naranjada",
+        "Natural",
+        "Mineral"
+      ],
+      "choiceGroups": [
+        {
+          "label": "Sabor",
+          "options": [
+            "Limonada",
+            "Naranjada"
+          ]
+        },
+        {
+          "label": "Preparación",
+          "options": [
+            "Natural",
+            "Mineral"
+          ]
+        }
+      ],
+      "variants": [],
+      "active": true
+    },
+    {
+      "id": "bebidas-70",
+      "name": "Limonada o Naranjada 1 litro",
+      "category": "bebidas",
+      "group": "bebidas",
+      "kind": "dish",
+      "price": 90,
+      "prices": {
+        "base": 90
+      },
+      "description": "Natural o mineral · 1 litro.",
+      "choices": [
+        "Limonada",
+        "Naranjada",
+        "Natural",
+        "Mineral"
+      ],
+      "choiceGroups": [
+        {
+          "label": "Sabor",
+          "options": [
+            "Limonada",
+            "Naranjada"
+          ]
+        },
+        {
+          "label": "Preparación",
+          "options": [
+            "Natural",
+            "Mineral"
+          ]
+        }
+      ],
+      "variants": [],
+      "active": true
+    },
+    {
+      "id": "bebidas-71",
+      "name": "Limonada o Naranjada 2 litros",
+      "category": "bebidas",
+      "group": "bebidas",
+      "kind": "dish",
+      "price": 160,
+      "prices": {
+        "base": 160
+      },
+      "description": "Natural o mineral · 2 litros.",
+      "choices": [
+        "Limonada",
+        "Naranjada",
+        "Natural",
+        "Mineral"
+      ],
+      "choiceGroups": [
+        {
+          "label": "Sabor",
+          "options": [
+            "Limonada",
+            "Naranjada"
+          ]
+        },
+        {
+          "label": "Preparación",
+          "options": [
+            "Natural",
+            "Mineral"
+          ]
+        }
+      ],
+      "variants": [],
+      "active": true
+    },
+    {
+      "id": "bebidas-72",
+      "name": "Colados",
+      "category": "bebidas",
+      "group": "bebidas",
+      "kind": "dish",
+      "price": 95,
+      "prices": {
+        "base": 95
+      },
+      "description": "Elige piña o fresa sin alcohol, o piña, fresa o Baileys con alcohol.",
+      "choices": [
+        "Piña",
+        "Fresa",
+        "Baileys"
+      ],
+      "choiceGroups": [
+        {
+          "label": "Sabor",
+          "options": [
+            "Piña",
+            "Fresa",
+            "Baileys"
+          ]
+        }
+      ],
+      "variants": [],
+      "active": true
+    },
+    {
+      "id": "bebidas-73",
+      "name": "Clericot",
+      "category": "bebidas",
+      "group": "bebidas",
+      "kind": "dish",
+      "price": 90,
+      "prices": {
+        "1/2 litro (500 ml)": 90,
+        "1 litro": 180
+      },
+      "description": "Elige 1/2 litro o 1 litro.",
+      "choices": [],
+      "choiceGroups": [],
+      "variants": [
+        {
+          "label": "1/2 litro (500 ml)",
+          "price": 90
+        },
+        {
+          "label": "1 litro",
+          "price": 180
+        }
+      ],
+      "active": true
+    },
+    {
+      "id": "bebidas-74",
+      "name": "Margarita",
+      "category": "bebidas",
+      "group": "bebidas",
+      "kind": "dish",
+      "price": 95,
+      "prices": {
+        "base": 95
+      },
+      "description": "Cóctel. Elige un sabor.",
+      "choices": [
+        "Original",
+        "Mango",
+        "Frutos rojos",
+        "Tamarindo",
+        "Fresa"
+      ],
+      "choiceGroups": [
+        {
+          "label": "Sabor",
+          "options": [
+            "Original",
+            "Mango",
+            "Frutos rojos",
+            "Tamarindo",
+            "Fresa"
+          ]
+        }
+      ],
+      "variants": [],
+      "active": true
+    },
+    {
+      "id": "bebidas-75",
+      "name": "Cerveza",
+      "category": "bebidas",
+      "group": "bebidas",
+      "kind": "dish",
+      "price": 30,
+      "prices": {
+        "1/2 litro (500 ml)": 30,
+        "1 litro": 60
+      },
+      "description": "Cerveza servida en tarro.",
+      "choices": [],
+      "choiceGroups": [],
+      "variants": [
+        {
+          "label": "1/2 litro (500 ml)",
+          "price": 30
+        },
+        {
+          "label": "1 litro",
+          "price": 60
+        }
+      ],
+      "active": true
+    },
+    {
+      "id": "bebidas-76",
+      "name": "Michelada",
+      "category": "bebidas",
+      "group": "bebidas",
+      "kind": "dish",
+      "price": 45,
+      "prices": {
+        "1/2 litro (500 ml)": 45,
+        "1 litro": 90
+      },
+      "description": "Elige tamaño y sabor: chela, clamato, fresa, mango, tamarindo o frutos rojos.",
+      "choices": [
+        "Chela",
+        "Clamato",
+        "Fresa",
+        "Mango",
+        "Tamarindo",
+        "Frutos rojos"
+      ],
+      "choiceGroups": [
+        {
+          "label": "Sabor",
+          "options": [
+            "Chela",
+            "Clamato",
+            "Fresa",
+            "Mango",
+            "Tamarindo",
+            "Frutos rojos"
+          ]
+        }
+      ],
+      "variants": [
+        {
+          "label": "1/2 litro (500 ml)",
+          "price": 45
+        },
+        {
+          "label": "1 litro",
+          "price": 90
+        }
+      ],
+      "active": true
+    },
+    {
+      "id": "bebidas-77",
+      "name": "Mojito",
+      "category": "bebidas",
+      "group": "bebidas",
+      "kind": "dish",
+      "price": 70,
+      "prices": {
+        "1/2 litro (500 ml)": 70,
+        "1 litro": 140
+      },
+      "description": "Elige tamaño y sabor: natural, fresa, mango o frutos rojos.",
+      "choices": [
+        "Natural",
+        "Fresa",
+        "Mango",
+        "Frutos rojos"
+      ],
+      "choiceGroups": [
+        {
+          "label": "Sabor",
+          "options": [
+            "Natural",
+            "Fresa",
+            "Mango",
+            "Frutos rojos"
+          ]
+        }
+      ],
+      "variants": [
+        {
+          "label": "1/2 litro (500 ml)",
+          "price": 70
+        },
+        {
+          "label": "1 litro",
+          "price": 140
+        }
+      ],
+      "active": true
+    }
+  ]
+}

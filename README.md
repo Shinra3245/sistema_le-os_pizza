@@ -12,7 +12,7 @@ Requiere Node.js 20 o posterior. Desde esta carpeta:
 npm start
 ```
 
-Abre `http://127.0.0.1:4173`. En el primer inicio, el usuario administrador es `pizzas` y el sistema te pedirá crear una contraseña. Al entrar se abre la caja con el fondo inicial del turno; registra el efectivo contado al terminar, revisa el corte y cierra la sesión. La contraseña se guarda como hash local en `data/auth.json`. El servidor escucha únicamente en el equipo local y los recursos de Three.js están incluidos en `public/vendor`, así que el sistema no requiere conexión a internet para operar. Los pedidos y ajustes se guardan en `data/restaurante.json`; respáldalo periódicamente o usa **Ajustes → Descargar respaldo**.
+Abre `http://127.0.0.1:4173`. En el primer inicio, el usuario administrador es `pizzas` y el sistema te pedirá crear una contraseña. Al entrar se abre la caja con el fondo inicial del turno; registra el efectivo contado al terminar, revisa el corte y cierra la sesión. La contraseña se guarda como hash local en `data/auth.json`. El servidor escucha únicamente en el equipo local y las dependencias quedan instaladas con el proyecto, así que el sistema no requiere conexión a internet para operar después de ejecutar `npm install`. Los pedidos y ajustes se guardan en `data/restaurante.json`; respáldalo periódicamente o usa **Ajustes → Descargar respaldo**.
 
 ## Desarrollo con Vite
 

@@ -1,0 +1,37 @@
+/* Opción 1 · Verde bosque suave · Previsualización */
+:root {
+  --canvas: #f6f5f0;
+  --surface: #fffefa;
+  --line: #e2e8df;
+  --line-dark: #c9d6c9;
+  --forest: #3d6853;
+  --forest-dark: #2c4f3e;
+  --green-soft: #edf6ef;
+  --orange: #cf8151;
+}
+
+body { background: var(--canvas); }
+.topbar { border-bottom-color: #e5ebe3; background: rgba(255,255,252,.9); }
+.nav-link { border-radius: 10px; }
+.nav-link.is-active { background: #3c493e; }
+.nav-link.is-active::before { width: 4px; background: #d18a59; }
+.welcome-panel { border-color: #dde7dd; border-radius: 16px; box-shadow: 0 8px 24px rgba(49, 76, 56, .055); }
+.metric-card, .panel { border-color: #e1e8e0; border-radius: 13px; box-shadow: 0 5px 17px rgba(49, 76, 56, .035); }
+.metric-highlight { background: #f0f7f0; }
+.button { border-radius: 9px; box-shadow: 0 2px 4px rgba(42, 75, 57, .06); }
+.button-primary { background: var(--forest); }
+.button-primary:hover { background: var(--forest-dark); box-shadow: 0 5px 12px rgba(42, 75, 57, .16); }
+.button-secondary:hover, .button-print:hover { border-color: #9db7a2; background: #f5faf5; }
+.product-card { border-color: #e1e8e0; border-radius: 13px; background: #fffefa; }
+.product-card:hover { border-color: #86a98c; box-shadow: 0 8px 22px rgba(50, 93, 65, .1); }
+.product-art { border-radius: 12px; background: #f0f6ee; }
+.add-indicator { border-color: #c8dccb; background: #f1f8f1; }
+.category-tab.is-active { background: #3d6853; box-shadow: 0 4px 10px rgba(46, 82, 61, .14); }
+.field-label select, .field-label input, .field-label textarea, .service-fields input, .service-fields textarea { border-color: #d8e2d8; }
+.field-label select:focus, .field-label input:focus, .field-label textarea:focus { border-color: #6c9a76 !important; box-shadow: 0 0 0 3px rgba(92, 143, 101, .14); }
+.table-card { border-color: #dfe8df; border-radius: 13px; }
+.table-card.is-free .table-number { background: #eaf5eb; color: #3c6a48; }
+.table-card.is-selected { border-color: #5f936d; background: #f0f8f0; box-shadow: 0 0 0 3px rgba(95,147,109,.15); }
+.table-card.is-occupied:disabled { background: #fff7f3; }
+.beverage-category-card.selected, .ingredient-toggle.is-selected, .choice-card.selected { border-color: #6e9c77; background: #f0f8f0; box-shadow: 0 0 0 2px rgba(99,148,108,.15) inset; }
+.dialog-card { border-radius: 15px; box-shadow: 0 20px 50px rgba(29, 53, 37, .2); }

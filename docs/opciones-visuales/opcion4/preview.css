@@ -1,0 +1,48 @@
+/* Opción 4 · Operación de alto contraste · Previsualización */
+:root {
+  --canvas: #f1f3ef;
+  --surface: #fff;
+  --line: #cfd8cf;
+  --line-dark: #aab9ab;
+  --forest: #24573e;
+  --forest-dark: #153d2b;
+  --green-soft: #e5f1e7;
+  --orange: #bc572e;
+  --red: #a33e31;
+  --muted: #5f675f;
+  --muted-strong: #424b43;
+}
+
+body { background: #f1f3ef; }
+.sidebar { background: #17231c; }
+.nav-link { color: #d5e0d6; }
+.nav-link.is-active { background: #2f644a; }
+.nav-link.is-active::before { width: 5px; background: #ef9a65; }
+.topbar { border-bottom: 2px solid #d2dbd3; background: #fff; }
+.welcome-panel { border: 2px solid #ced9cf; border-radius: 12px; background: #fff; box-shadow: 0 6px 18px rgba(25, 52, 35, .08); }
+.metric-card, .panel { border: 2px solid #d3ddd4; border-radius: 10px; box-shadow: none; }
+.metric-highlight { background: #e8f2e9; }
+.button { min-height: 46px; border-radius: 8px; border-width: 2px; }
+.button-primary { border-color: #24573e; background: #24573e; }
+.button-primary:hover { background: #153d2b; box-shadow: 0 4px 10px rgba(25, 79, 52, .2); }
+.button-secondary, .button-print { border-color: #9db19f; }
+.button-secondary:hover, .button-print:hover { border-color: #24573e; background: #e8f3e9; }
+.product-card { border: 2px solid #d2ddd3; border-radius: 10px; background: #fff; }
+.product-card:hover { border-color: #43825b; box-shadow: 0 5px 14px rgba(25, 79, 52, .1); }
+.product-art { border: 2px solid #c9d8cc; border-radius: 10px; background: #eaf3eb; }
+.add-indicator { border: 2px solid #a3c1a9; background: #e9f4ea; }
+.category-tab { border-width: 2px; }
+.category-tab.is-active { background: #24573e; box-shadow: 0 3px 8px rgba(25,79,52,.2); }
+.field-label select, .field-label input, .field-label textarea, .service-fields input, .service-fields textarea { border: 2px solid #bfcfc2; border-radius: 8px; color: #26352b; }
+.field-label select:focus, .field-label input:focus, .field-label textarea:focus { border-color: #24573e !important; box-shadow: 0 0 0 4px rgba(36,87,62,.18); }
+.table-card { border: 2px solid #c6d5c8; border-radius: 10px; }
+.table-card.is-free .table-number { border: 2px solid #83aa8c; background: #e6f3e7; color: #1f5a36; }
+.table-card.is-selected { border-color: #24573e; background: #e6f3e7; box-shadow: 0 0 0 4px rgba(36,87,62,.16); }
+.table-card.is-occupied:disabled { border-color: #d5a99f; background: #fff0ec; }
+.table-card.is-occupied .table-number { border-width: 2px; background: #f9ddd5; color: #963d2e; }
+.beverage-category-card, .ingredient-toggle, .choice-card { border-width: 2px; border-radius: 8px; }
+.beverage-category-card.selected, .ingredient-toggle.is-selected, .choice-card.selected { border-color: #24573e; background: #e5f2e7; box-shadow: 0 0 0 2px rgba(36,87,62,.14) inset; }
+.status-nuevo { border: 1px solid #bc7a2e; }
+.status-preparando { border: 1px solid #4c815d; }
+.status-cancelado { border: 1px solid #a33e31; }
+.modal-card { border: 2px solid #bdcdbf; box-shadow: 0 18px 42px rgba(18, 47, 29, .24); }

@@ -1,0 +1,43 @@
+/* Opción 3 · Crema editorial · Previsualización */
+:root {
+  --canvas: #f8f7f3;
+  --surface: #fff;
+  --line: #e4e3de;
+  --line-dark: #cfcfc8;
+  --forest: #3f5e4d;
+  --forest-dark: #294333;
+  --green-soft: #f2f5f1;
+  --orange: #b87552;
+}
+
+body { background: #f8f7f3; }
+.sidebar { width: 220px; background: #242621; }
+.app-frame { margin-left: 220px; }
+.topbar { height: 72px; padding-inline: 48px; background: #fff; }
+main { padding: 44px 48px 34px; }
+.welcome-panel { min-height: 264px; border-color: #e2e1dc; border-radius: 4px; background: #fff; box-shadow: none; }
+.welcome-copy p { max-width: 520px; line-height: 1.75; }
+.metric-grid { gap: 17px; margin-top: 24px; }
+.metric-card, .panel { border-color: #e4e3de; border-radius: 4px; box-shadow: none; }
+.metric-card { min-height: 136px; padding: 21px; }
+.metric-highlight { background: #f3f5f1; }
+.button { min-height: 46px; border-radius: 4px; box-shadow: none; }
+.button-primary { background: #3f5e4d; }
+.button-primary:hover { background: #294333; }
+.product-grid { gap: 14px; }
+.product-card { min-height: 138px; border-color: #e4e3de; border-radius: 4px; background: #fff; }
+.product-card:hover { border-color: #8da995; box-shadow: none; }
+.product-art { border-radius: 4px; background: #f3f3ef; }
+.add-indicator { border-radius: 4px; background: #f3f5f1; }
+.category-tab { border-radius: 4px; }
+.category-tab.is-active { background: #3f5e4d; }
+.field-label select, .field-label input, .field-label textarea, .service-fields input, .service-fields textarea { border-color: #d7d7d0; border-radius: 4px; }
+.field-label select:focus, .field-label input:focus, .field-label textarea:focus { border-color: #557963 !important; box-shadow: 0 0 0 2px rgba(63,94,77,.12); }
+.table-card { border-color: #dcdcd5; border-radius: 4px; box-shadow: none; }
+.table-card:hover:not(:disabled) { transform: none; box-shadow: 0 4px 10px rgba(37,52,39,.06); }
+.table-card.is-free .table-number { border-radius: 4px; background: #f1f4f0; }
+.table-card.is-selected { border-color: #5d8167; border-radius: 4px; background: #f3f6f2; box-shadow: 0 0 0 2px rgba(93,129,103,.14); }
+.table-card.is-occupied:disabled { border-radius: 4px; }
+.beverage-category-card, .ingredient-toggle, .choice-card { border-radius: 4px; }
+.beverage-category-card.selected, .ingredient-toggle.is-selected, .choice-card.selected { border-color: #6c8b73; border-radius: 4px; background: #f1f5f0; box-shadow: none; }
+.modal-card { border-radius: 4px; box-shadow: 0 16px 35px rgba(32,35,29,.14); }

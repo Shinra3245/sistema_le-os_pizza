@@ -1,0 +1,40 @@
+/* Opción 2 · Dorado artesanal · Previsualización */
+:root {
+  --canvas: #f7f0e4;
+  --surface: #fffaf0;
+  --line: #eadbc1;
+  --line-dark: #d5bd93;
+  --forest: #6f562d;
+  --forest-dark: #523d20;
+  --green-soft: #f5edda;
+  --orange: #bd7138;
+  --pale-gold: #fff0c5;
+}
+
+body { background: #f7f0e4; }
+.sidebar { background: #2b241a; }
+.brand small, .nav-link.is-active .nav-icon { color: #e7b95f; }
+.nav-link.is-active { background: #483a27; }
+.nav-link.is-active::before { background: #e2a846; }
+.topbar { border-bottom-color: #eadfcb; background: rgba(255,250,240,.94); }
+.welcome-panel { border-color: #eadbc1; border-radius: 15px; background: #fff9ed; box-shadow: 0 8px 25px rgba(126, 84, 27, .08); }
+.welcome-copy .eyebrow { color: #8b6d3b; }
+.metric-card, .panel { border-color: #eadfca; border-radius: 12px; box-shadow: 0 5px 16px rgba(126, 84, 27, .045); }
+.metric-highlight { background: #fbf0d5; }
+.button { border-radius: 8px; }
+.button-primary { background: #8b672d; color: #fff9eb; }
+.button-primary:hover { background: #674b25; box-shadow: 0 5px 12px rgba(111, 80, 35, .18); }
+.button-secondary:hover, .button-print:hover { border-color: #bd9a61; background: #fff7e5; }
+.product-card { border-color: #eadfce; border-radius: 11px; background: #fffdf8; }
+.product-card:hover { border-color: #c7a56a; box-shadow: 0 8px 20px rgba(126, 84, 27, .1); }
+.product-art { border-radius: 10px; background: #f9edcf; }
+.add-indicator { border-color: #e3c788; background: #fff4d2; color: #87652b; }
+.category-tab.is-active { background: #87652b; color: #fff9eb; }
+.field-label select, .field-label input, .field-label textarea, .service-fields input, .service-fields textarea { border-color: #e3d4ba; background: #fffdf8; }
+.field-label select:focus, .field-label input:focus, .field-label textarea:focus { border-color: #b58a45 !important; box-shadow: 0 0 0 3px rgba(181,138,69,.16); }
+.table-card { border-color: #eadcc4; border-radius: 10px; }
+.table-card.is-free .table-number { border-color: #e6cf9f; background: #fff1ce; color: #866329; }
+.table-card.is-selected { border-color: #b18a49; background: #fff6df; box-shadow: 0 0 0 3px rgba(177,138,73,.15); }
+.table-card.is-occupied:disabled { border-color: #e4c9bb; background: #fff4ef; }
+.beverage-category-card.selected, .ingredient-toggle.is-selected, .choice-card.selected { border-color: #bd934c; background: #fff5d7; box-shadow: 0 0 0 2px rgba(189,147,76,.16) inset; color: #6d5127; }
+.modal-card { border: 1px solid #e4d2ae; background: #fffaf0; box-shadow: 0 22px 55px rgba(83, 56, 22, .24); }
