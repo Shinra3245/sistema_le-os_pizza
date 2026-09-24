@@ -8,9 +8,9 @@
 
 **Referencia:** OWASP ASVS 5.0, guías OWASP de autenticación, sesiones y CSRF, y reglas funcionales solicitadas para el restaurante.
 
-## Dictamen ejecutivo
+## Dictamen ejecutivo de la auditoría inicial
 
-El sistema funciona como MVP local y sus flujos principales están implementados, pero **todavía no cumple un nivel suficiente de seguridad e integridad para usarse en operación real sin correcciones**. El riesgo principal está en el servidor: acepta precios, productos y estados enviados por el navegador sin reconstruirlos ni comprobar la secuencia del pedido. Un usuario autenticado, una extensión del navegador o un fallo XSS podría registrar ventas negativas, cerrar pedidos sin pago o saltar la preparación.
+En la revisión inicial, el sistema funcionaba como MVP local y sus flujos principales estaban implementados, pero **todavía no cumplía un nivel suficiente de seguridad e integridad para usarse en operación real sin correcciones**. El riesgo principal estaba en el servidor: aceptaba precios, productos y estados enviados por el navegador sin reconstruirlos ni comprobar la secuencia del pedido. Un usuario autenticado, una extensión del navegador o un fallo XSS podía registrar ventas negativas, cerrar pedidos sin pago o saltar la preparación.
 
 Se identificaron:
 
@@ -35,7 +35,9 @@ El servidor se enlaza por defecto a `127.0.0.1`, lo cual reduce la exposición d
 
 La suite actual contiene siete recorridos de integración que verifican integridad financiera, flujo de domicilio, validación de datos, máquina de estados, CSRF, aislamiento de archivos, cabeceras, concurrencia, permisos, bitácora, límite de acceso, catálogo, exportaciones y corte de caja. Se ejecutó además una revisión visual en Chrome de la configuración inicial y del modal de pizza, incluida la exclusión mutua de comboboxes.
 
-## Resultado de las verificaciones
+## Resultado de las verificaciones de la auditoría inicial
+
+La tabla siguiente conserva la evidencia que originó las correcciones. El resultado posterior está documentado en **Estado de remediación** y en la suite actual.
 
 | Verificación | Resultado | Evidencia |
 |---|---:|---|
