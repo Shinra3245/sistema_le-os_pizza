@@ -1,0 +1,106 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" role="img" aria-labelledby="pizza-title pizza-description">
+  <title id="pizza-title">Pizza artesanal dividida en ocho porciones</title>
+  <desc id="pizza-description">Icono vectorial de una pizza dorada con una porción separada, pepperoni, champiñones y hojas verdes.</desc>
+  <defs>
+    <filter id="pizza-shadow" x="-25%" y="-25%" width="150%" height="160%">
+      <feDropShadow dx="0" dy="12" stdDeviation="10" flood-color="#2d302b" flood-opacity=".18"/>
+    </filter>
+    <linearGradient id="cheese" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffdb76"/>
+      <stop offset="1" stop-color="#f6bd48"/>
+    </linearGradient>
+    <linearGradient id="crust" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffad18"/>
+      <stop offset="1" stop-color="#e88a08"/>
+    </linearGradient>
+    <g id="pepperoni">
+      <circle r="24" fill="#e95d58" stroke="#2d302b" stroke-width="7"/>
+      <circle cx="-8" cy="-8" r="4.5" fill="#fff5e4"/>
+      <circle cx="8" cy="8" r="4.5" fill="#fff5e4"/>
+      <circle cx="10" cy="-10" r="3" fill="#c94443"/>
+    </g>
+    <g id="mushroom">
+      <path d="M-24 4c0-17 11-29 25-29 15 0 27 12 27 29-8-5-15-7-21-7l2 27H-8l3-27c-6 0-12 2-19 7Z" fill="#ffe1a2" stroke="#2d302b" stroke-width="7" stroke-linejoin="round"/>
+    </g>
+    <g id="leaf">
+      <path d="M-19 5C-18-11-7-22 10-20 22-8 21 6 10 18-4 17-14 13-19 5Z" fill="#80ae48" stroke="#2d302b" stroke-width="7" stroke-linejoin="round"/>
+    </g>
+    <g id="crumbs" fill="#b46624">
+      <circle cx="-11" cy="0" r="4"/><circle cx="7" cy="-8" r="3.5"/><circle cx="12" cy="10" r="3"/>
+    </g>
+    <path id="cheese-wedge" d="M320 320 530 320A210 210 0 0 1 468.49 468.49Z"/>
+    <path id="crust-wedge" d="M530 320A210 210 0 0 1 468.49 468.49L489.71 489.71A240 240 0 0 0 560 320Z"/>
+    <path id="shine-wedge" d="M541 332A224 224 0 0 1 512 426"/>
+  </defs>
+
+  <g id="pizza-icon" filter="url(#pizza-shadow)" stroke-linecap="round" stroke-linejoin="round">
+    <g id="slice-1">
+      <use href="#cheese-wedge" fill="url(#cheese)" stroke="#2d302b" stroke-width="7"/>
+      <use href="#crust-wedge" fill="url(#crust)" stroke="#2d302b" stroke-width="7"/>
+      <use href="#shine-wedge" fill="none" stroke="#fff8df" stroke-width="8"/>
+    </g>
+    <g id="slice-2" transform="rotate(45 320 320)">
+      <use href="#cheese-wedge" fill="#ffd36a" stroke="#2d302b" stroke-width="7"/>
+      <use href="#crust-wedge" fill="url(#crust)" stroke="#2d302b" stroke-width="7"/>
+      <use href="#shine-wedge" fill="none" stroke="#fff8df" stroke-width="8"/>
+    </g>
+    <g id="slice-3" transform="rotate(90 320 320)">
+      <use href="#cheese-wedge" fill="url(#cheese)" stroke="#2d302b" stroke-width="7"/>
+      <use href="#crust-wedge" fill="url(#crust)" stroke="#2d302b" stroke-width="7"/>
+      <use href="#shine-wedge" fill="none" stroke="#fff8df" stroke-width="8"/>
+    </g>
+    <g id="slice-4" transform="rotate(135 320 320)">
+      <use href="#cheese-wedge" fill="#ffd36a" stroke="#2d302b" stroke-width="7"/>
+      <use href="#crust-wedge" fill="url(#crust)" stroke="#2d302b" stroke-width="7"/>
+      <use href="#shine-wedge" fill="none" stroke="#fff8df" stroke-width="8"/>
+    </g>
+    <g id="slice-5" transform="translate(-28 -24) rotate(180 320 320)">
+      <use href="#cheese-wedge" fill="url(#cheese)" stroke="#2d302b" stroke-width="8"/>
+      <use href="#crust-wedge" fill="url(#crust)" stroke="#2d302b" stroke-width="8"/>
+      <use href="#shine-wedge" fill="none" stroke="#fff8df" stroke-width="8"/>
+      <g id="toppings-slice-5">
+        <use href="#pepperoni" x="440" y="360"/>
+        <use href="#leaf" transform="translate(478 402) rotate(55) scale(.8)"/>
+        <use href="#mushroom" transform="translate(386 374) rotate(-42) scale(.75)"/>
+      </g>
+    </g>
+    <g id="slice-6" transform="rotate(225 320 320)">
+      <use href="#cheese-wedge" fill="#ffd36a" stroke="#2d302b" stroke-width="7"/>
+      <use href="#crust-wedge" fill="url(#crust)" stroke="#2d302b" stroke-width="7"/>
+      <use href="#shine-wedge" fill="none" stroke="#fff8df" stroke-width="8"/>
+    </g>
+    <g id="slice-7" transform="rotate(270 320 320)">
+      <use href="#cheese-wedge" fill="url(#cheese)" stroke="#2d302b" stroke-width="7"/>
+      <use href="#crust-wedge" fill="url(#crust)" stroke="#2d302b" stroke-width="7"/>
+      <use href="#shine-wedge" fill="none" stroke="#fff8df" stroke-width="8"/>
+    </g>
+    <g id="slice-8" transform="rotate(315 320 320)">
+      <use href="#cheese-wedge" fill="#ffd36a" stroke="#2d302b" stroke-width="7"/>
+      <use href="#crust-wedge" fill="url(#crust)" stroke="#2d302b" stroke-width="7"/>
+      <use href="#shine-wedge" fill="none" stroke="#fff8df" stroke-width="8"/>
+    </g>
+
+    <g id="main-toppings">
+      <use href="#pepperoni" x="420" y="270"/>
+      <use href="#pepperoni" x="468" y="370"/>
+      <use href="#pepperoni" x="404" y="440"/>
+      <use href="#pepperoni" x="292" y="455"/>
+      <use href="#pepperoni" x="210" y="385"/>
+      <use href="#pepperoni" x="250" y="212"/>
+      <use href="#pepperoni" x="350" y="190"/>
+      <use href="#mushroom" transform="translate(386 235) rotate(20) scale(.82)"/>
+      <use href="#mushroom" transform="translate(408 342) rotate(-30) scale(.82)"/>
+      <use href="#mushroom" transform="translate(347 399) rotate(18) scale(.78)"/>
+      <use href="#mushroom" transform="translate(276 333) rotate(82) scale(.78)"/>
+      <use href="#leaf" transform="translate(470 300) rotate(35) scale(.78)"/>
+      <use href="#leaf" transform="translate(441 417) rotate(75) scale(.78)"/>
+      <use href="#leaf" transform="translate(330 466) rotate(105) scale(.78)"/>
+      <use href="#leaf" transform="translate(234 431) rotate(42) scale(.78)"/>
+      <use href="#leaf" transform="translate(296 181) rotate(-55) scale(.75)"/>
+      <use href="#crumbs" transform="translate(384 285)"/>
+      <use href="#crumbs" transform="translate(285 395) rotate(60)"/>
+      <use href="#crumbs" transform="translate(449 345) rotate(20)"/>
+    </g>
+    <circle cx="320" cy="320" r="8" fill="#2d302b"/>
+  </g>
+</svg>
