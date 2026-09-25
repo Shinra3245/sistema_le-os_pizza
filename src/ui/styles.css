@@ -854,7 +854,8 @@ main.page-transition > :first-child, main.react-page-transition > :first-child {
 .table-state i { width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
 .is-occupied .table-state { color: #a35c46; }
 .no-free-tables { margin: 12px 0 0; color: #a2523d; font-size: 11px; }
-.table-guest-fields { grid-template-columns: minmax(150px,.45fr); }
+.guest-count-field { width: min(100%,132px); margin-top: 10px; gap: 5px; }
+.guest-count-field input { min-height: 38px; padding: 7px 9px; font-variant-numeric: tabular-nums; }
 .pickup-fields { display: grid; gap: 10px; margin-top: 15px; padding-top: 14px; border-top: 1px solid #f0efe9; }
 .pickup-source-label { display: grid; gap: 4px; }
 .pickup-source-label strong { color: #53564d; font-size: 11px; }
