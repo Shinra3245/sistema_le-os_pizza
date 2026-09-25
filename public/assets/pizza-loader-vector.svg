@@ -2,32 +2,24 @@
   <title id="pizza-title">Pizza artesanal dividida en ocho porciones</title>
   <desc id="pizza-description">Icono vectorial animado de una pizza dorada con una línea punteada que gira desde el centro hacia el borde.</desc>
   <style>
-    .loader-sweep {
-      transform-origin: 320px 320px;
-      animation: loader-clockwise 2.8s linear infinite;
-    }
     .pizza-slice-part {
-      animation: slice-visibility 5.6s linear infinite;
+      animation: slice-visibility 5.1s linear infinite;
       animation-delay: var(--slice-delay);
     }
-    #slice-7, #toppings-slice-7 { --slice-delay: .1s; }
-    #slice-8, #toppings-slice-8 { --slice-delay: .45s; }
-    #slice-1, #toppings-slice-1 { --slice-delay: .8s; }
-    #slice-2, #toppings-slice-2 { --slice-delay: 1.15s; }
-    #slice-3, #toppings-slice-3 { --slice-delay: 1.5s; }
-    #slice-4, #toppings-slice-4 { --slice-delay: 1.85s; }
-    #slice-5 { --slice-delay: 2.2s; }
-    #slice-6, #toppings-slice-6 { --slice-delay: 2.55s; }
-    @keyframes loader-clockwise {
-      to { transform: rotate(360deg); }
-    }
+    #slice-7, #toppings-slice-7 { --slice-delay: .09s; }
+    #slice-8, #toppings-slice-8 { --slice-delay: .41s; }
+    #slice-1, #toppings-slice-1 { --slice-delay: .73s; }
+    #slice-2, #toppings-slice-2 { --slice-delay: 1.05s; }
+    #slice-3, #toppings-slice-3 { --slice-delay: 1.36s; }
+    #slice-4, #toppings-slice-4 { --slice-delay: 1.68s; }
+    #slice-5 { --slice-delay: 2s; }
+    #slice-6, #toppings-slice-6 { --slice-delay: 2.32s; }
     @keyframes slice-visibility {
       0% { opacity: 1; }
       3%, 50% { opacity: 0; }
       53%, 100% { opacity: 1; }
     }
     @media (prefers-reduced-motion: reduce) {
-      .loader-sweep { animation-duration: 8s; }
       .pizza-slice-part { animation: none; }
     }
   </style>
@@ -146,10 +138,5 @@
       </g>
     </g>
     <circle cx="320" cy="320" r="8" fill="#2d302b"/>
-  </g>
-
-  <g id="loading-indicator" class="loader-sweep" aria-hidden="true">
-    <line x1="320" y1="320" x2="320" y2="60" fill="none" stroke="#171916" stroke-width="9" stroke-linecap="round" stroke-dasharray="1 18"/>
-    <circle cx="320" cy="320" r="6" fill="#171916"/>
   </g>
 </svg>
