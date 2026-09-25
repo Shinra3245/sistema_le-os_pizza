@@ -6,11 +6,29 @@
       transform-origin: 320px 320px;
       animation: loader-clockwise 2.8s linear infinite;
     }
+    .pizza-slice-part {
+      animation: slice-visibility 5.6s linear infinite;
+      animation-delay: var(--slice-delay);
+    }
+    #slice-7, #toppings-slice-7 { --slice-delay: .1s; }
+    #slice-8, #toppings-slice-8 { --slice-delay: .45s; }
+    #slice-1, #toppings-slice-1 { --slice-delay: .8s; }
+    #slice-2, #toppings-slice-2 { --slice-delay: 1.15s; }
+    #slice-3, #toppings-slice-3 { --slice-delay: 1.5s; }
+    #slice-4, #toppings-slice-4 { --slice-delay: 1.85s; }
+    #slice-5 { --slice-delay: 2.2s; }
+    #slice-6, #toppings-slice-6 { --slice-delay: 2.55s; }
     @keyframes loader-clockwise {
       to { transform: rotate(360deg); }
     }
+    @keyframes slice-visibility {
+      0% { opacity: 1; }
+      3%, 50% { opacity: 0; }
+      53%, 100% { opacity: 1; }
+    }
     @media (prefers-reduced-motion: reduce) {
       .loader-sweep { animation-duration: 8s; }
+      .pizza-slice-part { animation: none; }
     }
   </style>
   <defs>
@@ -46,27 +64,27 @@
   </defs>
 
   <g id="pizza-icon" filter="url(#pizza-shadow)" stroke-linecap="round" stroke-linejoin="round">
-    <g id="slice-1">
+    <g id="slice-1" class="pizza-slice-part">
       <use href="#cheese-wedge" fill="url(#cheese)" stroke="#2d302b" stroke-width="7"/>
       <use href="#crust-wedge" fill="url(#crust)" stroke="#2d302b" stroke-width="7"/>
       <use href="#shine-wedge" fill="none" stroke="#fff8df" stroke-width="8"/>
     </g>
-    <g id="slice-2" transform="rotate(45 320 320)">
+    <g id="slice-2" class="pizza-slice-part" transform="rotate(45 320 320)">
       <use href="#cheese-wedge" fill="#ffd36a" stroke="#2d302b" stroke-width="7"/>
       <use href="#crust-wedge" fill="url(#crust)" stroke="#2d302b" stroke-width="7"/>
       <use href="#shine-wedge" fill="none" stroke="#fff8df" stroke-width="8"/>
     </g>
-    <g id="slice-3" transform="rotate(90 320 320)">
+    <g id="slice-3" class="pizza-slice-part" transform="rotate(90 320 320)">
       <use href="#cheese-wedge" fill="url(#cheese)" stroke="#2d302b" stroke-width="7"/>
       <use href="#crust-wedge" fill="url(#crust)" stroke="#2d302b" stroke-width="7"/>
       <use href="#shine-wedge" fill="none" stroke="#fff8df" stroke-width="8"/>
     </g>
-    <g id="slice-4" transform="rotate(135 320 320)">
+    <g id="slice-4" class="pizza-slice-part" transform="rotate(135 320 320)">
       <use href="#cheese-wedge" fill="#ffd36a" stroke="#2d302b" stroke-width="7"/>
       <use href="#crust-wedge" fill="url(#crust)" stroke="#2d302b" stroke-width="7"/>
       <use href="#shine-wedge" fill="none" stroke="#fff8df" stroke-width="8"/>
     </g>
-    <g id="slice-5" transform="rotate(180 320 320)">
+    <g id="slice-5" class="pizza-slice-part" transform="rotate(180 320 320)">
       <use href="#cheese-wedge" fill="url(#cheese)" stroke="#2d302b" stroke-width="8"/>
       <use href="#crust-wedge" fill="url(#crust)" stroke="#2d302b" stroke-width="8"/>
       <use href="#shine-wedge" fill="none" stroke="#fff8df" stroke-width="8"/>
@@ -76,42 +94,56 @@
         <use href="#mushroom" transform="translate(386 374) rotate(-42) scale(.75)"/>
       </g>
     </g>
-    <g id="slice-6" transform="rotate(225 320 320)">
+    <g id="slice-6" class="pizza-slice-part" transform="rotate(225 320 320)">
       <use href="#cheese-wedge" fill="#ffd36a" stroke="#2d302b" stroke-width="7"/>
       <use href="#crust-wedge" fill="url(#crust)" stroke="#2d302b" stroke-width="7"/>
       <use href="#shine-wedge" fill="none" stroke="#fff8df" stroke-width="8"/>
     </g>
-    <g id="slice-7" transform="rotate(270 320 320)">
+    <g id="slice-7" class="pizza-slice-part" transform="rotate(270 320 320)">
       <use href="#cheese-wedge" fill="url(#cheese)" stroke="#2d302b" stroke-width="7"/>
       <use href="#crust-wedge" fill="url(#crust)" stroke="#2d302b" stroke-width="7"/>
       <use href="#shine-wedge" fill="none" stroke="#fff8df" stroke-width="8"/>
     </g>
-    <g id="slice-8" transform="rotate(315 320 320)">
+    <g id="slice-8" class="pizza-slice-part" transform="rotate(315 320 320)">
       <use href="#cheese-wedge" fill="#ffd36a" stroke="#2d302b" stroke-width="7"/>
       <use href="#crust-wedge" fill="url(#crust)" stroke="#2d302b" stroke-width="7"/>
       <use href="#shine-wedge" fill="none" stroke="#fff8df" stroke-width="8"/>
     </g>
 
     <g id="main-toppings">
-      <use href="#pepperoni" x="420" y="270"/>
-      <use href="#pepperoni" x="468" y="370"/>
-      <use href="#pepperoni" x="404" y="440"/>
-      <use href="#pepperoni" x="292" y="455"/>
-      <use href="#pepperoni" x="210" y="385"/>
-      <use href="#pepperoni" x="250" y="212"/>
-      <use href="#pepperoni" x="350" y="190"/>
-      <use href="#mushroom" transform="translate(386 235) rotate(20) scale(.82)"/>
-      <use href="#mushroom" transform="translate(408 342) rotate(-30) scale(.82)"/>
-      <use href="#mushroom" transform="translate(347 399) rotate(18) scale(.78)"/>
-      <use href="#mushroom" transform="translate(276 333) rotate(82) scale(.78)"/>
-      <use href="#leaf" transform="translate(470 300) rotate(35) scale(.78)"/>
-      <use href="#leaf" transform="translate(441 417) rotate(75) scale(.78)"/>
-      <use href="#leaf" transform="translate(330 466) rotate(105) scale(.78)"/>
-      <use href="#leaf" transform="translate(234 431) rotate(42) scale(.78)"/>
-      <use href="#leaf" transform="translate(296 181) rotate(-55) scale(.75)"/>
-      <use href="#crumbs" transform="translate(384 285)"/>
-      <use href="#crumbs" transform="translate(285 395) rotate(60)"/>
-      <use href="#crumbs" transform="translate(449 345) rotate(20)"/>
+      <g id="toppings-slice-1" class="pizza-slice-part">
+        <use href="#pepperoni" x="468" y="370"/>
+        <use href="#mushroom" transform="translate(408 342) rotate(-30) scale(.82)"/>
+        <use href="#leaf" transform="translate(441 417) rotate(75) scale(.78)"/>
+        <use href="#crumbs" transform="translate(449 345) rotate(20)"/>
+      </g>
+      <g id="toppings-slice-2" class="pizza-slice-part">
+        <use href="#pepperoni" x="404" y="440"/>
+        <use href="#mushroom" transform="translate(347 399) rotate(18) scale(.78)"/>
+        <use href="#leaf" transform="translate(330 466) rotate(105) scale(.78)"/>
+      </g>
+      <g id="toppings-slice-3" class="pizza-slice-part">
+        <use href="#pepperoni" x="292" y="455"/>
+        <use href="#leaf" transform="translate(234 431) rotate(42) scale(.78)"/>
+        <use href="#crumbs" transform="translate(285 395) rotate(60)"/>
+      </g>
+      <g id="toppings-slice-4" class="pizza-slice-part">
+        <use href="#pepperoni" x="210" y="385"/>
+        <use href="#mushroom" transform="translate(276 333) rotate(82) scale(.78)"/>
+      </g>
+      <g id="toppings-slice-6" class="pizza-slice-part">
+        <use href="#pepperoni" x="250" y="212"/>
+        <use href="#leaf" transform="translate(296 181) rotate(-55) scale(.75)"/>
+      </g>
+      <g id="toppings-slice-7" class="pizza-slice-part">
+        <use href="#pepperoni" x="350" y="190"/>
+        <use href="#mushroom" transform="translate(386 235) rotate(20) scale(.82)"/>
+        <use href="#crumbs" transform="translate(384 285)"/>
+      </g>
+      <g id="toppings-slice-8" class="pizza-slice-part">
+        <use href="#pepperoni" x="420" y="270"/>
+        <use href="#leaf" transform="translate(470 300) rotate(35) scale(.78)"/>
+      </g>
     </g>
     <circle cx="320" cy="320" r="8" fill="#2d302b"/>
   </g>
