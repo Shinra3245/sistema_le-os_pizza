@@ -95,6 +95,8 @@ async function loadStore() {
   current.settings.paperWidth ||= '58mm';
   const hadPizzaSizes = Array.isArray(current.settings.pizzaSizes) && current.settings.pizzaSizes.length > 0;
   current.settings.pizzaSizes = hadPizzaSizes ? configuredPizzaSizes(current.settings) : structuredClone(pizzaSizes);
+  const standardPizzaDetails = new Map(pizzaSizes.map(size => [size.id,size.detail]));
+  current.settings.pizzaSizes = current.settings.pizzaSizes.map(size => standardPizzaDetails.has(size.id) ? { ...size, detail:standardPizzaDetails.get(size.id) } : size);
   current.orders ||= [];
   current.cashSessions ||= [];
   current.catalog ||= [];

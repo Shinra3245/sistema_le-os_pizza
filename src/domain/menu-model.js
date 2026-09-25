@@ -232,7 +232,7 @@ export function formatMoney(amount, currency = 'MXN') {
 
 export const pizzaSizes = [
   { id: 'mediana', name: 'Mediana', detail: '30 cm · 8 rebanadas', active: true, basePrice: 200, adjustments: { Especialidades: 20, Gourmet: 50 }, cheeseRimPrice: 30 },
-  { id: 'grande', name: 'Grande', detail: '35 cm · 12 rebanadas', active: true, basePrice: 220, adjustments: { Especialidades: 50, Gourmet: 70 }, cheeseRimPrice: 50 },
+  { id: 'grande', name: 'Grande', detail: '36 cm · 12 rebanadas', active: true, basePrice: 220, adjustments: { Especialidades: 50, Gourmet: 70 }, cheeseRimPrice: 50 },
   { id: 'familiar', name: 'Familiar', detail: '40 cm · 16 rebanadas', active: true, basePrice: 250, adjustments: { Especialidades: 50, Gourmet: 80 }, cheeseRimPrice: 70 }
 ];
 

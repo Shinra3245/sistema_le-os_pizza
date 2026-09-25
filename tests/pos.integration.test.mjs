@@ -61,6 +61,7 @@ after(async () => { processServer?.kill(); await rm(dataDir,{recursive:true,forc
 
 test('reconstruye productos y precios, separa estaciones y cumple el flujo de domicilio', async () => {
   const boot=(await call('/api/bootstrap')).body;
+  assert.deepEqual(Object.fromEntries(boot.settings.pizzaSizes.map(size=>[size.id,size.detail])),{mediana:'30 cm · 8 rebanadas',grande:'36 cm · 12 rebanadas',familiar:'40 cm · 16 rebanadas'});
   const burger=boot.catalog.find(product=>product.category==='hamburguesas');
   const drink=boot.catalog.find(product=>product.category==='bebidas');
   const items=[pizzaItem(boot,{unitPrice:-500,name:'Manipulado'}),dishItem(burger,{unitPrice:-500,station:'Resto'}),dishItem(drink,{unitPrice:-500})];
