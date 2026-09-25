@@ -13,6 +13,8 @@ const palette = {
   right: 0xefc3bd,
   leftInk: 0x4b78a1,
   rightInk: 0xa34d48,
+  leftGlow: 0x9acfff,
+  rightGlow: 0xffaaa0,
   pepperoni: 0xa94e45,
   pepperoniEdge: 0x743b38,
   herb: 0x6d8060,
@@ -206,8 +208,10 @@ function makePizzaScene(config = {}) {
   const focusLights = {};
   const colorHalf = config.mode === 'mitades';
   if (colorHalf) {
-    const left = new THREE.Mesh(halfGeometry(true), new THREE.MeshStandardMaterial({ color: palette.left, transparent: true, opacity: config.activeHalf === 'left' ? 0.52 : 0.27, roughness: 0.94, side: THREE.DoubleSide }));
-    const right = new THREE.Mesh(halfGeometry(false), new THREE.MeshStandardMaterial({ color: palette.right, transparent: true, opacity: config.activeHalf === 'right' ? 0.54 : 0.27, roughness: 0.94, side: THREE.DoubleSide }));
+    const leftActive = config.activeHalf === 'left';
+    const rightActive = config.activeHalf === 'right';
+    const left = new THREE.Mesh(halfGeometry(true), new THREE.MeshStandardMaterial({ color: palette.left, emissive: palette.leftInk, emissiveIntensity: leftActive ? 0.18 : 0.02, transparent: true, opacity: leftActive ? 0.61 : 0.23, roughness: 0.9, side: THREE.DoubleSide }));
+    const right = new THREE.Mesh(halfGeometry(false), new THREE.MeshStandardMaterial({ color: palette.right, emissive: palette.rightInk, emissiveIntensity: rightActive ? 0.18 : 0.02, transparent: true, opacity: rightActive ? 0.63 : 0.23, roughness: 0.9, side: THREE.DoubleSide }));
     left.position.z = 0.113;
     right.position.z = 0.114;
     left.userData.half = 'left';
@@ -215,9 +219,9 @@ function makePizzaScene(config = {}) {
     root.add(left, right);
     halfMeshes.left = left;
     halfMeshes.right = right;
-    const leftLight = new THREE.PointLight(palette.leftInk, config.activeHalf === 'left' ? 0.3 : 0.08, 2.2);
+    const leftLight = new THREE.PointLight(palette.leftGlow, leftActive ? 0.5 : 0.06, 2.35);
     leftLight.position.set(-0.48, 0.18, 0.75);
-    const rightLight = new THREE.PointLight(palette.rightInk, config.activeHalf === 'right' ? 0.3 : 0.08, 2.2);
+    const rightLight = new THREE.PointLight(palette.rightGlow, rightActive ? 0.5 : 0.06, 2.35);
     rightLight.position.set(0.48, 0.18, 0.75);
     root.add(leftLight, rightLight);
     focusLights.left = leftLight;
@@ -294,9 +298,13 @@ export function animatePizza(canvas, config) {
     root.rotation.z = Math.sin(frame * 0.008) * 0.008;
     root.position.y = Math.sin(frame * 0.014) * 0.006;
     const focus = config.mode === 'mitades' ? root.userData.halfMeshes?.[config.activeHalf] : null;
-    if (focus?.material?.opacity !== undefined) focus.material.opacity = 0.43 + Math.sin(frame * 0.055) * 0.09;
+    if (focus?.material?.opacity !== undefined) {
+      const pulse = Math.sin(frame * 0.055);
+      focus.material.opacity = 0.59 + pulse * 0.07;
+      focus.material.emissiveIntensity = 0.18 + pulse * 0.04;
+    }
     const focusLight = config.mode === 'mitades' ? root.userData.focusLights?.[config.activeHalf] : null;
-    if (focusLight) focusLight.intensity = 0.24 + Math.sin(frame * 0.045) * 0.045;
+    if (focusLight) focusLight.intensity = 0.48 + Math.sin(frame * 0.045) * 0.065;
     renderer.render(scene, camera);
     animation = requestAnimationFrame(draw);
   };
