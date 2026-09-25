@@ -563,8 +563,40 @@ h2 { margin-bottom: 0; font-size: 17px; font-weight: 700; letter-spacing: -.3px;
 .delivery-settlement p { margin: 0; color: #7b7c74; font-size: 10px; line-height: 1.45; text-align: center; }
 .pickup-ready-note { margin: 10px 0 0; padding: 10px 12px; border-radius: 7px; background: #e7f2e8; color: #39704a; font-size: 10px; font-weight: 650; line-height: 1.45; text-align: center; }
 @keyframes alert-in { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: none; } }
-.day-order-group + .day-order-group { margin-top: 17px; padding-top: 15px; border-top: 1px solid #eeece5; }
-.day-order-group h3 { margin: 0 0 8px; color: #75766d; font-size: 10px; letter-spacing: .7px; text-transform: capitalize; }
+.order-history-filters { padding: 14px; border: 1px solid #e8e4d9; border-radius: 10px; background: #faf8f2; }
+.order-filter-heading { display: flex; align-items: end; justify-content: space-between; gap: 16px; margin-bottom: 12px; }
+.order-filter-heading > div { display: grid; gap: 4px; }
+.order-filter-heading .eyebrow { margin: 0; }
+.order-filter-heading strong { font-size: 13px; }
+.order-filter-heading > span { color: #888a81; font-size: 10px; }
+.order-filter-grid { display: grid; grid-template-columns: repeat(4,minmax(125px,1fr)) auto; align-items: end; gap: 9px; }
+.order-filter-grid label { display: grid; gap: 5px; color: #66685f; font-size: 9px; font-weight: 750; }
+.order-filter-grid input { width: 100%; min-width: 0; min-height: 40px; padding: 8px 9px; border: 1px solid #dedbd1; border-radius: 7px; background: #fff; color: var(--ink); font: inherit; font-size: 11px; }
+.order-filter-grid input:focus { border-color: #78967b; box-shadow: 0 0 0 3px rgba(76,116,83,.12); outline: 0; }
+.order-filter-clear { min-height: 40px; white-space: nowrap; }
+.order-history-limit { display: block; margin-top: 10px; color: #8b8b82; font-size: 9px; }
+.order-day-accordions { display: grid; gap: 9px; margin-top: 13px; }
+.day-order-group { overflow: hidden; border: 1px solid #e6e2d7; border-radius: 10px; background: #fdfcf8; }
+.day-order-trigger { display: flex; align-items: center; justify-content: space-between; width: 100%; min-height: 58px; gap: 14px; padding: 11px 14px; border: 0; background: #faf8f2; color: var(--ink); text-align: left; cursor: pointer; }
+.day-order-trigger:hover { background: #f7f4eb; }
+.day-order-trigger > span { display: grid; gap: 4px; }
+.day-order-trigger strong { font-size: 11px; text-transform: capitalize; }
+.day-order-trigger small { color: #8a8b82; font-size: 9px; }
+.day-order-trigger i { color: #8b7951; font-size: 19px; font-style: normal; transition: transform .18s ease; }
+.day-order-group.is-expanded .day-order-trigger { border-bottom: 1px solid #ebe7dc; background: #f8f5ec; }
+.day-order-group.is-expanded .day-order-trigger i { transform: rotate(180deg); }
+.day-order-group > .orders-list { padding: 4px 10px 10px; }
+.orders-filter-empty { display: grid; justify-items: center; gap: 6px; padding: 35px 16px; border: 1px dashed #ddd8cb; border-radius: 10px; color: #8a8b82; text-align: center; }
+.orders-filter-empty > span { display: grid; place-items: center; width: 36px; height: 36px; border-radius: 9px; background: #edf3ed; color: #527152; font-size: 17px; }
+.orders-filter-empty strong { color: var(--ink); font-size: 12px; }
+.orders-filter-empty p { margin: 0; font-size: 10px; }
+@media (max-width: 720px) {
+  .order-filter-heading { align-items: flex-start; flex-direction: column; gap: 6px; }
+  .order-filter-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
+  .order-filter-clear { grid-column: 1 / -1; }
+  .day-order-trigger { min-height: 54px; padding: 10px 11px; }
+  .day-order-group > .orders-list { padding-inline: 7px; }
+}
 .export-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 14px; }
 .user-role-list { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 7px; margin: 2px 0 13px; }
 .user-role-list span { display: flex; justify-content: space-between; gap: 8px; padding: 9px; border: 1px solid #eceae3; border-radius: 7px; background: #fbfaf7; font-size: 10px; }

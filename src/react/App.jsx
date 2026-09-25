@@ -221,8 +221,28 @@ function Cash({ store, onClose }) {
 }
 
 function Orders({ store, orders, onNew, onOpen }) {
-  const groups = useMemo(() => Object.entries(orders.reduce((result, order) => { const key = new Intl.DateTimeFormat('es-MX',{weekday:'long',day:'numeric',month:'long',year:'numeric'}).format(new Date(order.createdAt)); (result[key] ||= []).push(order); return result; }, {})), [orders]);
-  return <><section className="page-heading"><div><span className="eyebrow">VENTA Y SERVICIO</span><h1>Pedidos</h1><p>Historial de mesa, domicilio y recogida.</p></div><button className="button button-primary" onClick={onNew}>＋ Nuevo pedido</button></section><section className="panel orders-section">{groups.map(([day, dayOrders]) => <section className="day-order-group" key={day}><h3>{day}</h3><div className="orders-list">{dayOrders.map(order => <OrderRow key={order.id} order={order} store={store} onOpen={() => onOpen(order)} />)}</div></section>)}</section></>;
+  const [filters, setFilters] = useState({ dateFrom:'', dateTo:'', timeFrom:'', timeTo:'' });
+  const [expandedDays, setExpandedDays] = useState(new Set());
+  const localDateKey = value => { const date = new Date(value); const offset = date.getTimezoneOffset() * 60000; return new Date(date.getTime() - offset).toISOString().slice(0,10); };
+  const groups = useMemo(() => {
+    const filtered = [...orders].filter(order => {
+      const created = new Date(order.createdAt);
+      const dateKey = localDateKey(created);
+      const timeKey = `${String(created.getHours()).padStart(2,'0')}:${String(created.getMinutes()).padStart(2,'0')}`;
+      return (!filters.dateFrom || dateKey >= filters.dateFrom) && (!filters.dateTo || dateKey <= filters.dateTo) && (!filters.timeFrom || timeKey >= filters.timeFrom) && (!filters.timeTo || timeKey <= filters.timeTo);
+    }).sort((left,right) => new Date(right.createdAt) - new Date(left.createdAt));
+    const byDay = new Map();
+    filtered.forEach(order => { const key = localDateKey(order.createdAt); if (!byDay.has(key)) byDay.set(key, []); byDay.get(key).push(order); });
+    return [...byDay.entries()].map(([key, dayOrders]) => ({ key, label:new Intl.DateTimeFormat('es-MX',{weekday:'long',day:'numeric',month:'long',year:'numeric'}).format(new Date(`${key}T12:00:00`)), orders:dayOrders }));
+  }, [orders, filters]);
+  const hasFilters = Object.values(filters).some(Boolean);
+  const visibleGroups = hasFilters ? groups : groups.slice(0,7);
+  const visibleOrders = visibleGroups.reduce((total, group) => total + group.orders.length, 0);
+  useEffect(() => { setExpandedDays(visibleGroups[0] ? new Set([visibleGroups[0].key]) : new Set()); }, [filters.dateFrom, filters.dateTo, filters.timeFrom, filters.timeTo, orders]);
+  const updateFilter = (field, value) => setFilters(current => ({...current,[field]:value}));
+  const clearFilters = () => setFilters({ dateFrom:'', dateTo:'', timeFrom:'', timeTo:'' });
+  const toggleDay = key => setExpandedDays(current => { const next = new Set(current); if (next.has(key)) next.delete(key); else next.add(key); return next; });
+  return <><section className="page-heading"><div><span className="eyebrow">VENTA Y SERVICIO</span><h1>Pedidos</h1><p>Historial de mesa, domicilio y recogida.</p></div><button className="button button-primary" onClick={onNew}>＋ Nuevo pedido</button></section><section className="panel orders-section"><div className="order-history-filters"><div className="order-filter-heading"><div><span className="eyebrow">FILTROS DEL HISTORIAL</span><strong>Consulta por fecha y hora</strong></div><span>{visibleOrders} {visibleOrders === 1 ? 'pedido mostrado' : 'pedidos mostrados'}</span></div><div className="order-filter-grid"><label>Fecha inicial<input type="date" value={filters.dateFrom} max={filters.dateTo || undefined} onChange={event => updateFilter('dateFrom',event.target.value)} /></label><label>Fecha final<input type="date" value={filters.dateTo} min={filters.dateFrom || undefined} onChange={event => updateFilter('dateTo',event.target.value)} /></label><label>Hora inicial<input type="time" value={filters.timeFrom} onChange={event => updateFilter('timeFrom',event.target.value)} /></label><label>Hora final<input type="time" value={filters.timeTo} onChange={event => updateFilter('timeTo',event.target.value)} /></label><button type="button" className="button button-secondary order-filter-clear" disabled={!hasFilters} onClick={clearFilters}>Limpiar filtros</button></div>{!hasFilters && groups.length > 7 && <small className="order-history-limit">Se muestran los siete días más recientes. Usa los filtros para consultar fechas anteriores.</small>}</div><div className="order-day-accordions">{visibleGroups.map(group => { const expanded = expandedDays.has(group.key); return <section className={`day-order-group ${expanded ? 'is-expanded' : ''}`} key={group.key}><button type="button" className="day-order-trigger" aria-expanded={expanded} aria-controls={`orders-${group.key}`} onClick={() => toggleDay(group.key)}><span><strong>{group.label}</strong><small>{group.orders.length} {group.orders.length === 1 ? 'pedido' : 'pedidos'}</small></span><i aria-hidden="true">⌄</i></button>{expanded && <div className="orders-list" id={`orders-${group.key}`}>{group.orders.map(order => <OrderRow key={order.id} order={order} store={store} onOpen={() => onOpen(order)} />)}</div>}</section>; })}{visibleGroups.length === 0 && <div className="orders-filter-empty"><span>▤</span><strong>No se encontraron pedidos</strong><p>Ajusta las fechas o las horas para ampliar la búsqueda.</p><button type="button" className="text-button" onClick={clearFilters}>Limpiar filtros</button></div>}</div></section></>;
 }
 
 function Kitchen({ store, orders, onRefresh, onOpen, toast }) {
