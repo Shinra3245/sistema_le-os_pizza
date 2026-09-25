@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" role="img" aria-labelledby="pizza-title pizza-description">
   <title id="pizza-title">Pizza artesanal dividida en ocho porciones</title>
-  <desc id="pizza-description">Icono vectorial animado de una pizza dorada con una línea punteada que gira desde el centro hacia el borde.</desc>
+  <desc id="pizza-description">Icono vectorial animado de una pizza dorada que desaparece y se reconstruye por rebanadas.</desc>
   <style>
     .pizza-slice-part {
       animation: slice-visibility 5.1s linear infinite;
@@ -53,6 +53,14 @@
     <path id="cheese-wedge" d="M320 320 530 320A210 210 0 0 1 468.49 468.49Z"/>
     <path id="crust-wedge" d="M530 320A210 210 0 0 1 468.49 468.49L489.71 489.71A240 240 0 0 0 560 320Z"/>
     <path id="shine-wedge" d="M541 332A224 224 0 0 1 512 426"/>
+    <path id="slice-area" d="M320 320 570 320A250 250 0 0 1 496.78 496.78Z"/>
+    <clipPath id="clip-slice-1"><use href="#slice-area"/></clipPath>
+    <clipPath id="clip-slice-2"><use href="#slice-area" transform="rotate(45 320 320)"/></clipPath>
+    <clipPath id="clip-slice-3"><use href="#slice-area" transform="rotate(90 320 320)"/></clipPath>
+    <clipPath id="clip-slice-4"><use href="#slice-area" transform="rotate(135 320 320)"/></clipPath>
+    <clipPath id="clip-slice-6"><use href="#slice-area" transform="rotate(225 320 320)"/></clipPath>
+    <clipPath id="clip-slice-7"><use href="#slice-area" transform="rotate(270 320 320)"/></clipPath>
+    <clipPath id="clip-slice-8"><use href="#slice-area" transform="rotate(315 320 320)"/></clipPath>
   </defs>
 
   <g id="pizza-icon" filter="url(#pizza-shadow)" stroke-linecap="round" stroke-linejoin="round">
@@ -80,7 +88,7 @@
       <use href="#cheese-wedge" fill="url(#cheese)" stroke="#2d302b" stroke-width="8"/>
       <use href="#crust-wedge" fill="url(#crust)" stroke="#2d302b" stroke-width="8"/>
       <use href="#shine-wedge" fill="none" stroke="#fff8df" stroke-width="8"/>
-      <g id="toppings-slice-5">
+      <g id="toppings-slice-5" clip-path="url(#clip-slice-1)">
         <use href="#pepperoni" x="440" y="360"/>
         <use href="#leaf" transform="translate(478 402) rotate(55) scale(.8)"/>
         <use href="#mushroom" transform="translate(386 374) rotate(-42) scale(.75)"/>
@@ -103,38 +111,38 @@
     </g>
 
     <g id="main-toppings">
-      <g id="toppings-slice-1" class="pizza-slice-part">
+      <g id="toppings-slice-1" class="pizza-slice-part" clip-path="url(#clip-slice-1)">
         <use href="#pepperoni" x="468" y="370"/>
         <use href="#mushroom" transform="translate(408 342) rotate(-30) scale(.82)"/>
         <use href="#leaf" transform="translate(441 417) rotate(75) scale(.78)"/>
         <use href="#crumbs" transform="translate(449 345) rotate(20)"/>
       </g>
-      <g id="toppings-slice-2" class="pizza-slice-part">
+      <g id="toppings-slice-2" class="pizza-slice-part" clip-path="url(#clip-slice-2)">
         <use href="#pepperoni" x="404" y="440"/>
         <use href="#mushroom" transform="translate(347 399) rotate(18) scale(.78)"/>
         <use href="#leaf" transform="translate(330 466) rotate(105) scale(.78)"/>
       </g>
-      <g id="toppings-slice-3" class="pizza-slice-part">
+      <g id="toppings-slice-3" class="pizza-slice-part" clip-path="url(#clip-slice-3)">
         <use href="#pepperoni" x="292" y="455"/>
         <use href="#leaf" transform="translate(234 431) rotate(42) scale(.78)"/>
         <use href="#crumbs" transform="translate(285 395) rotate(60)"/>
       </g>
-      <g id="toppings-slice-4" class="pizza-slice-part">
+      <g id="toppings-slice-4" class="pizza-slice-part" clip-path="url(#clip-slice-4)">
         <use href="#pepperoni" x="210" y="385"/>
         <use href="#mushroom" transform="translate(276 333) rotate(82) scale(.78)"/>
       </g>
-      <g id="toppings-slice-6" class="pizza-slice-part">
+      <g id="toppings-slice-6" class="pizza-slice-part" clip-path="url(#clip-slice-6)">
         <use href="#pepperoni" x="250" y="212"/>
         <use href="#leaf" transform="translate(296 181) rotate(-55) scale(.75)"/>
       </g>
-      <g id="toppings-slice-7" class="pizza-slice-part">
+      <g id="toppings-slice-7" class="pizza-slice-part" clip-path="url(#clip-slice-7)">
         <use href="#pepperoni" x="350" y="190"/>
         <use href="#mushroom" transform="translate(386 235) rotate(20) scale(.82)"/>
-        <use href="#crumbs" transform="translate(384 285)"/>
       </g>
-      <g id="toppings-slice-8" class="pizza-slice-part">
+      <g id="toppings-slice-8" class="pizza-slice-part" clip-path="url(#clip-slice-8)">
         <use href="#pepperoni" x="420" y="270"/>
         <use href="#leaf" transform="translate(470 300) rotate(35) scale(.78)"/>
+        <use href="#crumbs" transform="translate(384 285)"/>
       </g>
     </g>
     <circle cx="320" cy="320" r="8" fill="#2d302b"/>
