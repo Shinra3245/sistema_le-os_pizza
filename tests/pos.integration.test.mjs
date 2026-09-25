@@ -4,6 +4,7 @@ import { mkdtemp, readFile, rm, stat } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { spawn } from 'node:child_process';
+import { selectableProducts } from '../src/domain/menu-model.js';
 
 const dataDir = await mkdtemp(path.join(tmpdir(), 'pizzas-pos-'));
 const port = 4198;
@@ -118,6 +119,39 @@ test('permite alitas o boneless mitad de un sabor y mitad de otro', async () => 
   assert.equal(created.body.items[0].configuration.leftFlavor,flavors[1]);
   assert.equal(created.body.items[0].configuration.rightFlavor,flavors[3]);
   const cancelled=await call(`/api/orders/${created.body.id}`,{method:'PATCH',body:JSON.stringify({cancellation:{reason:'Fin de prueba mitad y mitad'}})});
+  assert.equal(cancelled.response.status,200);
+});
+
+test('separa snacks, extras y bebidas y valida combinaciones del menú', async () => {
+  const boot=(await call('/api/bootstrap')).body;
+  const menu=selectableProducts(boot.catalog,boot.settings);
+  const snacks=menu.find(product=>product.id==='family-snacks');
+  const extras=menu.find(product=>product.id==='family-extras');
+  const drinks=menu.find(product=>product.id==='beverage-menu');
+  assert.ok(snacks?.familyOptions.some(option=>option.product.name==='Papas a la francesa'));
+  assert.ok(snacks?.familyOptions.some(option=>option.product.name==='Papas gajo'));
+  assert.ok(extras?.familyOptions.some(option=>option.product.name==='Burritos 2 pz'));
+  assert.deepEqual(drinks.beverageGroups.map(group=>group.label),['Sin alcohol','Alcohol']);
+  assert.ok(drinks.beverageGroups.every(group=>group.options.some(option=>option.product.name==='Colados')));
+
+  const fries=boot.catalog.find(product=>product.id==='snacks-28');
+  const burrito=boot.catalog.find(product=>product.id==='extras-41');
+  const colado=boot.catalog.find(product=>product.id==='bebidas-72');
+  const invalidColado=await call('/api/orders',{method:'POST',body:JSON.stringify({type:'recoger',customerName:'Cliente menú',phone:'9999999999',items:[dishItem(colado,{configuration:{type:'dish',choices:{Tipo:'Sin alcohol',Sabor:'Baileys'},variant:'',excludedIngredients:[]}})]})});
+  assert.equal(invalidColado.response.status,400);
+
+  const items=[
+    dishItem(fries,{configuration:{type:'dish',choices:{},variant:'Queso gratinado',excludedIngredients:[]}}),
+    dishItem(burrito,{configuration:{type:'dish',choices:{Relleno:'Carne molida'},variant:'',excludedIngredients:[],flavorMode:'mitades',leftFlavor:'Carne molida',rightFlavor:'Pastor'}}),
+    dishItem(colado,{configuration:{type:'dish',choices:{Tipo:'Con alcohol',Sabor:'Baileys'},variant:'',excludedIngredients:[]}})
+  ];
+  const created=await call('/api/orders',{method:'POST',body:JSON.stringify({type:'recoger',customerName:'Cliente menú',phone:'9999999999',items})});
+  assert.equal(created.response.status,201);
+  assert.equal(created.body.items[0].unitPrice,80);
+  assert.match(created.body.items[0].details,/Queso gratinado/);
+  assert.match(created.body.items[1].details,/Carne molida \/ Pastor/);
+  assert.match(created.body.items[2].details,/Con alcohol · Baileys/);
+  const cancelled=await call(`/api/orders/${created.body.id}`,{method:'PATCH',body:JSON.stringify({cancellation:{reason:'Fin de prueba de menú'}})});
   assert.equal(cancelled.response.status,200);
 });
 

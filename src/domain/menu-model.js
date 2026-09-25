@@ -101,16 +101,19 @@ export function menuFromSource(source) {
         : item.opciones_ingredientes_menu_1 || item.opciones_ingredientes_menu_2 ? 'Relleno'
           : item.variantes ? 'Variante' : 'Elige una opción';
       let choiceGroups = choices.length ? [{ label: choiceLabel, options: choices }] : [];
-      if (['Burritos 2pz', 'Palitos de queso 2pz'].includes(name)) choiceGroups = [
-        { label: 'Relleno pieza 1', options: choices },
-        { label: 'Relleno pieza 2', options: choices }
-      ];
+      const splitChoiceGroup = /^(burritos|palitos de queso)\s*2\s*pz$/i.test(name) ? 'Relleno' : '';
+      if (splitChoiceGroup) choiceGroups = [{ label: splitChoiceGroup, options: choices }];
       if (categoryId === 'alitas_boneless') choiceGroups = [
         { label: 'Presentación', options: ['Alitas · 8 piezas', 'Boneless · 200 g'] },
         { label: 'Sabor', options: choices }
       ];
       if (categoryId === 'bebidas' && name.toLowerCase() === 'café o té') choiceGroups = [
         { label: 'Elige una opción', options: ['Café', 'Té'] }
+      ];
+      const isColado = categoryId === 'bebidas' && /^colados?$/i.test(name);
+      if (isColado) choiceGroups = [
+        { label:'Tipo', options:['Sin alcohol','Con alcohol'] },
+        { label:'Sabor', options:choices }
       ];
       const variants = item.precios && Object.keys(item.precios).some(key => !sizes.includes(key))
         ? Object.entries(item.precios).filter(([, value]) => value !== null).map(([label, price]) => ({ label: label[0].toUpperCase() + label.slice(1), price }))
@@ -119,7 +122,8 @@ export function menuFromSource(source) {
         id, name, category: categoryId, group: isPizza ? category.categoria.replace('Pizzas ', '') : subgroup,
         kind: isPizza ? 'pizza' : 'dish', price: Object.values(prices).find(value => typeof value === 'number') ?? 0,
         prices, description: ingredients, choices, choiceGroups,
-        variants, active: true,
+        variants, active: true, ...(splitChoiceGroup ? { splitChoiceGroup } : {}),
+        ...(isColado ? { alcoholCategories:['sin-alcohol','alcohol'] } : {}),
         presentInMenu1: item.presente_en_menu_1 !== false,
         presentInMenu2: item.presente_en_menu_2 !== false
       }));
@@ -148,7 +152,8 @@ export function selectableProducts(catalog = [], settings = {}) {
   }] : [];
   const dishes = available.filter(product => product.kind !== 'pizza');
   const definitions = [
-    { id: 'snacks-extras', name: 'Snacks y extras', category: 'snacks_extras', categories: ['snacks', 'extras'], label: 'Elige el platillo', match: product => ['snacks', 'extras'].includes(product.category), option: product => product.name },
+    { id: 'snacks', name: 'Snacks', category: 'snacks', label: 'Elige el platillo', match: product => product.category === 'snacks', option: product => product.name },
+    { id: 'extras', name: 'Extras', category: 'extras', label: 'Elige el extra', match: product => product.category === 'extras', option: product => product.name },
     { id: 'hamburguesas', name: 'Hamburguesa', category: 'hamburguesas', label: 'Tipo de hamburguesa', match: product => product.category === 'hamburguesas', option: product => product.name },
     { id: 'ensaladas', name: 'Ensalada', category: 'ensaladas', label: 'Preparación', match: product => product.category === 'ensaladas', option: product => {
       const name = product.name.replace(/^ensalada\s*/i, '');
@@ -181,11 +186,11 @@ export function selectableProducts(catalog = [], settings = {}) {
   const beverageGroups = [
     {
       id: 'sin-alcohol', label: 'Sin alcohol',
-      options: beverages.filter(product => !isAlcoholic(product) || isColado(product)).map(beverageOption)
+      options: beverages.filter(product => product.alcoholCategories?.includes('sin-alcohol') || !isAlcoholic(product)).map(beverageOption)
     },
     {
       id: 'alcohol', label: 'Alcohol',
-      options: beverages.filter(product => isAlcoholic(product) || isColado(product)).map(beverageOption)
+      options: beverages.filter(product => product.alcoholCategories?.includes('alcohol') || isAlcoholic(product) || isColado(product)).map(beverageOption)
     }
   ].filter(group => group.options.length);
   beverages.forEach(product => consumed.add(product.id));

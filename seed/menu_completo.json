@@ -1,6 +1,6 @@
 {
   "restaurante": "Pizzas a la Leña",
-  "version": "Menu_Completo-2026-09-21-v3",
+  "version": "Menu_Completo-2026-09-24-v4",
   "fuente": "Menu_Completo (ocho láminas PNG, 21/09/2026)",
   "categorias": [
     "pizzas_clasicas",
@@ -509,92 +509,66 @@
       "kind": "dish",
       "price": 60,
       "prices": {
-        "base": 60
+        "Natural": 60,
+        "Pimienta limón": 65,
+        "Queso gratinado": 80
       },
-      "description": "Papas a la francesa 300 g · Naturales.",
-      "choices": [],
+      "description": "Papas a la francesa 300 g. Elige el sabor.",
+      "choices": [
+        "Natural",
+        "Pimienta limón",
+        "Queso gratinado"
+      ],
       "choiceGroups": [],
-      "variants": [],
-      "active": true
-    },
-    {
-      "id": "snacks-29",
-      "name": "Papas a la francesa pimienta limon",
-      "category": "snacks",
-      "group": "snacks",
-      "kind": "dish",
-      "price": 65,
-      "prices": {
-        "base": 65
-      },
-      "description": "Papas a la francesa 300 g · Pimienta limón.",
-      "choices": [],
-      "choiceGroups": [],
-      "variants": [],
-      "active": true
-    },
-    {
-      "id": "snacks-30",
-      "name": "Papas a la francesa queso gratinado",
-      "category": "snacks",
-      "group": "snacks",
-      "kind": "dish",
-      "price": 80,
-      "prices": {
-        "base": 80
-      },
-      "description": "Papas a la francesa 300 g · Queso gratinado.",
-      "choices": [],
-      "choiceGroups": [],
-      "variants": [],
+      "variants": [
+        {
+          "label": "Natural",
+          "price": 60
+        },
+        {
+          "label": "Pimienta limón",
+          "price": 65
+        },
+        {
+          "label": "Queso gratinado",
+          "price": 80
+        }
+      ],
       "active": true
     },
     {
       "id": "snacks-31",
-      "name": "Papas Gajo",
+      "name": "Papas gajo",
       "category": "snacks",
       "group": "snacks",
       "kind": "dish",
       "price": 70,
       "prices": {
-        "base": 70
+        "Natural": 70,
+        "Queso cheddar": 85,
+        "Queso gratinado": 85
       },
-      "description": "Papas gajo 300 g · Naturales.",
-      "choices": [],
+      "description": "Papas gajo 300 g. Elige el sabor.",
+      "choices": [
+        "Natural",
+        "Queso cheddar",
+        "Queso gratinado"
+      ],
       "choiceGroups": [],
-      "variants": [],
-      "active": true
-    },
-    {
-      "id": "snacks-32",
-      "name": "Papas Gajo queso chedar",
-      "category": "snacks",
-      "group": "snacks",
-      "kind": "dish",
-      "price": 85,
-      "prices": {
-        "base": 85
-      },
-      "description": "Papas gajo 300 g · Queso cheddar.",
-      "choices": [],
-      "choiceGroups": [],
-      "variants": [],
-      "active": true
-    },
-    {
-      "id": "snacks-33",
-      "name": "Papas Gajo queso gratinado",
-      "category": "snacks",
-      "group": "snacks",
-      "kind": "dish",
-      "price": 85,
-      "prices": {
-        "base": 85
-      },
-      "description": "Papas gajo 300 g · Queso gratinado.",
-      "choices": [],
-      "choiceGroups": [],
-      "variants": [],
+      "variants": [
+        {
+          "label": "Natural",
+          "price": 70
+        },
+        {
+          "label": "Queso cheddar",
+          "price": 85
+        },
+        {
+          "label": "Queso gratinado",
+          "price": 85
+        }
+      ],
       "active": true
     },
     {
@@ -740,7 +714,8 @@
         }
       ],
       "variants": [],
-      "active": true
+      "active": true,
+      "splitChoiceGroup": "Relleno"
     },
     {
       "id": "extras-42",
@@ -771,7 +746,8 @@
         }
       ],
       "variants": [],
-      "active": true
+      "active": true,
+      "splitChoiceGroup": "Relleno"
     },
     {
       "id": "extras-43",
@@ -1694,13 +1670,20 @@
       "prices": {
         "base": 95
       },
-      "description": "Elige piña o fresa sin alcohol, o piña, fresa o Baileys con alcohol.",
+      "description": "Elige Piña o Fresa con o sin alcohol; Baileys está disponible con alcohol.",
       "choices": [
         "Piña",
         "Fresa",
         "Baileys"
       ],
       "choiceGroups": [
+        {
+          "label": "Tipo",
+          "options": [
+            "Sin alcohol",
+            "Con alcohol"
+          ]
+        },
         {
           "label": "Sabor",
           "options": [
@@ -1711,7 +1694,11 @@
         }
       ],
       "variants": [],
-      "active": true
+      "active": true,
+      "alcoholCategories": [
+        "sin-alcohol",
+        "alcohol"
+      ]
     },
     {
       "id": "bebidas-73",

@@ -72,8 +72,9 @@ function canonicalDish(raw, product) {
   const requestedChoices = configuration.choices && typeof configuration.choices === 'object' ? configuration.choices : {};
   const allGroups = (product.choiceGroups || []).filter(group => !(product.category === 'hamburguesas' && group.label === 'Queso'));
   const isWings = productParentCategory(product) === 'alitas_boneless';
-  const flavorGroup = isWings ? allGroups.find(group => group.label === 'Sabor') : null;
-  const groups = flavorGroup ? allGroups.filter(group => group !== flavorGroup) : allGroups;
+  const splitChoiceLabel = cleanText(product.splitChoiceGroup || (isWings ? 'Sabor' : ''), 80);
+  const splitGroup = splitChoiceLabel ? allGroups.find(group => group.label === splitChoiceLabel) : null;
+  const groups = splitGroup ? allGroups.filter(group => group !== splitGroup) : allGroups;
   const allowedLabels = new Set(allGroups.map(group => group.label));
   if (Object.keys(requestedChoices).some(label => !allowedLabels.has(label))) throw new ValidationError('Se recibió una opción que no pertenece al platillo.');
   const choices = {};
@@ -86,14 +87,15 @@ function canonicalDish(raw, product) {
   let flavorMode = '';
   let leftFlavor = '';
   let rightFlavor = '';
-  if (flavorGroup) {
-    const flavors = Array.isArray(flavorGroup.options) ? flavorGroup.options : [];
+  if (splitGroup) {
+    const flavors = Array.isArray(splitGroup.options) ? splitGroup.options : [];
     flavorMode = configuration.flavorMode === 'mitades' ? 'mitades' : 'completa';
     leftFlavor = cleanText(configuration.leftFlavor || requestedChoices.Sabor || flavors[0], 80);
     rightFlavor = flavorMode === 'mitades' ? cleanText(configuration.rightFlavor, 80) : leftFlavor;
-    if (!flavors.includes(leftFlavor) || !flavors.includes(rightFlavor)) throw new ValidationError('Selecciona uno o dos sabores válidos para las alitas o boneless.');
-    choices.Sabor = flavorMode === 'mitades' ? `${leftFlavor} / ${rightFlavor}` : leftFlavor;
+    if (!flavors.includes(leftFlavor) || !flavors.includes(rightFlavor)) throw new ValidationError(`Selecciona una o dos opciones válidas para ${splitChoiceLabel.toLocaleLowerCase('es-MX')}.`);
+    choices[splitChoiceLabel] = flavorMode === 'mitades' ? `${leftFlavor} / ${rightFlavor}` : leftFlavor;
   }
+  if (/^colados?$/i.test(product.name) && choices.Tipo === 'Sin alcohol' && choices.Sabor === 'Baileys') throw new ValidationError('Baileys solo está disponible en Colados con alcohol.');
   let variant = '';
   if (Array.isArray(product.variants) && product.variants.length) {
     variant = cleanText(configuration.variant, 80);
@@ -109,7 +111,7 @@ function canonicalDish(raw, product) {
     name: displayNameFor(product), productId: product.id, category: product.category,
     parentCategory: productParentCategory(product), subcategory: productSubcategory(product),
     station: stationFor(product), unitPrice, details,
-    configuration: { type:'dish', choices, variant, excludedIngredients, ...(flavorGroup ? { flavorMode, leftFlavor, rightFlavor } : {}) }
+    configuration: { type:'dish', choices, variant, excludedIngredients, ...(splitGroup ? { flavorMode, leftFlavor, rightFlavor } : {}) }
   };
 }
 
@@ -197,12 +199,16 @@ export function validateCatalog(entries) {
     const cleanGroups = choiceGroups.map(group => ({ label:cleanText(group.label, 80), options:sanitizeOptions(group.options) }));
     if (cleanGroups.some(group => !group.label || group.options.length === 0)) throw new ValidationError(`Revisa las opciones de ${name}.`);
     ids.add(id); identities.add(identity);
+    const splitChoiceGroup = cleanText(normalized.splitChoiceGroup, 80);
+    if (splitChoiceGroup && !cleanGroups.some(group => group.label === splitChoiceGroup)) throw new ValidationError(`La opción mitad y mitad de ${name} no coincide con sus grupos.`);
+    const alcoholCategories = sanitizeOptions(normalized.alcoholCategories || [], 2).filter(value => ['sin-alcohol','alcohol'].includes(value));
     return {
       id, name, category:normalized.category, parentCategory, subcategory,
       group:cleanText(normalized.group || subcategory, 80), kind, price, prices,
       description:cleanText(normalized.description, 500),
       choices:sanitizeOptions(normalized.choices || []), choiceGroups:cleanGroups,
       variants:cleanVariants, ingredientOptions:sanitizeOptions(normalized.ingredientOptions || []),
+      ...(splitChoiceGroup ? { splitChoiceGroup } : {}), ...(alcoholCategories.length ? { alcoholCategories } : {}),
       active:normalized.active !== false,
       presentInMenu1:normalized.presentInMenu1 !== false,
       presentInMenu2:normalized.presentInMenu2 !== false
