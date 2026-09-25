@@ -1,6 +1,18 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" role="img" aria-labelledby="pizza-title pizza-description">
   <title id="pizza-title">Pizza artesanal dividida en ocho porciones</title>
-  <desc id="pizza-description">Icono vectorial de una pizza dorada con una porción separada, pepperoni, champiñones y hojas verdes.</desc>
+  <desc id="pizza-description">Icono vectorial animado de una pizza dorada con una línea punteada que gira desde el centro hacia el borde.</desc>
+  <style>
+    .loader-sweep {
+      transform-origin: 320px 320px;
+      animation: loader-clockwise 2s linear infinite;
+    }
+    @keyframes loader-clockwise {
+      to { transform: rotate(360deg); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .loader-sweep { animation-duration: 8s; }
+    }
+  </style>
   <defs>
     <filter id="pizza-shadow" x="-25%" y="-25%" width="150%" height="160%">
       <feDropShadow dx="0" dy="12" stdDeviation="10" flood-color="#2d302b" flood-opacity=".18"/>
@@ -102,5 +114,10 @@
       <use href="#crumbs" transform="translate(449 345) rotate(20)"/>
     </g>
     <circle cx="320" cy="320" r="8" fill="#2d302b"/>
+  </g>
+
+  <g id="loading-indicator" class="loader-sweep" aria-hidden="true">
+    <line x1="320" y1="320" x2="320" y2="82" fill="none" stroke="#335f4f" stroke-width="9" stroke-linecap="round" stroke-dasharray="1 18"/>
+    <circle cx="320" cy="320" r="6" fill="#335f4f"/>
   </g>
 </svg>
