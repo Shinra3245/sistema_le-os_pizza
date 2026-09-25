@@ -72,6 +72,16 @@ button:disabled { opacity: .52; cursor: not-allowed; }
 .avatar-button { width: 35px; height: 35px; border: 1px solid #eadfc2; border-radius: 50%; background: #fbf1d8; color: #65491b; font-size: 11px; font-weight: 800; cursor: pointer; }
 main { width: min(1500px, 100%); margin: 0 auto; padding: 34px 42px 26px; }
 .loading-card { padding: 40px; border-radius: 12px; background: var(--surface); color: var(--muted-strong); }
+.major-loading-screen { position: fixed; z-index: 2000; inset: 0; display: grid; place-items: center; min-width: 320px; padding: 28px; overflow: hidden; background: #fff; }
+.major-loading-content { display: grid; justify-items: center; width: min(520px,100%); text-align: center; }
+.major-loading-content img { display: block; width: clamp(230px,32vw,360px); height: auto; margin-bottom: 6px; }
+.major-loading-content .eyebrow { margin-bottom: 9px; color: #91713d; }
+.major-loading-content h1 { margin-bottom: 8px; font-size: clamp(27px,3.2vw,38px); }
+.major-loading-content p { max-width: 420px; margin: 0; color: var(--muted-strong); font-size: 13px; line-height: 1.55; }
+@media (max-width: 590px) {
+  .major-loading-screen { padding: 20px; }
+  .major-loading-content img { width: min(270px,82vw); }
+}
 .eyebrow { display: block; color: #929188; font-size: 10px; font-weight: 800; letter-spacing: 1.25px; line-height: 1.4; }
 h1, h2, h3, p { margin-top: 0; }
 h1 { margin-bottom: 8px; font-family: Georgia, "Times New Roman", serif; font-size: clamp(29px, 3vw, 39px); font-weight: 650; letter-spacing: -.9px; line-height: 1.15; }
