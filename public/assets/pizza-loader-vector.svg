@@ -4,7 +4,7 @@
   <style>
     .loader-sweep {
       transform-origin: 320px 320px;
-      animation: loader-clockwise 2s linear infinite;
+      animation: loader-clockwise 2.8s linear infinite;
     }
     @keyframes loader-clockwise {
       to { transform: rotate(360deg); }
@@ -117,7 +117,7 @@
   </g>
 
   <g id="loading-indicator" class="loader-sweep" aria-hidden="true">
-    <line x1="320" y1="320" x2="320" y2="82" fill="none" stroke="#335f4f" stroke-width="9" stroke-linecap="round" stroke-dasharray="1 18"/>
-    <circle cx="320" cy="320" r="6" fill="#335f4f"/>
+    <line x1="320" y1="320" x2="320" y2="60" fill="none" stroke="#171916" stroke-width="9" stroke-linecap="round" stroke-dasharray="1 18"/>
+    <circle cx="320" cy="320" r="6" fill="#171916"/>
   </g>
 </svg>
