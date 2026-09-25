@@ -14,6 +14,11 @@ const stationFor = product => product.kind === 'pizza' || product.kind === 'pizz
 const phone = value => { const d = String(value || '').replace(/\D/g, '').slice(0, 10); return d.length > 6 ? `${d.slice(0, 3)}-${d.slice(3, 6)}-${d.slice(6)}` : d.length > 3 ? `${d.slice(0, 3)}-${d.slice(3)}` : d; };
 const typeLabel = order => order.type === 'mesa' ? 'En mesa' : order.type === 'domicilio' ? 'Domicilio' : 'Recoger aquí';
 const comboOpenEvent = 'pizzas:combo-open';
+const majorLoadingMinimumMs = 3500;
+const completeMinimumLoadingTime = async startedAt => {
+  const remaining = majorLoadingMinimumMs - (Date.now() - startedAt);
+  if (remaining > 0) await new Promise(resolve => window.setTimeout(resolve, remaining));
+};
 const orderStatus = status => ({
   nuevo: { key:'abierto', label:'Abierto' }, abierto: { key:'abierto', label:'Abierto' },
   pendiente: { key:'pendiente', label:'Pendiente' }, preparando: { key:'preparando', label:'En preparación' },
@@ -163,14 +168,16 @@ function Auth({ configured, onLogin, onLoadingChange, sessionMessage = '' }) {
   const [error, setError] = useState(sessionMessage); const [working, setWorking] = useState(false);
   const submit = async event => {
     event.preventDefault(); const data = new FormData(event.currentTarget); const password = String(data.get('password') || '');
+    let loadingStartedAt = null;
     try {
       if (!configured && password !== String(data.get('confirmPassword') || '')) throw new Error('Las contraseñas no coinciden.');
       setError(''); setWorking(true);
+      loadingStartedAt = Date.now();
       onLoadingChange({ title:configured ? 'Preparando tu sesión' : 'Configurando el acceso', detail:configured ? 'Validando el acceso y cargando el área de operación.' : 'Guardando el acceso inicial y preparando el sistema.' });
       if (configured) await api.login({ username: data.get('username'), password }); else await api.setupAuth({ username: 'pizzas', password });
       await onLogin();
     } catch (exception) { setError(exception.message); }
-    finally { setWorking(false); onLoadingChange(null); }
+    finally { if (loadingStartedAt) await completeMinimumLoadingTime(loadingStartedAt); setWorking(false); onLoadingChange(null); }
   };
   return <main className="auth-layout"><section className="auth-card"><div className="auth-brand"><span className="brand-mark"><span /><span /><span /></span><span><strong>Pizzas</strong><small>a la leña</small></span></div><span className="eyebrow">{configured ? 'ACCESO DEL RESTAURANTE' : 'CONFIGURACIÓN INICIAL'}</span><h1>{configured ? 'Bienvenido de nuevo' : 'Crea tu contraseña'}</h1><p>{configured ? 'Ingresa con la cuenta del restaurante para abrir el área de operación.' : 'El usuario inicial es pizzas y este acceso se guarda en este equipo.'}</p><form className="auth-form" onSubmit={submit}>{configured ? <label>Usuario<input name="username" defaultValue="pizzas" required disabled={working} /></label> : <label className="auth-fixed-user">Usuario <strong>pizzas</strong></label>}<label>Contraseña<input name="password" type="password" minLength="10" maxLength="128" required autoFocus disabled={working} /></label>{!configured && <><label>Confirmar contraseña<input name="confirmPassword" type="password" minLength="10" maxLength="128" required disabled={working} /></label><small className="password-help">Mínimo 10 caracteres, con mayúscula, minúscula y número.</small></>}{error && <div className="auth-error" role="alert">{error}</div>}<button className="button button-primary button-full" disabled={working}>{working ? 'Preparando…' : configured ? 'Entrar al sistema' : 'Guardar acceso y continuar'} {!working && <span>→</span>}</button></form></section><aside className="auth-side-art"><img src="/assets/portada-menu.jpeg" alt="Horno de leña" /><div><span className="eyebrow">PIZZAS A LA LEÑA</span><h2>La operación,<br />lista para el servicio.</h2></div></aside></main>;
 }
@@ -187,7 +194,7 @@ export function App() {
   const sessionOrders = store.activeCashSession ? store.orders.filter(order => order.cashSessionId === store.activeCashSession.id) : [];
   const navigate = next => { setPage(next); if (next !== 'nuevo') setDraft(current => current?.items?.length ? current : null); };
   const withMajorLoading = content => <>{content}{majorLoading && <MajorLoadingScreen {...majorLoading} />}</>;
-  const runMajorTransition = async (loading, operation) => { setMajorLoading(loading); try { return await operation(); } finally { setMajorLoading(null); } };
+  const runMajorTransition = async (loading, operation) => { const startedAt=Date.now(); setMajorLoading(loading); try { return await operation(); } finally { await completeMinimumLoadingTime(startedAt); setMajorLoading(null); } };
   if (!ready) return <div className="loading-card">Preparando tu área de pedidos…</div>;
   if (!store.currentUser) return withMajorLoading(<Auth configured={configured} sessionMessage={sessionMessage} onLoadingChange={setMajorLoading} onLogin={async () => { setConfigured(true); setSessionMessage(''); await refresh(); }} />);
   if (store.closedCashSummary) return withMajorLoading(<CashCloseReport store={store} session={store.closedCashSummary} onNewCash={async () => { await api.acknowledgeCashClose(); await refresh(); }} onLogout={async () => { await api.logout(); setStore({ settings:{}, catalog:[], orders:[], cashSessions:[] }); }} />);
