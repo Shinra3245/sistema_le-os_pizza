@@ -101,10 +101,10 @@ function canonicalDish(raw, product) {
     variant = cleanText(configuration.variant, 80);
     if (!product.variants.some(entry => entry.label === variant)) throw new ValidationError('Selecciona una presentación válida.');
   }
-  const ingredientOptions = product.category === 'hamburguesas' ? (product.ingredientOptions || []) : [];
+  const ingredientOptions = product.ingredientOptions || [];
   const excludedIngredients = Array.isArray(configuration.excludedIngredients)
     ? [...new Set(configuration.excludedIngredients.map(value => cleanText(value, 80)))] : [];
-  if (excludedIngredients.some(ingredient => !ingredientOptions.includes(ingredient))) throw new ValidationError('Se intentó retirar un ingrediente que no pertenece a la hamburguesa.');
+  if (excludedIngredients.some(ingredient => !ingredientOptions.includes(ingredient))) throw new ValidationError('Se intentó retirar un ingrediente que no pertenece al platillo.');
   const unitPrice = finiteAmount(priceForProduct(product, '', variant), { minimum: 0.01 });
   const details = [product.name, ...Object.values(choices), ...excludedIngredients.map(ingredient => `Sin ${ingredient.toLocaleLowerCase('es-MX')}`), variant].filter(Boolean).join(' · ');
   return {
@@ -166,9 +166,36 @@ const sanitizeOptions = (values, maximum = 50) => {
   return [...new Set(values.map(value => cleanText(value, 80)).filter(Boolean))];
 };
 
-export function validateCatalog(entries) {
+export function validateCatalogCategories(entries, catalog = []) {
+  if (!Array.isArray(entries) || entries.length < productCategories.length || entries.length > 60) throw new ValidationError(`La carta debe conservar sus ${productCategories.length} categorías base y admite hasta 60 categorías.`);
+  const ids = new Set(); const labels = new Set();
+  const categories = entries.map(entry => {
+    const id = cleanText(entry?.id, 100);
+    const label = cleanText(entry?.label, 80);
+    if (!/^[a-z0-9][a-z0-9_-]{1,99}$/i.test(id) || !label) throw new ValidationError('Cada categoría necesita un nombre válido.');
+    const labelKey = label.toLocaleLowerCase('es-MX');
+    if (ids.has(id) || labels.has(labelKey)) throw new ValidationError('No puede haber categorías repetidas.');
+    const subcategories = sanitizeOptions(entry.subcategories || [], 50);
+    if (!subcategories.length) throw new ValidationError(`Agrega al menos una subcategoría a ${label}.`);
+    if (new Set(subcategories.map(value => value.toLocaleLowerCase('es-MX'))).size !== subcategories.length) throw new ValidationError(`Hay subcategorías repetidas en ${label}.`);
+    ids.add(id); labels.add(labelKey);
+    return { id, label, subcategories };
+  });
+  const missingBuiltin = productCategories.find(category => !ids.has(category.id));
+  if (missingBuiltin) throw new ValidationError(`La categoría base ${missingBuiltin.label} debe permanecer disponible.`);
+  const missingUsed = catalog.find(product => !ids.has(productParentCategory(product)));
+  if (missingUsed) throw new ValidationError(`No puedes eliminar la categoría usada por ${missingUsed.name}.`);
+  const missingUsedSubcategory = catalog.find(product => {
+    const category = categories.find(entry => entry.id === productParentCategory(product));
+    return category && !category.subcategories.includes(productSubcategory(product));
+  });
+  if (missingUsedSubcategory) throw new ValidationError(`No puedes eliminar la subcategoría ${productSubcategory(missingUsedSubcategory)} porque contiene productos.`);
+  return categories;
+}
+
+export function validateCatalog(entries, categoryDefinitions = productCategories) {
   if (!Array.isArray(entries) || entries.length === 0 || entries.length > 500) throw new ValidationError('La carta debe contener entre 1 y 500 productos.');
-  const validParents = new Set(productCategories.map(category => category.id));
+  const validParents = new Map(categoryDefinitions.map(category => [category.id, new Set(category.subcategories || [])]));
   const ids = new Set();
   const identities = new Set();
   return entries.map(entry => {
@@ -179,7 +206,7 @@ export function validateCatalog(entries) {
     const subcategory = cleanText(normalized.subcategory, 80);
     if (!/^[a-z0-9][a-z0-9._-]{1,99}$/i.test(id) || !name) throw new ValidationError('Cada producto necesita un identificador y nombre válidos.');
     if (ids.has(id)) throw new ValidationError(`El identificador ${id} está repetido.`);
-    if (!validParents.has(parentCategory) || !subcategory) throw new ValidationError(`Revisa la categoría y subcategoría de ${name}.`);
+    if (!validParents.has(parentCategory) || !subcategory || !validParents.get(parentCategory).has(subcategory)) throw new ValidationError(`Revisa la categoría y subcategoría de ${name}.`);
     const identity = `${parentCategory}|${subcategory}|${name}`.toLocaleLowerCase('es-MX');
     if (identities.has(identity)) throw new ValidationError(`${name} está repetido en la misma subcategoría.`);
     const kind = normalized.kind === 'pizza' || normalized.kind === 'supplement' ? normalized.kind : 'dish';

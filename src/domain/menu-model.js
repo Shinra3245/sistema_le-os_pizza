@@ -11,6 +11,33 @@ export const productCategories = [
   { id:'bebidas', label:'Bebidas', subcategories:['Frappes y malteadas','Refrescos y cafetería','Aguas, limonadas y naranjadas','Coctelería con y sin alcohol','Bebidas con alcohol'] }
 ];
 
+export function configuredProductCategories(settings = {}, catalog = []) {
+  const configured = Array.isArray(settings.catalogCategories) ? settings.catalogCategories : [];
+  const byId = new Map(productCategories.map(category => [category.id, { ...category, subcategories:[...category.subcategories], builtin:true }]));
+  for (const category of configured) {
+    const id = String(category?.id || '').trim();
+    const label = String(category?.label || '').trim();
+    if (!id || !label) continue;
+    const previous = byId.get(id);
+    const configuredSubcategories = Array.isArray(category.subcategories)
+      ? category.subcategories.map(value => String(value || '').trim()).filter(Boolean)
+      : previous?.subcategories || [];
+    byId.set(id, {
+      id,
+      label,
+      builtin:previous?.builtin === true,
+      subcategories:[...new Set(configuredSubcategories)]
+    });
+  }
+  for (const product of catalog) {
+    const id = productParentCategory(product);
+    const subcategory = productSubcategory(product);
+    const previous = byId.get(id) || { id, label:String(product.parentCategoryLabel || product.group || id).trim() || id, subcategories:[], builtin:false };
+    byId.set(id, { ...previous, subcategories:[...new Set([...previous.subcategories, subcategory].filter(Boolean))] });
+  }
+  return [...byId.values()];
+}
+
 const pizzaSubcategories = { pizzas_clasicas:'Clásicas', pizzas_especialidades:'Especialidades', pizzas_gourmet:'Gourmet' };
 const pizzaCategoryBySubcategory = { 'Clásicas':'pizzas_clasicas', 'Especialidades':'pizzas_especialidades', 'Gourmet':'pizzas_gourmet' };
 function beverageSubcategory(product) {

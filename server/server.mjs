@@ -4,9 +4,9 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { randomBytes, randomUUID, scrypt as scryptCallback, timingSafeEqual } from 'node:crypto';
 import { promisify } from 'node:util';
-import { configuredPizzaSizes, menuFromSource, normalizeProductHierarchy, pizzaPriceForSubcategory, pizzaSizes, productSubcategory } from '../src/domain/menu-model.js';
+import { configuredPizzaSizes, configuredProductCategories, menuFromSource, normalizeProductHierarchy, pizzaPriceForSubcategory, pizzaSizes, productSubcategory } from '../src/domain/menu-model.js';
 import { cashCloseReportPdf, generalReportPdf } from './pdf-reports.mjs';
-import { ValidationError, canonicalizeItems, cleanText, validateCatalog, validateOrderMetadata, validateRawMaterials, validateSettings } from './validation.mjs';
+import { ValidationError, canonicalizeItems, cleanText, validateCatalog, validateCatalogCategories, validateOrderMetadata, validateRawMaterials, validateSettings } from './validation.mjs';
 
 const appDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const frontendDir = path.join(appDir, 'dist');
@@ -153,6 +153,7 @@ async function loadStore() {
     current.menuVersion = source.version || 'initial';
   }
   if (!hadPizzaSizes) current.catalog = applyPizzaSizePricing(current.catalog, current.settings.pizzaSizes);
+  current.settings.catalogCategories = configuredProductCategories(current.settings, current.catalog).map(({ builtin: _builtin, ...category }) => category);
   return current;
 }
 
@@ -594,10 +595,19 @@ async function handleApi(request, response, url) {
   if (request.method === 'PUT' && pathname === '/api/catalog') {
     if (!requireRole(request, response, 'admin')) return;
     const body = await readBody(request);
-    store.catalog = validateCatalog(body.catalog);
+    store.catalog = validateCatalog(body.catalog, store.settings.catalogCategories);
     await saveStore();
     await auditEvent(request, 'catalog.update', 'success', { count:store.catalog.length });
     sendJson(response, 200, store.catalog);
+    return;
+  }
+  if (request.method === 'PUT' && pathname === '/api/catalog-categories') {
+    if (!requireRole(request, response, 'admin')) return;
+    const body = await readBody(request);
+    store.settings.catalogCategories = validateCatalogCategories(body.categories, store.catalog);
+    await saveStore();
+    await auditEvent(request, 'catalog_categories.update', 'success', { count:store.settings.catalogCategories.length });
+    sendJson(response, 200, store.settings.catalogCategories);
     return;
   }
   if (request.method === 'PUT' && pathname === '/api/raw-materials') {

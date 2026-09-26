@@ -53,6 +53,7 @@ export const api = {
   saveSettings: settings => request('/api/settings', { method: 'PUT', body: JSON.stringify(settings) }),
   savePizzaSizes: pizzaSizes => request('/api/pizza-sizes', { method: 'PUT', body: JSON.stringify({ pizzaSizes }) }),
   saveCatalog: catalog => request('/api/catalog', { method: 'PUT', body: JSON.stringify({ catalog }) }),
+  saveCatalogCategories: categories => request('/api/catalog-categories', { method: 'PUT', body: JSON.stringify({ categories }) }),
   saveRawMaterials: (rawMaterials, categories = []) => request('/api/raw-materials', { method: 'PUT', body: JSON.stringify({ rawMaterials, categories }) }),
   createUser: user => request('/api/users', { method: 'POST', body: JSON.stringify(user) }),
   changePassword: data => request('/api/users/password', { method: 'PUT', body: JSON.stringify(data) }),
