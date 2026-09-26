@@ -266,18 +266,28 @@ export function validateSettings(input, current = {}) {
 export function validateRawMaterials(entries, categories = []) {
   if (!Array.isArray(entries) || entries.length > 1000) throw new ValidationError('El inventario admite hasta 1000 materias primas.');
   if (!Array.isArray(categories) || categories.length > 100) throw new ValidationError('La lista de categorías no es válida.');
+  const categoryByName = new Map();
+  for (const value of categories) {
+    const category = cleanText(value, 80);
+    const key = category.toLocaleLowerCase('es-MX');
+    if (category && !categoryByName.has(key)) categoryByName.set(key, category);
+  }
   const ids = new Set(); const names = new Set();
   const materials = entries.map(entry => {
     const id = cleanText(entry.id || randomUUID(), 100);
     const name = cleanText(entry.name, 100);
-    const category = cleanText(entry.category, 80);
+    const requestedCategory = cleanText(entry.category, 80);
+    const categoryKey = requestedCategory.toLocaleLowerCase('es-MX');
+    const category = categoryByName.get(categoryKey) || requestedCategory;
     const stock = finiteAmount(entry.stock, { minimum:0, maximum:1_000_000_000 });
     if (!id || !name || !category) throw new ValidationError('Cada materia prima necesita nombre y categoría.');
     const nameKey = name.toLocaleLowerCase('es-MX');
     if (ids.has(id) || names.has(nameKey)) throw new ValidationError(`${name} está repetida en el inventario.`);
+    if (!categoryByName.has(categoryKey)) categoryByName.set(categoryKey, category);
     ids.add(id); names.add(nameKey);
     return { id, name, category, stock };
   });
-  const cleanCategories = [...new Set([...categories, ...materials.map(material => material.category)].map(value => cleanText(value, 80)).filter(Boolean))];
+  const cleanCategories = [...categoryByName.values()];
+  if (cleanCategories.length > 100) throw new ValidationError('El inventario admite hasta 100 categorías.');
   return { materials, categories:cleanCategories };
 }
