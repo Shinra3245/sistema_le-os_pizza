@@ -172,38 +172,31 @@ export function selectableProducts(catalog = [], settings = {}) {
   const pizzaOptions = available.filter(product => product.kind === 'pizza');
   const activeSizeIds = new Set(configuredPizzaSizes(settings).filter(size => size.active !== false).map(size => size.id));
   const pizzaPrices = pizzaOptions.flatMap(product => Object.entries(product.prices || {}).filter(([size]) => activeSizeIds.has(size)).map(([, price]) => price)).map(Number).filter(price => Number.isFinite(price) && price > 0);
+  const categoryDefinitions = configuredProductCategories(settings, catalog);
+  const pizzaSubcategoryNames = categoryDefinitions.find(category => category.id === 'pizzas')?.subcategories || [];
   const pizzaMenu = pizzaOptions.length ? [{
-    id: 'pizza-menu', name: 'Pizza', category: 'pizzas', group: 'Clásicas · Especialidades · Gourmet',
+    id:'pizza-menu', name:'Pizza', category:'pizzas', group:'Categoría principal', subcategories:pizzaSubcategoryNames,
     kind: 'pizza-menu', pizzaOptions, description: `${pizzaOptions.length} sabores para elegir · masa horneada a la leña`,
     price: pizzaPrices.length ? Math.min(...pizzaPrices) : 0
   }] : [];
   const dishes = available.filter(product => product.kind !== 'pizza');
-  const definitions = [
-    { id: 'snacks', name: 'Snacks', category: 'snacks', label: 'Elige el platillo', match: product => product.category === 'snacks', option: product => product.name },
-    { id: 'extras', name: 'Extras', category: 'extras', label: 'Elige el extra', match: product => product.category === 'extras', option: product => product.name },
-    { id: 'hamburguesas', name: 'Hamburguesa', category: 'hamburguesas', label: 'Tipo de hamburguesa', match: product => product.category === 'hamburguesas', option: product => product.name },
-    { id: 'ensaladas', name: 'Ensalada', category: 'ensaladas', label: 'Preparación', match: product => product.category === 'ensaladas', option: product => {
-      const name = product.name.replace(/^ensalada\s*/i, '');
-      const normalized = name.toLocaleLowerCase('es-MX') === 'cesar' ? 'César' : name;
-      return normalized.charAt(0).toLocaleUpperCase('es-MX') + normalized.slice(1);
-    } },
-    { id: 'pastas', name: 'Pasta', category: 'pastas', label: 'Especialidad', match: product => product.category === 'pastas', option: product => product.name },
-  ];
   const families = [];
   const consumed = new Set();
-  for (const definition of definitions) {
-    const members = dishes.filter(definition.match);
-    if (members.length < 2) continue;
+  for (const definition of categoryDefinitions.filter(category => !['pizzas','bebidas'].includes(category.id))) {
+    const members = dishes.filter(product => productParentCategory(product) === definition.id);
+    if (!members.length) continue;
     members.forEach(member => consumed.add(member.id));
-    const options = members.map(product => ({ id: product.id, label: definition.option(product), product }));
+    const options = members.map(product => ({ id:product.id, label:product.name, product }));
     const prices = members.flatMap(product => product.variants?.length
       ? product.variants.map(variant => Number(variant.price) || 0)
       : [Number(product.price) || 0]);
+    const subcategories = definition.subcategories.filter(subcategory => members.some(product => productSubcategory(product) === subcategory));
     families.push({
-      id: `family-${definition.id}`, name: definition.name, category: definition.category, categories: definition.categories || [definition.category],
-      group: members[0].group || definition.category, kind: 'family',
-      familyChoiceGroup: { label: definition.label, options }, familyOptions: options,
-      description: `${options.length} opciones para elegir`, price: Math.min(...prices)
+      id:`family-${definition.id}`, name:definition.label, category:definition.id, categories:[definition.id],
+      group:'Categoría principal', kind:'family', subcategories,
+      familyChoiceGroup:{ label:'Platillo', options }, familyOptions:options,
+      description:`${options.length} ${options.length === 1 ? 'platillo' : 'platillos'} · ${subcategories.length} ${subcategories.length === 1 ? 'subcategoría' : 'subcategorías'}`,
+      price:Math.min(...prices.filter(price => price > 0))
     });
   }
   const beverages = dishes.filter(product => product.category === 'bebidas');
@@ -225,8 +218,9 @@ export function selectableProducts(catalog = [], settings = {}) {
     ? product.variants.map(variant => Number(variant.price) || 0)
     : [Number(product.price) || 0]);
   const beverageMenu = beverages.length ? [{
-    id: 'beverage-menu', name: 'Bebidas', category: 'bebidas', group: 'Con y sin alcohol', kind: 'beverage-menu',
-    beverageGroups, description: 'Todas las bebidas en una sola selección · elige categoría, bebida y presentación', price: Math.min(...beveragePrices)
+    id:'beverage-menu', name:'Bebidas', category:'bebidas', group:'Categoría principal', kind:'beverage-menu',
+    subcategories:categoryDefinitions.find(category => category.id === 'bebidas')?.subcategories || [],
+    beverageGroups, description:'Elige tipo, subcategoría, bebida y presentación', price:Math.min(...beveragePrices.filter(price => price > 0))
   }] : [];
   return [...pizzaMenu, ...families, ...beverageMenu, ...dishes.filter(product => !consumed.has(product.id))];
 }

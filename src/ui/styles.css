@@ -333,6 +333,7 @@ h2 { margin-bottom: 0; font-size: 17px; font-weight: 700; letter-spacing: -.3px;
 .product-group { overflow: hidden; color: #9a8969; font-size: 9px; font-weight: 750; letter-spacing: .55px; text-overflow: ellipsis; text-transform: uppercase; white-space: nowrap; }
 .product-card-copy strong { overflow: hidden; font-size: 11px; line-height: 1.35; text-overflow: ellipsis; white-space: nowrap; }
 .product-card-copy small { display: -webkit-box; overflow: hidden; min-height: 26px; color: #94948b; font-size: 9px; line-height: 1.4; -webkit-box-orient: vertical; -webkit-line-clamp: 2; }
+.product-subcategories { overflow: hidden; color: #806d47; font-size: 8px; font-weight: 700; line-height: 1.35; text-overflow: ellipsis; white-space: nowrap; }
 .product-price { color: var(--forest); font-size: 11px; font-weight: 800; }
 .add-indicator { position: absolute; top: 8px; right: 9px; display: grid; place-items: center; width: 23px; height: 23px; border: 1px solid #eae8e0; border-radius: 50%; background: #fff; color: #547455; font-size: 16px; line-height: 1; }
 .order-summary-panel { position: sticky; top: 82px; overflow: hidden; padding: 19px 17px 16px; }
@@ -435,6 +436,22 @@ h2 { margin-bottom: 0; font-size: 17px; font-weight: 700; letter-spacing: -.3px;
 .modal-card:has(.product-editor-form) { width: min(760px, 100%); }
 .product-editor-form { display: grid; gap: 14px; }
 .catalog-heading-actions { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 8px; }
+.product-hierarchy-guide, .category-example { display: flex; align-items: center; gap: 9px; padding: 11px 12px; border: 1px solid #e2e7dc; border-radius: 9px; background: #f6f9f3; }
+.product-hierarchy-guide > span { display: grid; min-width: 0; gap: 2px; }
+.product-hierarchy-guide b { display: grid; place-items: center; width: 19px; height: 19px; margin-bottom: 2px; border-radius: 50%; background: #dfeadf; color: #416249; font-size: 9px; }
+.product-hierarchy-guide small { color: #8a8e85; font-size: 8px; }
+.product-hierarchy-guide strong { overflow: hidden; color: #36473a; font-size: 10px; text-overflow: ellipsis; white-space: nowrap; }
+.product-hierarchy-guide > i, .category-example > i { color: #9e9277; font-style: normal; }
+.configuration-boundary { display: grid; gap: 3px; margin-top: 3px; padding: 11px 12px; border-left: 3px solid #c9b681; border-radius: 0 7px 7px 0; background: #faf7ee; }
+.configuration-boundary strong { color: #665735; font-size: 10px; }
+.configuration-boundary span { color: #89867b; font-size: 9px; line-height: 1.45; }
+.beverage-classification-options { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 8px; }
+.beverage-classification-options label { display: flex; align-items: center; min-height: 42px; gap: 8px; padding: 9px 11px; border: 1px solid #e1e3da; border-radius: 8px; background: #fff; color: #4e554d; font-size: 10px; font-weight: 750; cursor: pointer; }
+.beverage-classification-options input { width: 16px; height: 16px; accent-color: var(--forest); }
+.selection-path { display: flex; align-items: center; flex-wrap: wrap; gap: 5px; margin-bottom: 14px; padding: 9px 10px; border: 1px solid #e5e7df; border-radius: 8px; background: #f7f9f5; }
+.selection-path span { color: #92958c; font-size: 8px; }
+.selection-path strong { color: #3f5c46; font-size: 9px; }
+.selection-path i { color: #a29578; font-style: normal; }
 .product-config-section { display: grid; gap: 10px; padding: 14px; border: 1px solid #e8e4d9; border-radius: 10px; background: #fbfaf6; }
 .editor-section-heading > div { display: grid; gap: 4px; }
 .editor-section-heading small { color: #929188; font-size: 9px; line-height: 1.4; }
@@ -457,6 +474,9 @@ h2 { margin-bottom: 0; font-size: 17px; font-weight: 700; letter-spacing: -.3px;
 .modal-card:has(.catalog-category-manager) { width: min(860px, 100%); }
 .catalog-category-manager { display: grid; gap: 15px; }
 .catalog-category-manager .editor-modal-header { margin-bottom: 0; }
+.category-example { justify-content: center; border-color: #e7dfcb; background: #faf7ef; color: #756746; font-size: 9px; }
+.category-example span { display: grid; gap: 3px; }
+.category-example b { color: #8f7950; font-size: 8px; letter-spacing: .4px; text-transform: uppercase; }
 .catalog-category-list { display: grid; max-height: 420px; gap: 10px; padding-right: 4px; overflow-y: auto; }
 .catalog-category-editor { display: grid; gap: 10px; padding: 13px; border: 1px solid #e7e3d8; border-radius: 10px; background: #fff; }
 .catalog-category-title { display: grid; grid-template-columns: minmax(180px,1fr) auto auto; align-items: end; gap: 10px; }
@@ -1224,6 +1244,7 @@ select.system-combo-native { position: absolute !important; width: 1px !importan
 .half-choice .system-combo-trigger { min-height: 39px; padding: 7px 9px; font-size: 10px; }.half-choice .system-combo-trigger svg { width: 15px; height: 15px; }.half-choice .system-combo-list { z-index: 50; }
 @media (max-width: 590px) { .system-combo-trigger { min-height: 43px; }.system-combo.is-open .system-combo-list { max-height: 220px; } }
 @media (max-width: 590px) { .product-hierarchy-fields { grid-template-columns: 1fr; } }
+@media (max-width: 590px) { .product-hierarchy-guide, .category-example { align-items: stretch; flex-direction: column; }.product-hierarchy-guide > i, .category-example > i { align-self: center; transform: rotate(90deg); }.beverage-classification-options { grid-template-columns: 1fr; } }
 @media (max-width: 760px) { .catalog-category-title { grid-template-columns: minmax(0,1fr) auto; }.catalog-category-title label { grid-column: 1 / -1; }.catalog-new-category { grid-template-columns: repeat(2,minmax(0,1fr)); }.catalog-new-category > div, .catalog-new-category .button { grid-column: 1 / -1; } }
 @media (max-width: 590px) { .config-editor-row { grid-template-columns: minmax(0,1fr) 34px; }.config-editor-row .money-input { grid-column: 1 / -1; grid-row: 2; }.config-editor-row > .config-remove { grid-column: 2; grid-row: 1; }.choice-group-heading, .catalog-add-subcategory, .catalog-new-category { grid-template-columns: 1fr; }.choice-group-heading .config-remove, .catalog-add-subcategory .button { width: 100%; }.catalog-new-category > div, .catalog-new-category .button { grid-column: auto; } }
 @media (max-width: 900px) { .pizza-size-row { grid-template-columns: 1fr; align-items: stretch; }.pizza-size-actions { grid-template-columns: 1fr 1fr; }.new-pizza-size { grid-template-columns: repeat(2, minmax(0, 1fr)); }.new-pizza-size > div, .new-pizza-size .button { grid-column: 1 / -1; } }
