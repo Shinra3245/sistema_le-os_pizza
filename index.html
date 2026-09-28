@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="es-MX">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#243f31">
+  <meta name="description" content="Menú digital de Pizzas a la Leña. Consulta pizzas, alitas, hamburguesas, snacks, ensaladas, pastas, extras y bebidas.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_MX">
+  <meta property="og:title" content="Menú | Pizzas a la Leña">
+  <meta property="og:description" content="Buena pizza, buenos momentos. Consulta nuestro menú completo.">
+  <meta property="og:url" content="https://shinra3245.github.io/sistema_le-os_pizza/">
+  <meta property="og:image" content="https://shinra3245.github.io/sistema_le-os_pizza/images/portada-social.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://shinra3245.github.io/sistema_le-os_pizza/">
+  <link rel="manifest" href="manifest.webmanifest">
+  <title>Menú | Pizzas a la Leña</title>
+  <style>
+    :root{--ink:#282b26;--forest:#315f49;--forest-dark:#243f31;--cream:#f6f3eb;--paper:#fffdf8;--gold:#d99b22;--line:#e5dfd1;--muted:#7e8078;--shadow:0 18px 48px rgba(42,44,36,.12)}
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth;background:var(--cream)}
+    body{margin:0;color:var(--ink);background:radial-gradient(circle at 15% 0,#fff 0,transparent 26rem),var(--cream);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}
+    button,a{font:inherit}
+    .topbar{position:sticky;z-index:20;top:0;display:flex;align-items:center;justify-content:space-between;min-height:68px;padding:10px max(18px,calc((100vw - 1120px)/2));border-bottom:1px solid rgba(217,209,191,.8);background:rgba(255,253,248,.92);backdrop-filter:blur(16px)}
+    .brand{display:flex;align-items:center;gap:10px;color:var(--forest-dark);text-decoration:none}.brand-mark{display:grid;place-items:center;width:38px;height:38px;border:1px solid var(--gold);border-radius:50%;color:var(--gold);font-size:21px}.brand-copy{display:grid}.brand-copy strong{font-family:Georgia,serif;font-size:18px}.brand-copy small{color:#a16f12;font-size:9px;font-weight:800;letter-spacing:2px}
+    .share-button{display:inline-flex;align-items:center;min-height:40px;gap:7px;padding:0 14px;border:1px solid #d8d2c5;border-radius:999px;background:#fff;color:var(--forest);font-size:13px;font-weight:750;cursor:pointer}.share-button:hover{border-color:#91a695;background:#f7faf6}
+    .hero{display:grid;grid-template-columns:minmax(0,.82fr) minmax(330px,1.18fr);align-items:center;width:min(1120px,calc(100% - 36px));min-height:520px;gap:42px;margin:0 auto;padding:46px 0 34px}.hero-copy{align-self:start;margin-top:145px}.eyebrow{display:inline-flex;align-items:center;gap:8px;color:#936e24;font-size:11px;font-weight:850;letter-spacing:1.8px}.eyebrow:before{width:24px;border-top:2px solid var(--gold);content:""}.hero h1{max-width:590px;margin:17px 0 14px;font-family:Georgia,serif;font-size:clamp(44px,7vw,76px);font-weight:700;line-height:.95}.hero p{max-width:520px;margin:0;color:var(--muted);font-size:17px;line-height:1.65}.hero-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:25px}.primary,.secondary{display:inline-flex;align-items:center;justify-content:center;min-height:47px;padding:0 18px;border-radius:9px;font-size:14px;font-weight:800;text-decoration:none}.primary{border:1px solid var(--forest);background:var(--forest);color:#fff}.secondary{border:1px solid #d9d2c5;background:#fff;color:var(--ink)}
+    .hero-cover{position:relative;justify-self:center;width:min(100%,480px);margin:0}.hero-cover:before{position:absolute;inset:8% -7%;border-radius:50%;background:rgba(217,155,34,.12);filter:blur(30px);content:""}.hero-cover img{position:relative;display:block;width:100%;border:1px solid #e3dccd;border-radius:18px;box-shadow:var(--shadow)}
+    .menu-nav{position:sticky;z-index:15;top:68px;border-block:1px solid var(--line);background:rgba(246,243,235,.94);backdrop-filter:blur(12px)}.menu-nav>div{display:flex;width:min(1120px,calc(100% - 24px));gap:7px;margin:auto;padding:10px 0;overflow-x:auto;scrollbar-width:thin}.menu-nav a{flex:0 0 auto;padding:8px 12px;border:1px solid #ded7c8;border-radius:999px;background:var(--paper);color:#63675f;font-size:11px;font-weight:750;text-decoration:none}.menu-nav a:hover{border-color:#8ca08d;color:var(--forest)}
+    main{width:min(1120px,calc(100% - 36px));margin:auto;padding:42px 0 70px}.section-heading{text-align:center}.section-heading span{color:#997626;font-size:10px;font-weight:850;letter-spacing:1.8px}.section-heading h2{margin:10px 0 8px;font-family:Georgia,serif;font-size:38px}.section-heading p{margin:0;color:var(--muted)}
+    .menu-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));align-items:start;gap:22px;margin-top:30px}.menu-page{scroll-margin-top:130px}.menu-page:first-child{display:none}.menu-page h3{margin:0 0 9px;color:#6d6045;font-size:11px;font-weight:850;letter-spacing:1.1px;text-transform:uppercase}.image-button{display:block;width:100%;padding:0;overflow:hidden;border:1px solid #ddd6c8;border-radius:14px;background:#fff;box-shadow:0 10px 28px rgba(47,46,39,.08);cursor:zoom-in}.image-button img{display:block;width:100%;height:auto;transition:transform .25s ease}.image-button:hover img{transform:scale(1.008)}
+    .qr-card{display:grid;grid-template-columns:170px minmax(0,1fr);align-items:center;width:min(700px,100%);gap:24px;margin:52px auto 0;padding:22px;border:1px solid #ddd6c6;border-radius:16px;background:var(--paper);box-shadow:0 13px 35px rgba(44,43,36,.07)}.qr-card img{display:block;width:170px;border:8px solid #fff}.qr-card h2{margin:0 0 8px;font-family:Georgia,serif;font-size:28px}.qr-card p{margin:0 0 14px;color:var(--muted);font-size:13px;line-height:1.55}.qr-card a{color:var(--forest);font-size:12px;font-weight:800}
+    footer{padding:28px 18px 38px;border-top:1px solid var(--line);color:#85877f;text-align:center;font-size:11px}footer strong{display:block;margin-bottom:5px;color:var(--forest-dark);font-family:Georgia,serif;font-size:18px}
+    dialog{width:min(94vw,760px);max-height:94vh;padding:0;border:0;border-radius:15px;background:#191b18;box-shadow:0 28px 80px rgba(0,0,0,.4)}dialog::backdrop{background:rgba(17,20,17,.78);backdrop-filter:blur(5px)}dialog img{display:block;max-width:100%;max-height:90vh;margin:auto}dialog button{position:absolute;top:9px;right:9px;display:grid;place-items:center;width:39px;height:39px;border:1px solid rgba(255,255,255,.4);border-radius:50%;background:rgba(15,17,14,.72);color:#fff;font-size:22px;cursor:pointer}
+    .toast{position:fixed;z-index:40;right:18px;bottom:18px;max-width:calc(100% - 36px);padding:11px 14px;border-radius:8px;background:var(--forest-dark);color:#fff;font-size:12px;font-weight:750;box-shadow:0 10px 30px rgba(0,0,0,.2);opacity:0;transform:translateY(8px);transition:.2s;pointer-events:none}.toast.show{opacity:1;transform:none}
+    @media(max-width:760px){.topbar{min-height:62px}.brand-copy strong{font-size:16px}.share-button{min-height:37px;padding-inline:11px}.hero{grid-template-columns:1fr;min-height:0;gap:28px;padding:32px 0}.hero-copy{margin-top:0;text-align:center}.eyebrow{justify-content:center}.hero p{margin-inline:auto;font-size:15px}.hero-actions{justify-content:center}.hero-cover{width:min(88%,430px)}.menu-nav{top:62px}.menu-grid{grid-template-columns:1fr;gap:20px}.menu-page:first-child{display:block}.section-heading h2{font-size:32px}.qr-card{grid-template-columns:1fr;justify-items:center;text-align:center}.qr-card img{width:190px}}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.image-button img,.toast{transition:none}}
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#inicio" aria-label="Ir al inicio"><span class="brand-mark">✳</span><span class="brand-copy"><strong>Pizzas</strong><small>A LA LEÑA</small></span></a>
+    <button class="share-button" id="share" type="button">↗ Compartir menú</button>
+  </header>
+  <section class="hero" id="inicio">
+    <div class="hero-copy"><span class="eyebrow">MENÚ DIGITAL</span><h1>Buena pizza,<br>buenos momentos.</h1><p>Consulta nuestro menú completo de pizzas, alitas, hamburguesas, snacks, ensaladas, pastas, extras y bebidas.</p><div class="hero-actions"><a class="primary" href="#menu">Ver menú completo ↓</a><a class="secondary" href="#qr">Compartir con QR</a></div></div>
+    <figure class="hero-cover"><img src="images/01-portada.webp" width="1024" height="1536" alt="Portada del menú de Pizzas a la Leña"></figure>
+  </section>
+  <nav class="menu-nav" aria-label="Secciones del menú"><div>
+    <a href="#clasicas">Pizzas clásicas</a><a href="#especialidades">Especialidades</a><a href="#gourmet">Gourmet</a><a href="#alitas">Alitas y hamburguesas</a><a href="#snacks">Snacks y ensaladas</a><a href="#extras">Extras y pastas</a><a href="#bebidas">Bebidas</a>
+  </div></nav>
+  <main id="menu">
+    <div class="section-heading"><span>NUESTRA CARTA</span><h2>Menú completo</h2><p>Toca cualquier página para verla en tamaño completo.</p></div>
+    <div class="menu-grid">
+      <article class="menu-page" id="portada"><h3>Portada</h3><button class="image-button" data-full="images/01-portada.webp"><img src="images/01-portada.webp" width="1024" height="1536" alt="Portada del menú" loading="lazy"></button></article>
+      <article class="menu-page" id="clasicas"><h3>Pizzas clásicas</h3><button class="image-button" data-full="images/02-pizzas-clasicas.webp"><img src="images/02-pizzas-clasicas.webp" width="1024" height="1536" alt="Menú de pizzas clásicas" loading="lazy"></button></article>
+      <article class="menu-page" id="especialidades"><h3>Pizzas especiales</h3><button class="image-button" data-full="images/03-pizzas-especialidades.webp"><img src="images/03-pizzas-especialidades.webp" width="1024" height="1536" alt="Menú de pizzas especiales" loading="lazy"></button></article>
+      <article class="menu-page" id="gourmet"><h3>Pizzas gourmet</h3><button class="image-button" data-full="images/04-pizzas-gourmet.webp"><img src="images/04-pizzas-gourmet.webp" width="1024" height="1536" alt="Menú de pizzas gourmet" loading="lazy"></button></article>
+      <article class="menu-page" id="alitas"><h3>Alitas, boneless y hamburguesas</h3><button class="image-button" data-full="images/05-alitas-hamburguesas.webp"><img src="images/05-alitas-hamburguesas.webp" width="1024" height="1536" alt="Menú de alitas, boneless y hamburguesas" loading="lazy"></button></article>
+      <article class="menu-page" id="snacks"><h3>Snacks y ensaladas</h3><button class="image-button" data-full="images/06-snacks-ensaladas.webp"><img src="images/06-snacks-ensaladas.webp" width="1024" height="1536" alt="Menú de snacks y ensaladas" loading="lazy"></button></article>
+      <article class="menu-page" id="extras"><h3>Extras y pastas</h3><button class="image-button" data-full="images/07-extras-pastas.webp"><img src="images/07-extras-pastas.webp" width="1024" height="1536" alt="Menú de extras y pastas" loading="lazy"></button></article>
+      <article class="menu-page" id="bebidas"><h3>Bebidas</h3><button class="image-button" data-full="images/08-bebidas.webp"><img src="images/08-bebidas.webp" width="1024" height="1536" alt="Menú de bebidas con y sin alcohol" loading="lazy"></button></article>
+    </div>
+    <section class="qr-card" id="qr"><img src="qr-menu-pizzas-a-la-lena.png" width="574" height="574" alt="Código QR del menú digital"><div><h2>Comparte nuestro menú</h2><p>Escanea el código QR o descarga la imagen para colocarla en mesas, mostrador y redes sociales.</p><a href="qr-menu-pizzas-a-la-lena.png" download="QR-Menu-Pizzas-a-la-Lena.png">Descargar código QR ↓</a></div></section>
+  </main>
+  <footer><strong>Pizzas a la Leña</strong>Buena pizza, buenos momentos.</footer>
+  <dialog id="viewer"><button type="button" aria-label="Cerrar">×</button><img alt="Página ampliada del menú"></dialog>
+  <div class="toast" id="toast" role="status">Enlace copiado</div>
+  <script>
+    const viewer=document.querySelector('#viewer');const viewerImage=viewer.querySelector('img');
+    document.querySelectorAll('[data-full]').forEach(button=>button.addEventListener('click',()=>{viewerImage.src=button.dataset.full;viewer.showModal()}));
+    viewer.querySelector('button').addEventListener('click',()=>viewer.close());viewer.addEventListener('click',event=>{if(event.target===viewer)viewer.close()});
+    document.querySelector('#share').addEventListener('click',async()=>{const data={title:'Menú | Pizzas a la Leña',text:'Consulta el menú completo de Pizzas a la Leña',url:location.href};try{if(navigator.share){await navigator.share(data)}else{await navigator.clipboard.writeText(location.href);const toast=document.querySelector('#toast');toast.classList.add('show');setTimeout(()=>toast.classList.remove('show'),1800)}}catch(error){if(error.name!=='AbortError')location.hash='qr'}});
+  </script>
+</body>
+</html>

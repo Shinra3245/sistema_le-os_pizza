@@ -1,0 +1,10 @@
+{
+  "name": "Menú Pizzas a la Leña",
+  "short_name": "Menú Pizzas",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#f6f3eb",
+  "theme_color": "#243f31",
+  "lang": "es-MX",
+  "icons": []
+}

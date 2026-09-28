@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://shinra3245.github.io/sistema_le-os_pizza/sitemap.xml
